@@ -12,15 +12,17 @@ public class ItemCategorySegmentEntity {
         return id;
     }
 
-    public void setId(int id) {
+    public ItemCategorySegmentEntity setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public ItemCategorySegmentEntity setName(String name) {
         this.name = name;
+        return this;
     }
 }

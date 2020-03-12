@@ -16,47 +16,53 @@ public class ItemCharEntity<T> {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public ItemCharEntity<T> setItemId(int itemId) {
         this.itemId = itemId;
+        return this;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public ItemCharEntity<T> setBrand(String brand) {
         this.brand = brand;
+        return this;
     }
 
     public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public ItemCharEntity<T> setColor(String color) {
         this.color = color;
+        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public ItemCharEntity<T> setStatus(String status) {
         this.status = status;
+        return this;
     }
 
     public T getSize() {
         return size;
     }
 
-    public void setSize(T size) {
+    public ItemCharEntity<T> setSize(T size) {
         this.size = size;
+        return this;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public ItemCharEntity<T> setPrice(double price) {
         this.price = price;
+        return this;
     }
 }

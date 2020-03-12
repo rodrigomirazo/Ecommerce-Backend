@@ -13,23 +13,26 @@ public class ItemEntity {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public ItemEntity setItemId(int itemId) {
         this.itemId = itemId;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public ItemEntity setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public int getUserPublisherId() {
         return userPublisherId;
     }
 
-    public void setUserPublisherId(int userPublisherId) {
+    public ItemEntity setUserPublisherId(int userPublisherId) {
         this.userPublisherId = userPublisherId;
+        return this;
     }
 }

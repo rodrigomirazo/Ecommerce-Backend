@@ -15,23 +15,26 @@ public class ItemCategorySubEntity {
         return id;
     }
 
-    public void setId(int id) {
+    public ItemCategorySubEntity setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public ItemCategorySubEntity setName(String name) {
         this.name = name;
+        return this;
     }
 
     public List<ItemCategorySegmentEntity> getSegments() {
         return segments;
     }
 
-    public void setSegments(List<ItemCategorySegmentEntity> segments) {
+    public ItemCategorySubEntity setSegments(List<ItemCategorySegmentEntity> segments) {
         this.segments = segments;
+        return this;
     }
 }

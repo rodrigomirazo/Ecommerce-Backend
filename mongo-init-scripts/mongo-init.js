@@ -11,7 +11,17 @@ db.createUser(
         }
 );
 
-db.item.insert({
+db.ItemEntity.insert({
     name: "name1"
-})
+});
+
+db.ItemCategoryEntity.insert({
+    id: "1",
+    originEntity: {
+        originId: 1,
+        name: "shoe"
+    }
+});
+
+
 
