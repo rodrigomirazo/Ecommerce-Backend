@@ -19,14 +19,38 @@ public class ItemCategoryServiceImpl implements ItemCategoryService {
     @Override
     public List<ItemCategoryDto> get(Long itemTypeId) {
 
-        List<ItemCategory> itemCategories = StreamSupport.stream(
+        List<ItemCategory> allCategoriesRepo = StreamSupport.stream(
                 itemCategoryRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        List<ItemCategoryDto> itemCategoryDtos =
-                itemCategories.stream().map(ItemCategoryDto::new).collect(Collectors.toList());
+        List<ItemCategory> itemTypesRepo = StreamSupport.stream(
+                itemCategoryRepository.findByItemTypeId(-1).spliterator(), false)
+                .collect(Collectors.toList());
 
-        return itemCategoryDtos;
+
+        List<ItemCategoryDto> allCategories =
+                allCategoriesRepo.stream().map(ItemCategoryDto::new).collect(Collectors.toList());
+
+        List<ItemCategoryDto> itemTypes =
+                itemTypesRepo.stream().map(ItemCategoryDto::new).collect(Collectors.toList());
+
+        itemTypes = this.recursion(itemTypes, allCategories);
+
+        return itemTypes;
+    }
+
+    List<ItemCategoryDto> recursion(List<ItemCategoryDto> itemTypes, List<ItemCategoryDto> allCategories) {
+        for (int i = 0; i < itemTypes.size(); i++) {
+
+            int count = i;
+            List<ItemCategoryDto> subCategories = allCategories.stream().filter(itemCategoryDto -> itemCategoryDto.getParentId() != null && itemCategoryDto.getParentId() == itemTypes.get(count).getId()).collect(Collectors.toList());
+            itemTypes.get(count).setSubCategories(subCategories);
+
+            if(itemTypes.size() > 0) {
+                this.recursion(itemTypes.get(count).getSubCategories(), allCategories);
+            }
+        }
+        return itemTypes;
     }
 
     @Override

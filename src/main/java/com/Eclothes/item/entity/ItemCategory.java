@@ -11,9 +11,8 @@ public class ItemCategory {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "item_type_id")
-    private ItemTypeCat itemTypeCat;
+    @Column(name = "item_type_id")
+    private int itemTypeId;
 
     @Column(name = "sub_cat_level")
     private int subCategoryLevel;
@@ -75,12 +74,12 @@ public class ItemCategory {
         return this;
     }
 
-    public ItemTypeCat getItemTypeCat() {
-        return itemTypeCat;
+    public int getItemTypeId() {
+        return itemTypeId;
     }
 
-    public ItemCategory setItemTypeCat(ItemTypeCat itemTypeCat) {
-        this.itemTypeCat = itemTypeCat;
+    public ItemCategory setItemTypeId(int itemTypeId) {
+        this.itemTypeId = itemTypeId;
         return this;
     }
 

@@ -7,4 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ItemCategoryRepository extends CrudRepository<ItemCategory, Long> {
+    List<ItemCategory> findByItemTypeId(Integer itemTypeId);
 }

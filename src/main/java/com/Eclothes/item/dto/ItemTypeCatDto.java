@@ -3,9 +3,7 @@ package com.Eclothes.item.dto;
 import com.Eclothes.item.entity.ItemTypeCat;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemTypeCatDto implements Serializable {
 
@@ -18,7 +16,7 @@ public class ItemTypeCatDto implements Serializable {
     private String subCategoryName;
     private String subCategoryNameEsp;
 
-    private List<ItemCategoryDto> subCategories;
+    private List<ItemCategoryDto> itemCategoryDtos;
 
     public ItemTypeCatDto() {
     }
@@ -32,6 +30,7 @@ public class ItemTypeCatDto implements Serializable {
         this.setSubCategoryName("type");
         this.setSubCategoryNameEsp("tipo");
 
+        /*
         // 1. Map categories
         List<ItemCategoryDto> allCategories = itemTypeCat.getItemCategories().stream().map(itemCategory -> new ItemCategoryDto(itemCategory, itemTypeCat.getId())).collect(Collectors.toList());
 
@@ -57,6 +56,7 @@ public class ItemTypeCatDto implements Serializable {
         });
 
         this.setSubCategories(recursiveCat);
+        */
     }
 
     public Integer getId() {
@@ -122,12 +122,12 @@ public class ItemTypeCatDto implements Serializable {
         return this;
     }
 
-    public List<ItemCategoryDto> getSubCategories() {
-        return subCategories;
+    public List<ItemCategoryDto> getItemCategoryDtos() {
+        return itemCategoryDtos;
     }
 
-    public ItemTypeCatDto setSubCategories(List<ItemCategoryDto> subCategories) {
-        this.subCategories = subCategories;
+    public ItemTypeCatDto setItemCategoryDtos(List<ItemCategoryDto> itemCategoryDtos) {
+        this.itemCategoryDtos = itemCategoryDtos;
         return this;
     }
 }

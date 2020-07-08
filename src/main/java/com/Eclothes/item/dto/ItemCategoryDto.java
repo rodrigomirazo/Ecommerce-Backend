@@ -1,9 +1,6 @@
 package com.Eclothes.item.dto;
 
 import com.Eclothes.item.entity.ItemCategory;
-import com.Eclothes.item.entity.ItemTypeCat;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -26,10 +23,8 @@ public class ItemCategoryDto implements Serializable {
 
     public ItemCategoryDto(ItemCategory itemCategory, int parentId) {
 
-        itemCategory.getItemTypeCat();
-
         this.setId( itemCategory.getId() );
-        this.setItemTypeId( itemCategory.getItemTypeCat().getId() );
+        this.setItemTypeId( itemCategory.getItemTypeId() );
         this.setSubCategoryLevel( itemCategory.getSubCategoryLevel() );
         this.setParentId( parentId );
         this.setCategoryName( itemCategory.getCategoryName() );
@@ -39,10 +34,8 @@ public class ItemCategoryDto implements Serializable {
 
     public ItemCategoryDto(ItemCategory itemCategory) {
 
-        itemCategory.getItemTypeCat();
-
         this.setId( itemCategory.getId() );
-        this.setItemTypeId( itemCategory.getItemTypeCat().getId() );
+        this.setItemTypeId( itemCategory.getItemTypeId() );
         this.setSubCategoryLevel( itemCategory.getSubCategoryLevel() );
         this.setParentId( itemCategory.getParentId() );
         this.setCategoryName( itemCategory.getCategoryName() );

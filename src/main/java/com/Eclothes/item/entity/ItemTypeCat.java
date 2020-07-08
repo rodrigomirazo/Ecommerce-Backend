@@ -18,11 +18,6 @@ public class ItemTypeCat {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "itemTypeCat", cascade = {
-            CascadeType.ALL
-    })
-    List<ItemCategory> itemCategories;
-
     public ItemTypeCat() {
     }
 
@@ -49,12 +44,4 @@ public class ItemTypeCat {
         return this;
     }
 
-    public List<ItemCategory> getItemCategories() {
-        return itemCategories;
-    }
-
-    public ItemTypeCat setItemCategories(List<ItemCategory> itemCategories) {
-        this.itemCategories = itemCategories;
-        return this;
-    }
 }
