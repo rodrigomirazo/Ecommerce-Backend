@@ -12,7 +12,7 @@ public class ItemComments {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "item_id")
@@ -33,11 +33,11 @@ public class ItemComments {
         return this;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public ItemComments setUser(User user) {
+    public ItemComments setUser(UserEntity user) {
         this.user = user;
         return this;
     }

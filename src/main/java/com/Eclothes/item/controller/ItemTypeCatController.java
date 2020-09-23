@@ -21,9 +21,9 @@ public class ItemTypeCatController {
 
     @RequestMapping(value = itemTypeCatUri, method = {RequestMethod.GET})
     public @ResponseBody
-    List<ItemTypeCatDto> get() {
+    List<ItemTypeCatDto> get(@RequestParam String categoryId) {
 
-        List<ItemTypeCatDto> itemEntities = itemTypeCatService.get();
+        List<ItemTypeCatDto> itemEntities = itemTypeCatService.get(categoryId);
 
         return itemEntities;
     }

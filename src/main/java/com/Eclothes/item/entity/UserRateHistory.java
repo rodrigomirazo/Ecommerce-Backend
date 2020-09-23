@@ -12,7 +12,7 @@ public class UserRateHistory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "transaction_id")
@@ -33,11 +33,11 @@ public class UserRateHistory {
         return this;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public UserRateHistory setUser(User user) {
+    public UserRateHistory setUser(UserEntity user) {
         this.user = user;
         return this;
     }

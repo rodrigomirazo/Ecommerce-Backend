@@ -1,8 +1,9 @@
 package com.Eclothes.item.controller;
 
 import com.Eclothes.item.constants.EndpointNames;
-import com.Eclothes.item.dto.ItemDTo;
 import com.Eclothes.item.dto.UserDto;
+import com.Eclothes.item.entity.UserEntity;
+import com.Eclothes.item.mapper.UserMapper;
 import com.Eclothes.item.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class UserController {
 
     private static final String userUri = EndpointNames.USER_CONTROLLER;
     
+
     @Autowired
     private UserService userService;
 
@@ -23,23 +25,23 @@ public class UserController {
     public @ResponseBody
     List<UserDto> get() {
 
-        //List<UserDto> itemEntities = userService.get();
+        List<UserDto> itemEntities = userService.get();
 
-        return null;
+        return itemEntities;
     }
 
     @RequestMapping(value = userUri, method = {RequestMethod.PUT})
     public @ResponseBody
     UserDto put(UserDto userDto) {
 
-        //UserDto saveItemUser = userService.save(userDto);
+        UserDto savedItemUser = userService.save(userDto);
 
-        return null;
+        return savedItemUser;
     }
 
     @RequestMapping(value = userUri, method = {RequestMethod.DELETE})
     public @ResponseBody
-    void delete(Long itemId) {
+    void delete(Integer itemId) {
 
         userService.delete(itemId);
     }

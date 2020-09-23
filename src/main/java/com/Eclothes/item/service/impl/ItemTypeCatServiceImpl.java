@@ -22,7 +22,7 @@ public class ItemTypeCatServiceImpl implements ItemTypeCatService {
     ItemCategoryRepository itemCategoryRepository;
 
     @Override
-    public List<ItemTypeCatDto> get() {
+    public List<ItemTypeCatDto> get(String categoryId) {
 
         List<ItemTypeCat> itemTypeCats = StreamSupport.stream(
                 itemTypeCatRepository.findAll().spliterator(), false)

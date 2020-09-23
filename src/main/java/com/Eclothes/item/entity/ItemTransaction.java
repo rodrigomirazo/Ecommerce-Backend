@@ -1,7 +1,6 @@
 package com.Eclothes.item.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "item_transaction")
@@ -16,11 +15,11 @@ public class ItemTransaction {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_vendor_id")
-    private User userVendor;
+    private UserEntity userVendor;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_buyer_id")
-    private User userBuyer;
+    private UserEntity userBuyer;
 
     private String transactionStatus;
 
@@ -65,20 +64,20 @@ public class ItemTransaction {
         return this;
     }
 
-    public User getUserVendor() {
+    public UserEntity getUserVendor() {
         return userVendor;
     }
 
-    public ItemTransaction setUserVendor(User userVendor) {
+    public ItemTransaction setUserVendor(UserEntity userVendor) {
         this.userVendor = userVendor;
         return this;
     }
 
-    public User getUserBuyer() {
+    public UserEntity getUserBuyer() {
         return userBuyer;
     }
 
-    public ItemTransaction setUserBuyer(User userBuyer) {
+    public ItemTransaction setUserBuyer(UserEntity userBuyer) {
         this.userBuyer = userBuyer;
         return this;
     }

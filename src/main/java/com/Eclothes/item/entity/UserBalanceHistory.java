@@ -12,7 +12,7 @@ public class UserBalanceHistory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "transaction_id")
@@ -33,11 +33,11 @@ public class UserBalanceHistory {
         return this;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public UserBalanceHistory setUser(User user) {
+    public UserBalanceHistory setUser(UserEntity user) {
         this.user = user;
         return this;
     }

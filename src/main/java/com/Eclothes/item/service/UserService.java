@@ -1,12 +1,18 @@
 package com.Eclothes.item.service;
 
-import com.Eclothes.item.entity.User;
+import com.Eclothes.item.dto.UserDto;
+import com.Eclothes.item.entity.UserEntity;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public interface UserService {
-    List<User> get();
 
-    User save(User user);
+    List<UserDto> get();
 
-    void delete(Long userId);
+    UserDto get(Integer userId);
+
+    UserDto save(UserDto user);
+
+    void delete(Integer userId);
 }

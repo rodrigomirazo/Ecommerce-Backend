@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -21,14 +21,14 @@ public class User {
     @Column(name = "user_profile_img")
     private String userProfileImg;
 
-    public User() {
+    public UserEntity() {
     }
 
     public int getId() {
         return id;
     }
 
-    public User setId(int id) {
+    public UserEntity setId(int id) {
         this.id = id;
         return this;
     }
@@ -37,7 +37,7 @@ public class User {
         return username;
     }
 
-    public User setUsername(String username) {
+    public UserEntity setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -46,7 +46,7 @@ public class User {
         return email;
     }
 
-    public User setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -55,7 +55,7 @@ public class User {
         return password;
     }
 
-    public User setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
         return this;
     }
@@ -64,7 +64,7 @@ public class User {
         return createdTime;
     }
 
-    public User setCreatedTime(Timestamp createdTime) {
+    public UserEntity setCreatedTime(Timestamp createdTime) {
         this.createdTime = createdTime;
         return this;
     }
@@ -73,7 +73,7 @@ public class User {
         return userProfileImg;
     }
 
-    public User setUserProfileImg(String userProfileImg) {
+    public UserEntity setUserProfileImg(String userProfileImg) {
         this.userProfileImg = userProfileImg;
         return this;
     }

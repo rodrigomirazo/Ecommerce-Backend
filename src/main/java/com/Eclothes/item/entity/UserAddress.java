@@ -12,7 +12,7 @@ public class UserAddress {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity user;
 
     @Column(name = "name")
     private String name;
@@ -49,11 +49,11 @@ public class UserAddress {
         return this;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public UserAddress setUser(User user) {
+    public UserAddress setUser(UserEntity user) {
         this.user = user;
         return this;
     }
