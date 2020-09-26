@@ -23,23 +23,25 @@ public class UserMapper {
                 .setId(userEntity.getId())
                 .setEmail(userEntity.getEmail())
                 .setUsername(userEntity.getUsername())
-                .setUserProfileImg(userEntity.getUserProfileImg());
+                .setUserProfileImg(userEntity.getUserProfileImg())
+                .setPassword(userEntity.getPassword())
+                .setCreatedTime(userEntity.getCreatedTime());
     }
 
     public List<UserEntity> toUserList(List<UserDto> users) {
         return users.stream().map(this::toUserEntity).collect(Collectors.toList());
     }
 
-    public UserEntity toUserEntity(UserDto userEntity) {
+    public UserEntity toUserEntity(UserDto userDto) {
 
         return new UserEntity()
-                .setId(userEntity.getId())
-                .setEmail(userEntity.getEmail())
-                .setUsername(userEntity.getUsername())
-                .setUserProfileImg(userEntity.getUserProfileImg());
+                .setId(userDto.getId())
+                .setEmail(userDto.getEmail())
+                .setUsername(userDto.getUsername())
+                .setPassword(userDto.getPassword())
+                .setCreatedTime(userDto.getCreatedTime())
+                .setUserProfileImg(userDto.getUserProfileImg());
     }
-
-
 
     public List<UserEntity> toUserDtoList(Iterable<UserEntity> userIterableEntities) {
         return StreamSupport.stream(

@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto get(Integer userId) {
-        Optional<UserEntity> userEntities = userRepository.findById(Long.valueOf(userId));
+        Optional<UserEntity> userEntities = userRepository.findById(userId);
 
         UserDto userDto = userMapper.toUserDto(userEntities);
 
@@ -48,6 +48,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Integer userId) {
-        userRepository.deleteById(Long.valueOf(userId));
+        userRepository.deleteById(userId);
     }
 }

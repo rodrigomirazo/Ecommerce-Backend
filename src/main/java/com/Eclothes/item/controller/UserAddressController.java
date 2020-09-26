@@ -39,7 +39,7 @@ public class UserAddressController {
 
     @RequestMapping(value = userAddressUri, method = {RequestMethod.DELETE})
     public @ResponseBody
-    void delete(Long itemId) {
+    void delete(Integer itemId) {
 
         userService.delete(itemId);
     }
