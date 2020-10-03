@@ -8,11 +8,11 @@
         <version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.Eclothes</groupId>
-	<artifactId>ecloth-item</artifactId>
+	<groupId>com.ecommerce</groupId>
+	<artifactId>bicicle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>item</name>
-	<description>item description and Characteristics</description>
+	<name>Bicicle Item and user Mannagement</name>
+	<description>Bicicle and User description and Characteristics</description>
 
 	<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

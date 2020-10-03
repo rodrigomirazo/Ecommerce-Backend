@@ -1,0 +1,5 @@
+FROM java:8
+WORKDIR /
+COPY target/*.jar bicicle.jar
+RUN ls -l
+entrypoint ["java", "-jar", "bicicle.jar"]
