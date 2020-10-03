@@ -2,12 +2,14 @@ package com.ecommerce.bicicle.mapper;
 
 import com.ecommerce.bicicle.dto.ItemFloatingCharsRelDto;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Component
 public class ItemFloatingCharsItemRelMapper {
 
 
