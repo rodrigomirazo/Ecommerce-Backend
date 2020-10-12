@@ -19,7 +19,7 @@ public class ItemFloatingCharsMapper {
     public ItemFloatingCharsDto toItemFloatingCharsDto(ItemFloatingCharsEntity itemFloatingCharsEntity) {
 
         return new ItemFloatingCharsDto()
-                .setCharName(itemFloatingCharsEntity.getCharName())
+                .setFloatingCharName(itemFloatingCharsEntity.getCharName())
                 .setFloatingCharId(itemFloatingCharsEntity.getFloatingCharId());
     }
 
@@ -30,7 +30,7 @@ public class ItemFloatingCharsMapper {
     public ItemFloatingCharsEntity toItemFloatingCharsEntity(ItemFloatingCharsDto itemFloatingCharsDto) {
 
         return new ItemFloatingCharsEntity()
-                .setCharName(itemFloatingCharsDto.getCharName())
+                .setCharName(itemFloatingCharsDto.getFloatingCharName())
                 .setFloatingCharId(itemFloatingCharsDto.getFloatingCharId());
     }
 

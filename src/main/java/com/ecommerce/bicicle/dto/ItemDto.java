@@ -4,7 +4,7 @@ import com.ecommerce.bicicle.entity.ItemEntity;
 
 import java.io.Serializable;
 
-public class ItemDTo implements Serializable {
+public class ItemDto implements Serializable {
 
     private static final long serialVersionUID = -8236904528220098035L;
     private String id;
@@ -20,11 +20,11 @@ public class ItemDTo implements Serializable {
     private double fleetCost;
     private String sizeId;
     private int lastLevelCategoryId;
-    private UserDto userDto;
+    private UserDto user;
 
-    public ItemDTo() { }
+    public ItemDto() { }
 
-    public ItemDTo(ItemEntity item) {
+    public ItemDto(ItemEntity item) {
         this.setId( item.getId() );
         this.setStatusId( item.getStatusId() );
         this.setItemColorId( item.getItemColorId() );
@@ -44,7 +44,7 @@ public class ItemDTo implements Serializable {
         return id;
     }
 
-    public ItemDTo setId(String id) {
+    public ItemDto setId(String id) {
         this.id = id;
         return this;
     }
@@ -53,7 +53,7 @@ public class ItemDTo implements Serializable {
         return statusId;
     }
 
-    public ItemDTo setStatusId(int statusId) {
+    public ItemDto setStatusId(int statusId) {
         this.statusId = statusId;
         return this;
     }
@@ -62,7 +62,7 @@ public class ItemDTo implements Serializable {
         return itemColorId;
     }
 
-    public ItemDTo setItemColorId(int itemColorId) {
+    public ItemDto setItemColorId(int itemColorId) {
         this.itemColorId = itemColorId;
         return this;
     }
@@ -71,7 +71,7 @@ public class ItemDTo implements Serializable {
         return itemTypeCatId;
     }
 
-    public ItemDTo setItemTypeCatId(int itemTypeCatId) {
+    public ItemDto setItemTypeCatId(int itemTypeCatId) {
         this.itemTypeCatId = itemTypeCatId;
         return this;
     }
@@ -80,7 +80,7 @@ public class ItemDTo implements Serializable {
         return itemTransactionId;
     }
 
-    public ItemDTo setItemTransactionId(int itemTransactionId) {
+    public ItemDto setItemTransactionId(int itemTransactionId) {
         this.itemTransactionId = itemTransactionId;
         return this;
     }
@@ -89,7 +89,7 @@ public class ItemDTo implements Serializable {
         return name;
     }
 
-    public ItemDTo setName(String name) {
+    public ItemDto setName(String name) {
         this.name = name;
         return this;
     }
@@ -98,7 +98,7 @@ public class ItemDTo implements Serializable {
         return price;
     }
 
-    public ItemDTo setPrice(long price) {
+    public ItemDto setPrice(long price) {
         this.price = price;
         return this;
     }
@@ -107,7 +107,7 @@ public class ItemDTo implements Serializable {
         return originalPrice;
     }
 
-    public ItemDTo setOriginalPrice(long originalPrice) {
+    public ItemDto setOriginalPrice(long originalPrice) {
         this.originalPrice = originalPrice;
         return this;
     }
@@ -116,7 +116,7 @@ public class ItemDTo implements Serializable {
         return discount;
     }
 
-    public ItemDTo setDiscount(double discount) {
+    public ItemDto setDiscount(double discount) {
         this.discount = discount;
         return this;
     }
@@ -125,7 +125,7 @@ public class ItemDTo implements Serializable {
         return description;
     }
 
-    public ItemDTo setDescription(String description) {
+    public ItemDto setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -134,7 +134,7 @@ public class ItemDTo implements Serializable {
         return fleetCost;
     }
 
-    public ItemDTo setFleetCost(double fleetCost) {
+    public ItemDto setFleetCost(double fleetCost) {
         this.fleetCost = fleetCost;
         return this;
     }
@@ -143,7 +143,7 @@ public class ItemDTo implements Serializable {
         return sizeId;
     }
 
-    public ItemDTo setSizeId(String sizeId) {
+    public ItemDto setSizeId(String sizeId) {
         this.sizeId = sizeId;
         return this;
     }
@@ -152,17 +152,17 @@ public class ItemDTo implements Serializable {
         return lastLevelCategoryId;
     }
 
-    public ItemDTo setLastLevelCategoryId(int lastLevelCategoryId) {
+    public ItemDto setLastLevelCategoryId(int lastLevelCategoryId) {
         this.lastLevelCategoryId = lastLevelCategoryId;
         return this;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public UserDto getUser() {
+        return user;
     }
 
-    public ItemDTo setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public ItemDto setUser(UserDto user) {
+        this.user = user;
         return this;
     }
 }

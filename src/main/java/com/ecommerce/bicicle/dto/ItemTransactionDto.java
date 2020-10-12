@@ -6,7 +6,7 @@ public class ItemTransactionDto implements Serializable {
 
     private static final long serialVersionUID = 1474610357147019047L;
     private int id;
-    private ItemDTo item;
+    private ItemDto item;
     private UserDto userVendor;
     private UserDto userBuyer;
     private String transactionStatus;
@@ -29,11 +29,11 @@ public class ItemTransactionDto implements Serializable {
         return this;
     }
 
-    public ItemDTo getItem() {
+    public ItemDto getItem() {
         return item;
     }
 
-    public ItemTransactionDto setItem(ItemDTo item) {
+    public ItemTransactionDto setItem(ItemDto item) {
         this.item = item;
         return this;
     }

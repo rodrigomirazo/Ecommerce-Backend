@@ -7,7 +7,7 @@ public class ItemCommentsDto implements Serializable {
     private static final long serialVersionUID = -2708060042349507592L;
     private int id;
     private UserDto user;
-    private ItemDTo item;
+    private ItemDto item;
     private String comment;
 
     public ItemCommentsDto() {
@@ -31,11 +31,11 @@ public class ItemCommentsDto implements Serializable {
         return this;
     }
 
-    public ItemDTo getItem() {
+    public ItemDto getItem() {
         return item;
     }
 
-    public ItemCommentsDto setItem(ItemDTo item) {
+    public ItemCommentsDto setItem(ItemDto item) {
         this.item = item;
         return this;
     }

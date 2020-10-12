@@ -3,7 +3,6 @@ package com.ecommerce.bicicle.mapper;
 import com.ecommerce.bicicle.dto.ItemFloatingCharsCatDto;
 import com.ecommerce.bicicle.dto.ItemFloatingCharsDto;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsCatEntity;
-import com.ecommerce.bicicle.entity.ItemFloatingCharsEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,12 +21,11 @@ public class ItemFloatingCharsCatMapper {
 
         ItemFloatingCharsDto itemFloatingCharsDto = new ItemFloatingCharsDto();
         itemFloatingCharsDto.setFloatingCharId(itemFloatingCharsCatEntity.getItemFloatingChar().getFloatingCharId());
-        itemFloatingCharsDto.setCharName(itemFloatingCharsCatEntity.getItemFloatingChar().getCharName());
+        itemFloatingCharsDto.setFloatingCharName(itemFloatingCharsCatEntity.getItemFloatingChar().getCharName());
 
         return new ItemFloatingCharsCatDto()
-                .setFloatingCharCatId(itemFloatingCharsCatEntity.getFloatingCharCatId())
-                .setFloatingCharName(itemFloatingCharsCatEntity.getFloatingCharName())
-                .setItemFloatingChar(itemFloatingCharsDto);
+                .setCharId(itemFloatingCharsCatEntity.getFloatingCharCatId())
+                .setCharName(itemFloatingCharsCatEntity.getFloatingCharName());
     }
 
     public List<ItemFloatingCharsCatEntity> toItemFloatingCharsCatEntityList(List<ItemFloatingCharsCatDto> itemFloatingCharsCatDtos) {
@@ -36,14 +34,9 @@ public class ItemFloatingCharsCatMapper {
 
     public ItemFloatingCharsCatEntity toItemFloatingCharsCatEntity(ItemFloatingCharsCatDto itemFloatingCharsCatDto) {
 
-        ItemFloatingCharsEntity itemFloatingCharsEntity = new ItemFloatingCharsEntity();
-        itemFloatingCharsEntity.setFloatingCharId(itemFloatingCharsCatDto.getItemFloatingChar().getFloatingCharId());
-        itemFloatingCharsEntity.setCharName(itemFloatingCharsCatDto.getItemFloatingChar().getCharName());
-
         return new ItemFloatingCharsCatEntity()
-                .setFloatingCharCatId(itemFloatingCharsCatDto.getFloatingCharCatId())
-                .setFloatingCharName(itemFloatingCharsCatDto.getFloatingCharName())
-                .setItemFloatingChar(itemFloatingCharsEntity);
+                .setFloatingCharCatId(itemFloatingCharsCatDto.getCharId())
+                .setFloatingCharName(itemFloatingCharsCatDto.getCharName());
     }
 
     public List<ItemFloatingCharsCatDto> toItemFloatingCharsCatDtoList(Iterable<ItemFloatingCharsCatEntity> floatingCharsIterableEntities) {

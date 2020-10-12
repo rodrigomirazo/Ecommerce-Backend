@@ -1,9 +1,12 @@
 package com.ecommerce.bicicle.dto;
 
+import java.util.List;
+
 public class ItemFloatingCharsDto {
 
     private int floatingCharId;
-    private String charName;
+    private String floatingCharName;
+    private List<ItemFloatingCharsCatDto> catalogList;
 
     public ItemFloatingCharsDto() {
     }
@@ -17,12 +20,21 @@ public class ItemFloatingCharsDto {
         return this;
     }
 
-    public String getCharName() {
-        return charName;
+    public String getFloatingCharName() {
+        return floatingCharName;
     }
 
-    public ItemFloatingCharsDto setCharName(String charName) {
-        this.charName = charName;
+    public ItemFloatingCharsDto setFloatingCharName(String floatingCharName) {
+        this.floatingCharName = floatingCharName;
+        return this;
+    }
+
+    public List<ItemFloatingCharsCatDto> getCatalogList() {
+        return catalogList;
+    }
+
+    public ItemFloatingCharsDto setCatalogList(List<ItemFloatingCharsCatDto> catalogList) {
+        this.catalogList = catalogList;
         return this;
     }
 }

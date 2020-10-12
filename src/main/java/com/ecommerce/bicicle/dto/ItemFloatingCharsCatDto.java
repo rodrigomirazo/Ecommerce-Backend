@@ -2,37 +2,27 @@ package com.ecommerce.bicicle.dto;
 
 public class ItemFloatingCharsCatDto {
 
-    private int floatingCharCatId;
-    private String floatingCharName;
-    private ItemFloatingCharsDto itemFloatingChar;
+    private int charId;
+    private String charName;
 
     public ItemFloatingCharsCatDto() {
     }
 
-    public int getFloatingCharCatId() {
-        return floatingCharCatId;
+    public int getCharId() {
+        return charId;
     }
 
-    public ItemFloatingCharsCatDto setFloatingCharCatId(int floatingCharCatId) {
-        this.floatingCharCatId = floatingCharCatId;
+    public ItemFloatingCharsCatDto setCharId(int charId) {
+        this.charId = charId;
         return this;
     }
 
-    public ItemFloatingCharsDto getItemFloatingChar() {
-        return itemFloatingChar;
+    public String getCharName() {
+        return charName;
     }
 
-    public ItemFloatingCharsCatDto setItemFloatingChar(ItemFloatingCharsDto itemFloatingChar) {
-        this.itemFloatingChar = itemFloatingChar;
-        return this;
-    }
-
-    public String getFloatingCharName() {
-        return floatingCharName;
-    }
-
-    public ItemFloatingCharsCatDto setFloatingCharName(String floatingCharName) {
-        this.floatingCharName = floatingCharName;
+    public ItemFloatingCharsCatDto setCharName(String charName) {
+        this.charName = charName;
         return this;
     }
 }

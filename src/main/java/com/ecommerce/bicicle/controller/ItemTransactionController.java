@@ -1,7 +1,8 @@
 package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
-import com.ecommerce.bicicle.dto.ItemDTo;
+import com.ecommerce.bicicle.dto.ItemDto;
+import com.ecommerce.bicicle.dto.UserItemsDto;
 import com.ecommerce.bicicle.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,18 +21,18 @@ public class ItemTransactionController {
 
     @RequestMapping(value = itemTransactionUri, method = {RequestMethod.GET})
     public @ResponseBody
-    List<ItemDTo> getItem() {
+    List<ItemDto> getItem() {
 
-        List<ItemDTo> itemEntities = itemService.get();
+        List<ItemDto> itemEntities = itemService.get();
 
         return itemEntities;
     }
 
     @RequestMapping(value = itemTransactionUri, method = {RequestMethod.PUT})
     public @ResponseBody
-    ItemDTo getItem(ItemDTo item) {
+    ItemDto getItem(ItemDto item) {
 
-        ItemDTo saveItemUser = itemService.save(item);
+        ItemDto saveItemUser = itemService.save(item);
 
         return saveItemUser;
     }

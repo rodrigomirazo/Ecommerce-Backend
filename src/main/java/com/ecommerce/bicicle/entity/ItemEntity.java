@@ -1,6 +1,7 @@
 package com.ecommerce.bicicle.entity;
 
-import com.ecommerce.bicicle.dto.ItemDTo;
+import com.ecommerce.bicicle.dto.ItemDto;
+import com.ecommerce.bicicle.dto.UserDto;
 
 import javax.persistence.*;
 
@@ -49,27 +50,11 @@ public class ItemEntity {
     @Column(name = "last_level_category_id")
     private int lastLevelCategoryId;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private UserEntity user;
 
     public ItemEntity() { }
-
-    public ItemEntity(ItemDTo item) {
-        this.setId( item.getId() );
-        this.setStatusId( item.getStatusId() );
-        this.setItemColorId( item.getItemColorId() );
-        this.setItemTypeCatId( item.getItemTypeCatId() );
-        this.setItemTransactionId( item.getItemTransactionId() );
-        this.setName( item.getName() );
-        this.setPrice( item.getPrice() );
-        this.setOriginalPrice( item.getOriginalPrice() );
-        this.setDiscount( item.getDiscount() );
-        this.setDescription( item.getDescription() );
-        this.setFleetCost( item.getFleetCost() );
-        this.setSizeId( item.getSizeId() );
-        this.setLastLevelCategoryId( item.getLastLevelCategoryId() );
-    }
 
     public String getId() {
         return id;
@@ -185,6 +170,15 @@ public class ItemEntity {
 
     public ItemEntity setLastLevelCategoryId(int lastLevelCategoryId) {
         this.lastLevelCategoryId = lastLevelCategoryId;
+        return this;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public ItemEntity setUser(UserEntity user) {
+        this.user = user;
         return this;
     }
 }

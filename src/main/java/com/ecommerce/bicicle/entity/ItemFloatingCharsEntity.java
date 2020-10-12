@@ -1,9 +1,6 @@
 package com.ecommerce.bicicle.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "item_floating_chars")
@@ -17,6 +14,10 @@ public class ItemFloatingCharsEntity {
     private String charName;
 
     public ItemFloatingCharsEntity() {
+    }
+
+    public ItemFloatingCharsEntity(int floatingCharId) {
+        this.floatingCharId = floatingCharId;
     }
 
     public int getFloatingCharId() {

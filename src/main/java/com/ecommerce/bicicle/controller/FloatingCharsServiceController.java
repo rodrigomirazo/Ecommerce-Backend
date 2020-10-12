@@ -69,7 +69,7 @@ public class FloatingCharsServiceController {
 
     @RequestMapping(value = itemFloatingCharsCatUri, method = {RequestMethod.DELETE})
     public @ResponseBody
-    void deleteCat(@RequestParam Integer itemFloatingCharId) {
-        floatingCharsService.deleteFloatingCharCat(itemFloatingCharId);
+    void deleteCat(@RequestParam Integer itemFloatingCharCatId) {
+        floatingCharsService.deleteFloatingCharCat(itemFloatingCharCatId);
     }
 }

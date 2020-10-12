@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FloatingCharsServiceImpl implements FloatingCharsService {
@@ -64,6 +65,15 @@ public class FloatingCharsServiceImpl implements FloatingCharsService {
         // Map to Dto
         List<ItemFloatingCharsDto> itemFloatingCharsDto = charsMapper.toItemFloatingCharsDtoList(floatingCharsEntities);
 
+        itemFloatingCharsDto.stream().map(itemFloatingChar -> {
+            ItemFloatingCharsEntity floatingCharsEntity = new ItemFloatingCharsEntity(itemFloatingChar.getFloatingCharId());
+            List<ItemFloatingCharsCatEntity> floatingCharsCatEntities = itemFloatingCharsCatRepository.findByItemFloatingChar(floatingCharsEntity);
+            List<ItemFloatingCharsCatDto> floatingCharsCatDtos = charsCatMapper.toItemFloatingCharsCatDtoList(floatingCharsCatEntities);
+
+            return itemFloatingChar.setCatalogList(floatingCharsCatDtos);
+
+        }).collect(Collectors.toList());
+
         return itemFloatingCharsDto;
     }
 
@@ -82,10 +92,9 @@ public class FloatingCharsServiceImpl implements FloatingCharsService {
             throw new Exception();
         }
 
-        itemFloatingCharsCatRequest.setItemFloatingChar(charsMapper.toItemFloatingCharsDto(floatingCharsEntities.get()));
-
         // Map to Entities
         ItemFloatingCharsCatEntity itemFloatingCharsCatEntity = charsCatMapper.toItemFloatingCharsCatEntity(itemFloatingCharsCatRequest);
+        itemFloatingCharsCatEntity.setItemFloatingChar(floatingCharsEntities.get());
 
         // Persist Entity
         itemFloatingCharsCatEntity = itemFloatingCharsCatRepository.save(itemFloatingCharsCatEntity);
