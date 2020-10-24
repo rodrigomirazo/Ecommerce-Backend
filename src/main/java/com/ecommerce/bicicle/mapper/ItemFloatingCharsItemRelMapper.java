@@ -20,9 +20,10 @@ public class ItemFloatingCharsItemRelMapper {
     public ItemFloatingCharsRelDto toItemFloatingCharsRelDto(ItemFloatingCharsRelEntity itemFloatingCharsRelEntity) {
 
         return new ItemFloatingCharsRelDto()
-                .setItemFloatingCharsCatId(itemFloatingCharsRelEntity.getFloatingCharCatId())
+                .setFloatingCharCatId(itemFloatingCharsRelEntity.getFloatingCharCatId())
                 .setItemFloatingCharsRelId(itemFloatingCharsRelEntity.getItemFloatingCharsRelId())
-                .setItemId(itemFloatingCharsRelEntity.getItemId());
+                .setItemId(itemFloatingCharsRelEntity.getItemId())
+                .setFloatingCharId(itemFloatingCharsRelEntity.getFloatingCharId());
     }
 
     public List<ItemFloatingCharsRelEntity> toItemFloatingCharsRelEntityList(List<ItemFloatingCharsRelDto> itemFloatingCharsRelDtos) {
@@ -33,8 +34,9 @@ public class ItemFloatingCharsItemRelMapper {
 
         return new ItemFloatingCharsRelEntity()
                 .setItemFloatingCharsRelId(itemFloatingCharsRelDto.getItemFloatingCharsRelId())
-                .setFloatingCharCatId(itemFloatingCharsRelDto.getItemFloatingCharsCatId())
-                .setItemId(itemFloatingCharsRelDto.getItemId());
+                .setFloatingCharCatId(itemFloatingCharsRelDto.getFloatingCharCatId())
+                .setItemId(itemFloatingCharsRelDto.getItemId())
+                .setFloatingCharId(itemFloatingCharsRelDto.getFloatingCharId());
     }
 
     public List<ItemFloatingCharsRelDto> toItemFloatingCharsRelDtoList(Iterable<ItemFloatingCharsRelEntity> floatingCharsIterableEntities) {

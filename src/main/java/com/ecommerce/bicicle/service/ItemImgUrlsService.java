@@ -9,5 +9,5 @@ public interface ItemImgUrlsService {
 
     ItemImgUrls save(ItemImgUrls itemImgUrls);
 
-    void delete(Long itemImgUrlsId);
+    void delete(Integer itemImgUrlsId);
 }

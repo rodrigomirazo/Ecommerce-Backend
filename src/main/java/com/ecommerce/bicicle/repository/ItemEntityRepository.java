@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ItemEntityRepository extends CrudRepository<ItemEntity, Long> {
+public interface ItemEntityRepository extends CrudRepository<ItemEntity, Integer> {
 
     List<ItemEntity> findByItemTypeCatId(int itemTypeCatId);
     List<ItemEntity> findByUser(UserEntity user);

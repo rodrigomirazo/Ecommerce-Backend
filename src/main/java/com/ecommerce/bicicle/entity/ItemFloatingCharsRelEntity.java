@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class ItemFloatingCharsRelEntity {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "item_floating_chars_rel_id")
     private int itemFloatingCharsRelId;
 
@@ -16,7 +17,16 @@ public class ItemFloatingCharsRelEntity {
     @Column(name = "floating_char_cat_id")
     private Integer floatingCharCatId;
 
+    @Column(name = "floating_char_id")
+    private Integer floatingCharId;
+
     public ItemFloatingCharsRelEntity() {
+    }
+
+    public ItemFloatingCharsRelEntity(Integer itemId, Integer floatingCharCatId, Integer floatingCharId) {
+        this.itemId = itemId;
+        this.floatingCharCatId = floatingCharCatId;
+        this.floatingCharId = floatingCharId;
     }
 
     public int getItemFloatingCharsRelId() {
@@ -43,6 +53,15 @@ public class ItemFloatingCharsRelEntity {
 
     public ItemFloatingCharsRelEntity setFloatingCharCatId(Integer floatingCharCatId) {
         this.floatingCharCatId = floatingCharCatId;
+        return this;
+    }
+
+    public Integer getFloatingCharId() {
+        return floatingCharId;
+    }
+
+    public ItemFloatingCharsRelEntity setFloatingCharId(Integer floatingCharId) {
+        this.floatingCharId = floatingCharId;
         return this;
     }
 }

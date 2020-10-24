@@ -1,19 +1,20 @@
 package com.ecommerce.bicicle.service;
 
 import com.ecommerce.bicicle.dto.ItemDto;
+import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.dto.UserItemsDto;
 
 import java.util.List;
 
 public interface ItemService {
 
-    List<ItemDto> get();
+    List<ItemSavedDto> get();
 
-    List<ItemDto> getItemsByType(int itemTypeCatId);
+    List<ItemSavedDto> getItemsByType(int itemTypeCatId);
 
-    List<ItemDto> getItemsByUser(int userId);
+    List<ItemSavedDto> getItemsByUser(int userId);
 
-    ItemDto save(ItemDto ItemDTo);
+    ItemSavedDto save(ItemSavedDto ItemDTo);
 
-    void delete(Long userVendorId);
+    void delete(Integer userVendorId);
 }

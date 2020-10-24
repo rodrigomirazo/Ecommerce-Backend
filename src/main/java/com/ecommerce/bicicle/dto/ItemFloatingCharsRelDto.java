@@ -4,7 +4,8 @@ public class ItemFloatingCharsRelDto {
 
     private int itemFloatingCharsRelId;
     private int itemId;
-    private int itemFloatingCharsCatId;
+    private int floatingCharCatId;
+    private int floatingCharId;
 
     public ItemFloatingCharsRelDto() {
     }
@@ -27,12 +28,21 @@ public class ItemFloatingCharsRelDto {
         return this;
     }
 
-    public int getItemFloatingCharsCatId() {
-        return itemFloatingCharsCatId;
+    public int getFloatingCharCatId() {
+        return floatingCharCatId;
     }
 
-    public ItemFloatingCharsRelDto setItemFloatingCharsCatId(int itemFloatingCharsCatId) {
-        this.itemFloatingCharsCatId = itemFloatingCharsCatId;
+    public ItemFloatingCharsRelDto setFloatingCharCatId(int floatingCharCatId) {
+        this.floatingCharCatId = floatingCharCatId;
+        return this;
+    }
+
+    public int getFloatingCharId() {
+        return floatingCharId;
+    }
+
+    public ItemFloatingCharsRelDto setFloatingCharId(int floatingCharId) {
+        this.floatingCharId = floatingCharId;
         return this;
     }
 }

@@ -11,7 +11,7 @@ public class ItemEntity {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
 
     @Column(name = "status_id")
     private int statusId;
@@ -56,11 +56,11 @@ public class ItemEntity {
 
     public ItemEntity() { }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public ItemEntity setId(String id) {
+    public ItemEntity setId(Integer id) {
         this.id = id;
         return this;
     }

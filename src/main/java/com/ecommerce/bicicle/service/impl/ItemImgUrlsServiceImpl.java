@@ -29,7 +29,7 @@ public class ItemImgUrlsServiceImpl implements ItemImgUrlsService {
     }
 
     @Override
-    public void delete(Long itemImgUrlsId) {
+    public void delete(Integer itemImgUrlsId) {
         itemImgUrlsRepo.deleteById(itemImgUrlsId);
     }
 }

@@ -14,6 +14,9 @@ public class ItemImgUrls {
     @Column(name = "item_id")
     private int itemId;
 
+    @Column(name = "user_id")
+    private int userId;
+
     @Column(name = "created_time")
     private Timestamp createdTime;
 
@@ -41,6 +44,15 @@ public class ItemImgUrls {
 
     public ItemImgUrls setItemId(int itemId) {
         this.itemId = itemId;
+        return this;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public ItemImgUrls setUserId(int userId) {
+        this.userId = userId;
         return this;
     }
 
