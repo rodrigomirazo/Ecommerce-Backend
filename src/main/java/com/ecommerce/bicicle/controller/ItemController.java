@@ -2,6 +2,7 @@ package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
 import com.ecommerce.bicicle.dto.ItemDto;
+import com.ecommerce.bicicle.dto.ItemFilterDto;
 import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.entity.ItemImgUrls;
 import com.ecommerce.bicicle.service.ItemImgUrlsService;
@@ -52,6 +53,14 @@ public class ItemController {
             @PathVariable(value = "userId") Integer userId
     ) {
         return itemService.getItemsByUser(userId);
+    }
+
+    @RequestMapping(value = itemUri + "/criteria", method = {RequestMethod.POST})
+    public @ResponseBody
+    List<ItemSavedDto> getFilteredItems(
+            @RequestBody ItemFilterDto itemFilterDto
+    ) {
+        return itemService.getFilteredItems(itemFilterDto);
     }
 
     @RequestMapping(value = itemUri, method = {RequestMethod.POST})

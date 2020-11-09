@@ -11,4 +11,5 @@ public interface ItemEntityRepository extends CrudRepository<ItemEntity, Integer
     List<ItemEntity> findByItemTypeCatId(int itemTypeCatId);
     List<ItemEntity> findByUser(UserEntity user);
 
+
 }

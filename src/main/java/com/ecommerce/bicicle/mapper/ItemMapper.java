@@ -3,7 +3,6 @@ package com.ecommerce.bicicle.mapper;
 import com.ecommerce.bicicle.dto.ItemDto;
 import com.ecommerce.bicicle.dto.UserDto;
 import com.ecommerce.bicicle.entity.ItemEntity;
-import com.ecommerce.bicicle.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +32,7 @@ public class ItemMapper {
                 .setItemTypeCatId(itemEntity.getItemTypeCatId())
                 .setItemTransactionId(itemEntity.getItemTransactionId())
                 .setName(itemEntity.getName())
+                .setYear(itemEntity.getYear())
                 .setPrice(itemEntity.getPrice())
                 .setOriginalPrice(itemEntity.getOriginalPrice())
                 .setDiscount(itemEntity.getDiscount())
@@ -55,6 +55,7 @@ public class ItemMapper {
                 .setItemTypeCatId(itemDto.getItemTypeCatId())
                 .setItemTransactionId(itemDto.getItemTransactionId())
                 .setName(itemDto.getName())
+                .setYear(itemDto.getYear())
                 .setPrice(itemDto.getPrice())
                 .setOriginalPrice(itemDto.getOriginalPrice())
                 .setDiscount(itemDto.getDiscount())

@@ -29,6 +29,9 @@ public class ItemEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "year")
+    private Integer year;
+
     @Column(name = "price")
     private long price;
 
@@ -107,6 +110,15 @@ public class ItemEntity {
 
     public ItemEntity setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public ItemEntity setYear(Integer year) {
+        this.year = year;
         return this;
     }
 
