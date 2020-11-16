@@ -41,6 +41,12 @@ public class ItemController {
     @Autowired
     private ItemImgUrlsService itemImgUrlsService;
 
+    @RequestMapping(value = itemUri + "/{itemId}", method = {RequestMethod.GET})
+    public @ResponseBody
+    ItemSavedDto getItemById(@PathVariable(value = "itemId")  Integer itemId) {
+        return itemService.getItemsById(itemId);
+    }
+
     @RequestMapping(value = itemUri, method = {RequestMethod.GET})
     public @ResponseBody
     List<ItemSavedDto> getItem() {

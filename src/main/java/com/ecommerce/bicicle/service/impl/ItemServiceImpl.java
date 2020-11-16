@@ -180,6 +180,18 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemSavedDto getItemsById(int itemId) {
+
+        Optional<ItemEntity> itemEntity = itemRepository.findById(itemId);
+        if(!itemEntity.isPresent()) {
+            return null;
+        }
+        ItemSavedDto itemSavedDto = itemSaveMapper.toItemSaveDto(itemEntity);
+
+        return itemSavedDto;
+    }
+
+    @Override
     public ItemSavedDto save(ItemSavedDto itemDTo) {
         //1. Map to Entity
         ItemEntity item = itemSaveMapper.toItemEntity(itemDTo);

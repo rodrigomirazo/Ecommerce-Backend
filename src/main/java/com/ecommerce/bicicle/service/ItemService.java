@@ -9,6 +9,8 @@ public interface ItemService {
 
     List<ItemSavedDto> get();
 
+    ItemSavedDto getItemsById(int itemId);
+
     List<ItemSavedDto> getItemsByType(int itemTypeCatId);
 
     List<ItemSavedDto> getFilteredItems(ItemFilterDto itemFilterDto);
