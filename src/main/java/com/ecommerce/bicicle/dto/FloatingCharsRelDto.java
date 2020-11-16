@@ -2,37 +2,31 @@ package com.ecommerce.bicicle.dto;
 
 public class FloatingCharsRelDto {
 
-    private int itemFloatingCharsRelId;
-    private int itemFloatingCharsCatId;
-    private int itemFloatingCharId;
+    // ID for Floating Entity
+    private int floatingCharId;
+
+    // ID for Floating value Entity
+    private int floatingCharCatId;
+
 
     public FloatingCharsRelDto() {
     }
 
-    public int getItemFloatingCharsRelId() {
-        return itemFloatingCharsRelId;
+    public int getFloatingCharId() {
+        return floatingCharId;
     }
 
-    public FloatingCharsRelDto setItemFloatingCharsRelId(int itemFloatingCharsRelId) {
-        this.itemFloatingCharsRelId = itemFloatingCharsRelId;
+    public FloatingCharsRelDto setFloatingCharId(int floatingCharId) {
+        this.floatingCharId = floatingCharId;
         return this;
     }
 
-    public int getItemFloatingCharsCatId() {
-        return itemFloatingCharsCatId;
+    public int getFloatingCharCatId() {
+        return floatingCharCatId;
     }
 
-    public FloatingCharsRelDto setItemFloatingCharsCatId(int itemFloatingCharsCatId) {
-        this.itemFloatingCharsCatId = itemFloatingCharsCatId;
-        return this;
-    }
-
-    public int getItemFloatingCharId() {
-        return itemFloatingCharId;
-    }
-
-    public FloatingCharsRelDto setItemFloatingCharId(int itemFloatingCharId) {
-        this.itemFloatingCharId = itemFloatingCharId;
+    public FloatingCharsRelDto setFloatingCharCatId(int floatingCharCatId) {
+        this.floatingCharCatId = floatingCharCatId;
         return this;
     }
 

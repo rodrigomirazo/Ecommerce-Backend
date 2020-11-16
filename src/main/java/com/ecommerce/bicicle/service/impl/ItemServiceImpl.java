@@ -1,9 +1,6 @@
 package com.ecommerce.bicicle.service.impl;
 
-import com.ecommerce.bicicle.dto.ItemCategoryFilterDto;
-import com.ecommerce.bicicle.dto.ItemFilterDto;
-import com.ecommerce.bicicle.dto.ItemFloatingCharsRelDto;
-import com.ecommerce.bicicle.dto.ItemSavedDto;
+import com.ecommerce.bicicle.dto.*;
 import com.ecommerce.bicicle.entity.ItemEntity;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
 import com.ecommerce.bicicle.entity.UserEntity;
@@ -12,17 +9,15 @@ import com.ecommerce.bicicle.mapper.ItemSaveMapper;
 import com.ecommerce.bicicle.repository.ItemEntityRepository;
 import com.ecommerce.bicicle.repository.ItemFloatingCharsRelRepository;
 import com.ecommerce.bicicle.repository.UserRepository;
+import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.service.ItemService;
-import org.apache.commons.lang.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -47,6 +42,9 @@ public class ItemServiceImpl implements ItemService {
     @Autowired
     private EntityManager em;
 
+    @Autowired
+    private FloatingCharsService floatingCharsService;
+
     @Override
     public List<ItemSavedDto> get() {
 
@@ -54,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
                 itemRepository.findAll().spliterator(), false)
                 .collect(Collectors.toList());
 
-        return items.parallelStream().map(ItemSavedDto::new).collect(Collectors.toList());
+        return itemSaveMapper.toItemSaveDtoList(items);
     }
 
     @Override
@@ -62,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
 
         List<ItemEntity> items = itemRepository.findByItemTypeCatId(itemTypeCatId);
 
-        return items.parallelStream().map(ItemSavedDto::new).collect(Collectors.toList());
+        return itemSaveMapper.toItemSaveDtoList(items);
     }
 
     @Override
@@ -71,8 +69,24 @@ public class ItemServiceImpl implements ItemService {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<ItemEntity> criteriaQ = cb.createQuery(ItemEntity.class);
         Root<ItemEntity> root = criteriaQ.from(ItemEntity.class);
-
         List<Predicate> predicates = new ArrayList<>();
+
+        Map<Integer, List<Integer>> requestedFloatingChars = new HashMap<>();
+
+        for (int i = 0; i < itemFilterDto.getItemFloatingChars().size(); i++) {
+
+            List<Integer> filterCahrsDtos =
+            itemFilterDto.getItemFloatingChars()
+                    .get(i).getCatalogList().stream()
+                    .filter(floatCatalog -> floatCatalog.getIsSelected() )
+                    .map(floatCatalog -> floatCatalog.getCharId())
+                    .collect(Collectors.toList());
+
+            if(!filterCahrsDtos.isEmpty()) {
+                requestedFloatingChars.put(itemFilterDto.getItemFloatingChars().get(i).getFloatingCharId(),
+                        filterCahrsDtos);
+            }
+        }
 
         //Search by name
         try {
@@ -86,7 +100,14 @@ public class ItemServiceImpl implements ItemService {
         //Search by years
         try {
             if(itemFilterDto.getYears() != null && !itemFilterDto.getYears().isEmpty()) {
-                predicates.add( cb.equal(root.get("year"), itemFilterDto.getYears()) );
+                List<Integer> years =
+                itemFilterDto.getYears().stream()
+                        .filter(itemFilterYearsDto -> itemFilterYearsDto.getIsSelected())
+                        .map(itemFilterYearsDto -> itemFilterYearsDto.getYear())
+                        .collect(Collectors.toList());
+
+                if(!years.isEmpty())
+                    predicates.add( cb.and(root.get("year").in(years)) );
             }
         } catch (NullPointerException n) {
 
@@ -106,14 +127,35 @@ public class ItemServiceImpl implements ItemService {
 
         Predicate[] predicateArray = new Predicate[predicates.size()];
         predicateArray = predicates.toArray(predicateArray);
-
         criteriaQ.select(root).where(predicateArray);
 
         List<ItemEntity> itemEntities = em.createQuery(criteriaQ).getResultList();
-
         List<ItemSavedDto> itemSavedDtos = itemSaveMapper.toItemSaveDtoList(itemEntities);
 
-        return itemSavedDtos;
+        // No Floating Chars selected
+        if(requestedFloatingChars.size() == 0) {
+            return itemSavedDtos;
+        }
+
+        //Obtain Flaoting Chars
+        List<ItemSavedDto> itemsFilter = new ArrayList<>();
+        itemSavedDtos.forEach(itemSavedDto -> {
+
+            for (FloatingCharsRelDto itemFloatingChar : itemSavedDto.getItemFloatingChars()) {
+                // Example Item is made of CARBON
+                Integer itemFloatAssign = itemFloatingChar.getFloatingCharCatId();
+
+                // Example: Aluminium, CARBON (from Filter)
+                List<Integer> floatCharsFilterSelected = requestedFloatingChars.get(itemFloatingChar.getFloatingCharId());
+
+                if(floatCharsFilterSelected != null && floatCharsFilterSelected.contains(itemFloatAssign)) {
+                    itemsFilter.add(itemSavedDto);
+                    break;
+                }
+            }
+        });
+
+        return itemsFilter;
     }
 
     List<String> getSelectedTypes(List<ItemCategoryFilterDto> itemCategoryFilterDto) {
@@ -134,7 +176,7 @@ public class ItemServiceImpl implements ItemService {
         }
         List<ItemEntity> items = itemRepository.findByUser(userEntity.get());
 
-        return items.parallelStream().map(ItemSavedDto::new).collect(Collectors.toList());
+        return items.parallelStream().map(item -> new ItemSavedDto(item)).collect(Collectors.toList());
     }
 
     @Override
@@ -144,7 +186,7 @@ public class ItemServiceImpl implements ItemService {
         //2. Save
         item = this.itemRepository.save(item);
 
-        List<ItemFloatingCharsRelDto> floatingCharsRelated = itemDTo.getItemFloatingChars();
+        List<FloatingCharsRelDto> floatingCharsRelated = itemDTo.getItemFloatingChars();
 
         ItemEntity finalItem = item;
         floatingCharsRelated.forEach(floatingCharsRelDto -> {
@@ -156,6 +198,7 @@ public class ItemServiceImpl implements ItemService {
 
             itemFloatingCharsRelRepository.save(charsRelEntity);
         });
+
         List<ItemFloatingCharsRelEntity> relResult = itemFloatingCharsRelRepository.findByItemId(item.getId());
         //3. Map to Dto
         return new ItemSavedDto(item);

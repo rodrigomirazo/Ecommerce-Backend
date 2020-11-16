@@ -1,6 +1,8 @@
 package com.ecommerce.bicicle.mapper;
 
 import com.ecommerce.bicicle.dto.ItemFloatingCharsRelDto;
+import com.ecommerce.bicicle.entity.ItemFloatingCharsCatEntity;
+import com.ecommerce.bicicle.entity.ItemFloatingCharsEntity;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
 import org.springframework.stereotype.Component;
 

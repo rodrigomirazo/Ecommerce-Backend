@@ -4,6 +4,7 @@ import com.ecommerce.bicicle.entity.ItemEntity;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ItemSavedDto implements Serializable {
 
@@ -23,7 +24,7 @@ public class ItemSavedDto implements Serializable {
     private String sizeId;
     private int lastLevelCategoryId;
     private UserDto user;
-    private List<ItemFloatingCharsRelDto> itemFloatingChars;
+    private List<FloatingCharsRelDto> itemFloatingChars;
 
     public ItemSavedDto() { }
 
@@ -42,24 +43,16 @@ public class ItemSavedDto implements Serializable {
         this.setFleetCost( item.getFleetCost() );
         this.setSizeId( item.getSizeId() );
         this.setLastLevelCategoryId( item.getLastLevelCategoryId() );
-    }
 
-    public ItemSavedDto(ItemEntity item, List<ItemFloatingCharsRelDto> itemFloatingCharsRelDtoList) {
-        this.setId( item.getId() );
-        this.setStatusId( item.getStatusId() );
-        this.setItemColorId( item.getItemColorId() );
-        this.setItemTypeCatId( item.getItemTypeCatId() );
-        this.setItemTransactionId( item.getItemTransactionId() );
-        this.setName( item.getName() );
-        this.setYear( item.getYear() );
-        this.setPrice( item.getPrice() );
-        this.setOriginalPrice( item.getOriginalPrice() );
-        this.setDiscount( item.getDiscount() );
-        this.setDescription( item.getDescription() );
-        this.setFleetCost( item.getFleetCost() );
-        this.setSizeId( item.getSizeId() );
-        this.setLastLevelCategoryId( item.getLastLevelCategoryId() );
-        this.setItemFloatingChars(itemFloatingCharsRelDtoList);
+        this.setItemFloatingChars(
+            item.getItemFloatingCharsRel().stream().map(itemFloatingChars -> {
+
+                return new FloatingCharsRelDto()
+                        .setFloatingCharId(itemFloatingChars.getFloatingCharId())
+
+                        .setFloatingCharCatId(itemFloatingChars.getFloatingCharCatId());
+            }).collect(Collectors.toList())
+        );
     }
 
     public Integer getId() {
@@ -197,11 +190,11 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
-    public List<ItemFloatingCharsRelDto> getItemFloatingChars() {
+    public List<FloatingCharsRelDto> getItemFloatingChars() {
         return itemFloatingChars;
     }
 
-    public ItemSavedDto setItemFloatingChars(List<ItemFloatingCharsRelDto> itemFloatingChars) {
+    public ItemSavedDto setItemFloatingChars(List<FloatingCharsRelDto> itemFloatingChars) {
         this.itemFloatingChars = itemFloatingChars;
         return this;
     }

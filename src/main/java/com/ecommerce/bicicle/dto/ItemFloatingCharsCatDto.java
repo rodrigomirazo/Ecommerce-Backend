@@ -25,4 +25,12 @@ public class ItemFloatingCharsCatDto {
         this.charName = charName;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "ItemFloatingCharsCatDto{" +
+                "charId=" + charId +
+                ", charName='" + charName + '\'' +
+                '}';
+    }
 }

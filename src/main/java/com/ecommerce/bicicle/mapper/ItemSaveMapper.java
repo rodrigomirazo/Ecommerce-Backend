@@ -1,8 +1,9 @@
 package com.ecommerce.bicicle.mapper;
 
+import com.ecommerce.bicicle.dto.FloatingCharsRelDto;
 import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.dto.UserDto;
-import com.ecommerce.bicicle.entity.ItemEntity;
+import com.ecommerce.bicicle.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,7 +39,17 @@ public class ItemSaveMapper {
                 .setDescription(itemEntity.getDescription())
                 .setFleetCost(itemEntity.getFleetCost())
                 .setSizeId(itemEntity.getSizeId())
-                .setLastLevelCategoryId(itemEntity.getLastLevelCategoryId());
+                .setLastLevelCategoryId(itemEntity.getLastLevelCategoryId())
+                .setUser(userDto)
+                .setItemFloatingChars(
+                        itemEntity.getItemFloatingCharsRel().stream().map(itemFloatingChars ->
+
+                                new FloatingCharsRelDto()
+                                        .setFloatingCharId(itemFloatingChars.getFloatingCharId())
+                                        .setFloatingCharCatId(itemFloatingChars.getFloatingCharCatId())
+
+                    ).collect(Collectors.toList())
+                );
     }
 
     public List<ItemEntity> toUserList(List<ItemSavedDto> users) {
@@ -60,7 +71,16 @@ public class ItemSaveMapper {
                 .setDescription(itemSaveDto.getDescription())
                 .setFleetCost(itemSaveDto.getFleetCost())
                 .setSizeId(itemSaveDto.getSizeId())
-                .setLastLevelCategoryId(itemSaveDto.getLastLevelCategoryId());
+                .setLastLevelCategoryId(itemSaveDto.getLastLevelCategoryId())
+                .setUser(userMapper.toUserEntity(itemSaveDto.getUser()))
+                .setItemFloatingCharsRel(
+                        itemSaveDto.getItemFloatingChars().stream().map(floatChar ->
+                            new ItemFloatingCharsRelEntity()
+                                    .setItemId(itemSaveDto.getId())
+                                    .setFloatingCharId(floatChar.getFloatingCharId())
+                                    .setFloatingCharCatId(floatChar.getFloatingCharCatId())
+                        ).collect(Collectors.toList())
+                );
     }
 
     public List<ItemEntity> toItemSaveDtoList(Iterable<ItemEntity> userIterableEntities) {

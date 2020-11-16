@@ -4,6 +4,7 @@ import com.ecommerce.bicicle.dto.ItemDto;
 import com.ecommerce.bicicle.dto.UserDto;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "item")
@@ -56,6 +57,9 @@ public class ItemEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
+    private List<ItemFloatingCharsRelEntity> itemFloatingCharsRel;
 
     public ItemEntity() { }
 
@@ -191,6 +195,15 @@ public class ItemEntity {
 
     public ItemEntity setUser(UserEntity user) {
         this.user = user;
+        return this;
+    }
+
+    public List<ItemFloatingCharsRelEntity> getItemFloatingCharsRel() {
+        return itemFloatingCharsRel;
+    }
+
+    public ItemEntity setItemFloatingCharsRel(List<ItemFloatingCharsRelEntity> itemFloatingCharsRel) {
+        this.itemFloatingCharsRel = itemFloatingCharsRel;
         return this;
     }
 }
