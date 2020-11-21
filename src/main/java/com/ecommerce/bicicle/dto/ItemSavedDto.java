@@ -2,6 +2,7 @@ package com.ecommerce.bicicle.dto;
 
 import com.ecommerce.bicicle.entity.ItemEntity;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,36 +25,24 @@ public class ItemSavedDto implements Serializable {
     private String sizeId;
     private int lastLevelCategoryId;
     private UserDto user;
+    private List<ItemImgUrlsDto> itemImgUrls;
     private List<FloatingCharsRelDto> itemFloatingChars;
+    private String backRear;
+    private String model;
+    private String suspension;
+    private String ruedos;
+    private String casette;
+    private String series;
+    private String gearLevel;
+    private String multiplication;
+    private boolean isModified;
+    private String comments;
+    private int frameRate;
+    private int ruedosRate;
+    private int wheelsRate;
+    private int componentsRate;
 
     public ItemSavedDto() { }
-
-    public ItemSavedDto(ItemEntity item) {
-        this.setId( item.getId() );
-        this.setStatusId( item.getStatusId() );
-        this.setItemColorId( item.getItemColorId() );
-        this.setItemTypeCatId( item.getItemTypeCatId() );
-        this.setItemTransactionId( item.getItemTransactionId() );
-        this.setName( item.getName() );
-        this.setYear( item.getYear() );
-        this.setPrice( item.getPrice() );
-        this.setOriginalPrice( item.getOriginalPrice() );
-        this.setDiscount( item.getDiscount() );
-        this.setDescription( item.getDescription() );
-        this.setFleetCost( item.getFleetCost() );
-        this.setSizeId( item.getSizeId() );
-        this.setLastLevelCategoryId( item.getLastLevelCategoryId() );
-
-        this.setItemFloatingChars(
-            item.getItemFloatingCharsRel().stream().map(itemFloatingChars -> {
-
-                return new FloatingCharsRelDto()
-                        .setFloatingCharId(itemFloatingChars.getFloatingCharId())
-
-                        .setFloatingCharCatId(itemFloatingChars.getFloatingCharCatId());
-            }).collect(Collectors.toList())
-        );
-    }
 
     public Integer getId() {
         return id;
@@ -197,5 +186,177 @@ public class ItemSavedDto implements Serializable {
     public ItemSavedDto setItemFloatingChars(List<FloatingCharsRelDto> itemFloatingChars) {
         this.itemFloatingChars = itemFloatingChars;
         return this;
+    }
+
+    public List<ItemImgUrlsDto> getItemImgUrls() {
+        return itemImgUrls;
+    }
+
+    public ItemSavedDto setItemImgUrls(List<ItemImgUrlsDto> itemImgUrls) {
+        this.itemImgUrls = itemImgUrls;
+        return this;
+    }
+
+    public String getBackRear() {
+        return backRear;
+    }
+
+    public ItemSavedDto setBackRear(String backRear) {
+        this.backRear = backRear;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public ItemSavedDto setModel(String model) {
+        this.model = model;
+        return this;
+    }
+
+    public String getSuspension() {
+        return suspension;
+    }
+
+    public ItemSavedDto setSuspension(String suspension) {
+        this.suspension = suspension;
+        return this;
+    }
+
+    public String getRuedos() {
+        return ruedos;
+    }
+
+    public ItemSavedDto setRuedos(String ruedos) {
+        this.ruedos = ruedos;
+        return this;
+    }
+
+    public String getCasette() {
+        return casette;
+    }
+
+    public ItemSavedDto setCasette(String casette) {
+        this.casette = casette;
+        return this;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public ItemSavedDto setSeries(String series) {
+        this.series = series;
+        return this;
+    }
+
+    public String getGearLevel() {
+        return gearLevel;
+    }
+
+    public ItemSavedDto setGearLevel(String gearLevel) {
+        this.gearLevel = gearLevel;
+        return this;
+    }
+
+    public String getMultiplication() {
+        return multiplication;
+    }
+
+    public ItemSavedDto setMultiplication(String multiplication) {
+        this.multiplication = multiplication;
+        return this;
+    }
+
+    public boolean getIsModified() {
+        return isModified;
+    }
+
+    public ItemSavedDto setIsModified(boolean modified) {
+        isModified = modified;
+        return this;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public ItemSavedDto setComments(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public int getFrameRate() {
+        return frameRate;
+    }
+
+    public ItemSavedDto setFrameRate(int frameRate) {
+        this.frameRate = frameRate;
+        return this;
+    }
+
+    public int getRuedosRate() {
+        return ruedosRate;
+    }
+
+    public ItemSavedDto setRuedosRate(int ruedosRate) {
+        this.ruedosRate = ruedosRate;
+        return this;
+    }
+
+    public int getWheelsRate() {
+        return wheelsRate;
+    }
+
+    public ItemSavedDto setWheelsRate(int wheelsRate) {
+        this.wheelsRate = wheelsRate;
+        return this;
+    }
+
+    public int getComponentsRate() {
+        return componentsRate;
+    }
+
+    public ItemSavedDto setComponentsRate(int componentsRate) {
+        this.componentsRate = componentsRate;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemSavedDto{" +
+                "id=" + id +
+                ", statusId=" + statusId +
+                ", itemColorId=" + itemColorId +
+                ", itemTypeCatId=" + itemTypeCatId +
+                ", itemTransactionId=" + itemTransactionId +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                ", originalPrice=" + originalPrice +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
+                ", fleetCost=" + fleetCost +
+                ", sizeId='" + sizeId + '\'' +
+                ", lastLevelCategoryId=" + lastLevelCategoryId +
+                ", user=" + user +
+                ", itemImgUrls=" + itemImgUrls +
+                ", itemFloatingChars=" + itemFloatingChars +
+                ", backRear='" + backRear + '\'' +
+                ", model='" + model + '\'' +
+                ", suspension='" + suspension + '\'' +
+                ", ruedos='" + ruedos + '\'' +
+                ", casette='" + casette + '\'' +
+                ", series='" + series + '\'' +
+                ", gearLevel='" + gearLevel + '\'' +
+                ", multiplication='" + multiplication + '\'' +
+                ", isModified=" + isModified +
+                ", comments='" + comments + '\'' +
+                ", frameRate=" + frameRate +
+                ", ruedosRate=" + ruedosRate +
+                ", wheelsRate=" + wheelsRate +
+                ", componentsRate=" + componentsRate +
+                '}';
     }
 }

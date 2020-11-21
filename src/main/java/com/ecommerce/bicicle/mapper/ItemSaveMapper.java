@@ -18,6 +18,9 @@ public class ItemSaveMapper {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private ItemImgUrlMapper itemImgUrlMapper;
+
     public List<ItemSavedDto> toItemSaveDtoList(List<ItemEntity> users) {
         return users.stream().map(this::toItemSaveDto).collect(Collectors.toList());
     }
@@ -33,6 +36,7 @@ public class ItemSaveMapper {
                 .setItemTypeCatId(itemEntity.getItemTypeCatId())
                 .setItemTransactionId(itemEntity.getItemTransactionId())
                 .setName(itemEntity.getName())
+                .setYear(itemEntity.getYear())
                 .setPrice(itemEntity.getPrice())
                 .setOriginalPrice(itemEntity.getOriginalPrice())
                 .setDiscount(itemEntity.getDiscount())
@@ -41,6 +45,21 @@ public class ItemSaveMapper {
                 .setSizeId(itemEntity.getSizeId())
                 .setLastLevelCategoryId(itemEntity.getLastLevelCategoryId())
                 .setUser(userDto)
+                .setBackRear(itemEntity.getBackRear())
+                .setModel(itemEntity.getModel())
+                .setSuspension(itemEntity.getSuspension())
+                .setRuedos(itemEntity.getRuedos())
+                .setCasette(itemEntity.getCasette())
+                .setSeries(itemEntity.getSeries())
+                .setGearLevel(itemEntity.getGearLevel())
+                .setMultiplication(itemEntity.getMultiplication())
+                .setIsModified(itemEntity.getIsModified())
+                .setComments(itemEntity.getComments())
+                .setFrameRate(itemEntity.getFrameRate())
+                .setRuedosRate(itemEntity.getRuedosRate())
+                .setWheelsRate(itemEntity.getWheelsRate())
+                .setComponentsRate(itemEntity.getComponentsRate())
+                .setItemImgUrls( itemImgUrlMapper.toItemImgUrlsDtoList(itemEntity.getItemImgUrls()))
                 .setItemFloatingChars(
                         itemEntity.getItemFloatingCharsRel().stream().map(itemFloatingChars ->
 
@@ -65,14 +84,30 @@ public class ItemSaveMapper {
                 .setItemTypeCatId(itemSaveDto.getItemTypeCatId())
                 .setItemTransactionId(itemSaveDto.getItemTransactionId())
                 .setName(itemSaveDto.getName())
+                .setYear(itemSaveDto.getYear())
                 .setPrice(itemSaveDto.getPrice())
                 .setOriginalPrice(itemSaveDto.getOriginalPrice())
                 .setDiscount(itemSaveDto.getDiscount())
                 .setDescription(itemSaveDto.getDescription())
                 .setFleetCost(itemSaveDto.getFleetCost())
                 .setSizeId(itemSaveDto.getSizeId())
+                .setBackRear(itemSaveDto.getBackRear())
+                .setModel(itemSaveDto.getModel())
+                .setSuspension(itemSaveDto.getSuspension())
+                .setRuedos(itemSaveDto.getRuedos())
+                .setCasette(itemSaveDto.getCasette())
+                .setSeries(itemSaveDto.getSeries())
+                .setGearLevel(itemSaveDto.getGearLevel())
+                .setMultiplication(itemSaveDto.getMultiplication())
+                .setIsModified(itemSaveDto.getIsModified())
+                .setComments(itemSaveDto.getComments())
+                .setFrameRate(itemSaveDto.getFrameRate())
+                .setRuedosRate(itemSaveDto.getRuedosRate())
+                .setWheelsRate(itemSaveDto.getWheelsRate())
+                .setComponentsRate(itemSaveDto.getComponentsRate())
                 .setLastLevelCategoryId(itemSaveDto.getLastLevelCategoryId())
                 .setUser(userMapper.toUserEntity(itemSaveDto.getUser()))
+                .setItemImgUrls( itemImgUrlMapper.toItemImgUrlsEntityList(itemSaveDto.getItemImgUrls()))
                 .setItemFloatingCharsRel(
                         itemSaveDto.getItemFloatingChars().stream().map(floatChar ->
                             new ItemFloatingCharsRelEntity()

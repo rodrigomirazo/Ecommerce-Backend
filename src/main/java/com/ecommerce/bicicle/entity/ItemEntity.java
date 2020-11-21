@@ -1,8 +1,5 @@
 package com.ecommerce.bicicle.entity;
 
-import com.ecommerce.bicicle.dto.ItemDto;
-import com.ecommerce.bicicle.dto.UserDto;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -54,12 +51,57 @@ public class ItemEntity {
     @Column(name = "last_level_category_id")
     private int lastLevelCategoryId;
 
+    @Column(name = "back_rear")
+    private String backRear;
+
+    @Column(name = "model")
+    private String model;
+
+    @Column(name = "suspension")
+    private String suspension;
+
+    @Column(name = "ruedos")
+    private String ruedos;
+
+    @Column(name = "casette")
+    private String casette;
+
+    @Column(name = "series")
+    private String series;
+
+    @Column(name = "gear_level")
+    private String gearLevel;
+
+    @Column(name = "multiplication")
+    private String multiplication;
+
+    @Column(name = "is_modified")
+    private boolean isModified;
+
+    @Column(name = "comments")
+    private String comments;
+
+    @Column(name = "frame_rate")
+    private int frameRate;
+
+    @Column(name = "ruedos_rate")
+    private int ruedosRate;
+
+    @Column(name = "wheels_rate")
+    private int wheelsRate;
+
+    @Column(name = "components_rate")
+    private int componentsRate;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
     private List<ItemFloatingCharsRelEntity> itemFloatingCharsRel;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
+    private List<ItemImgUrlsEntity> itemImgUrls;
 
     public ItemEntity() { }
 
@@ -205,5 +247,177 @@ public class ItemEntity {
     public ItemEntity setItemFloatingCharsRel(List<ItemFloatingCharsRelEntity> itemFloatingCharsRel) {
         this.itemFloatingCharsRel = itemFloatingCharsRel;
         return this;
+    }
+
+    public List<ItemImgUrlsEntity> getItemImgUrls() {
+        return itemImgUrls;
+    }
+
+    public ItemEntity setItemImgUrls(List<ItemImgUrlsEntity> itemImgUrls) {
+        this.itemImgUrls = itemImgUrls;
+        return this;
+    }
+
+    public String getBackRear() {
+        return backRear;
+    }
+
+    public ItemEntity setBackRear(String backRear) {
+        this.backRear = backRear;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public ItemEntity setModel(String model) {
+        this.model = model;
+        return this;
+    }
+
+    public String getSuspension() {
+        return suspension;
+    }
+
+    public ItemEntity setSuspension(String suspension) {
+        this.suspension = suspension;
+        return this;
+    }
+
+    public String getRuedos() {
+        return ruedos;
+    }
+
+    public ItemEntity setRuedos(String ruedos) {
+        this.ruedos = ruedos;
+        return this;
+    }
+
+    public String getCasette() {
+        return casette;
+    }
+
+    public ItemEntity setCasette(String casette) {
+        this.casette = casette;
+        return this;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public ItemEntity setSeries(String series) {
+        this.series = series;
+        return this;
+    }
+
+    public String getGearLevel() {
+        return gearLevel;
+    }
+
+    public ItemEntity setGearLevel(String gearLevel) {
+        this.gearLevel = gearLevel;
+        return this;
+    }
+
+    public String getMultiplication() {
+        return multiplication;
+    }
+
+    public ItemEntity setMultiplication(String multiplication) {
+        this.multiplication = multiplication;
+        return this;
+    }
+
+    public boolean getIsModified() {
+        return isModified;
+    }
+
+    public ItemEntity setIsModified(boolean modified) {
+        isModified = modified;
+        return this;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public ItemEntity setComments(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public int getFrameRate() {
+        return frameRate;
+    }
+
+    public ItemEntity setFrameRate(int frameRate) {
+        this.frameRate = frameRate;
+        return this;
+    }
+
+    public int getRuedosRate() {
+        return ruedosRate;
+    }
+
+    public ItemEntity setRuedosRate(int ruedosRate) {
+        this.ruedosRate = ruedosRate;
+        return this;
+    }
+
+    public int getWheelsRate() {
+        return wheelsRate;
+    }
+
+    public ItemEntity setWheelsRate(int wheelsRate) {
+        this.wheelsRate = wheelsRate;
+        return this;
+    }
+
+    public int getComponentsRate() {
+        return componentsRate;
+    }
+
+    public ItemEntity setComponentsRate(int componentsRate) {
+        this.componentsRate = componentsRate;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemEntity{" +
+                "id=" + id +
+                ", statusId=" + statusId +
+                ", itemColorId=" + itemColorId +
+                ", itemTypeCatId=" + itemTypeCatId +
+                ", itemTransactionId=" + itemTransactionId +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                ", originalPrice=" + originalPrice +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
+                ", fleetCost=" + fleetCost +
+                ", sizeId='" + sizeId + '\'' +
+                ", lastLevelCategoryId=" + lastLevelCategoryId +
+                ", backRear='" + backRear + '\'' +
+                ", model='" + model + '\'' +
+                ", suspension='" + suspension + '\'' +
+                ", ruedos='" + ruedos + '\'' +
+                ", casette='" + casette + '\'' +
+                ", series='" + series + '\'' +
+                ", gearLevel='" + gearLevel + '\'' +
+                ", multiplication='" + multiplication + '\'' +
+                ", isModified=" + isModified +
+                ", comments='" + comments + '\'' +
+                ", frameRate=" + frameRate +
+                ", ruedosRate=" + ruedosRate +
+                ", wheelsRate=" + wheelsRate +
+                ", componentsRate=" + componentsRate +
+                ", user=" + user +
+                ", itemFloatingCharsRel=" + itemFloatingCharsRel +
+                ", itemImgUrls=" + itemImgUrls +
+                '}';
     }
 }

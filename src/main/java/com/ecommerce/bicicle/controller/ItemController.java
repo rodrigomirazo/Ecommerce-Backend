@@ -1,13 +1,11 @@
 package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
-import com.ecommerce.bicicle.dto.ItemDto;
 import com.ecommerce.bicicle.dto.ItemFilterDto;
 import com.ecommerce.bicicle.dto.ItemSavedDto;
-import com.ecommerce.bicicle.entity.ItemImgUrls;
+import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 import com.ecommerce.bicicle.service.ItemImgUrlsService;
 import com.ecommerce.bicicle.service.ItemService;
-import com.ecommerce.bicicle.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -86,11 +84,11 @@ public class ItemController {
     /**
      * Upload FIle
      */
-    @PostMapping( itemUri + "/uploadImg/{userId}/{itemId}")
+    @PostMapping( itemUri + "/uploadImg/{itemId}")
     public String singleFileUpload(
             @RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes,
-            @PathVariable(value = "userId") Integer userId, @PathVariable(value = "itemId") Integer itemId
+            @PathVariable(value = "itemId") Integer itemId
             ) {
 
         if (file.isEmpty()) {
@@ -99,14 +97,13 @@ public class ItemController {
         }
 
         Timestamp timestamp = new Timestamp(new Date().getTime());
-        ItemImgUrls itemImgUrls = new ItemImgUrls();
+        ItemImgUrlsEntity itemImgUrls = new ItemImgUrlsEntity();
         itemImgUrls.setCreatedTime(timestamp);
         itemImgUrls.setImgUrl("not_saved");
         itemImgUrls.setItemId(itemId);
-        itemImgUrls.setUserId(userId);
-        ItemImgUrls savedItemImg = itemImgUrlsService.save(itemImgUrls);
+        ItemImgUrlsEntity savedItemImg = itemImgUrlsService.save(itemImgUrls);
 
-        String pathStr = this.imgFilePath + ITEM_FILE_PREFIX + userId + "_" + itemId + "_" + savedItemImg.getId();
+        String pathStr = this.imgFilePath + ITEM_FILE_PREFIX + "_" + itemId + "_" + savedItemImg.getId();
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
@@ -119,6 +116,9 @@ public class ItemController {
             itemImgUrlsService.delete(savedItemImg.getItemId());
             e.printStackTrace();
         }
+
+        itemImgUrls.setImgUrl(pathStr);
+        itemImgUrlsService.save(itemImgUrls);
 
         return "redirect:/uploadStatus";
     }

@@ -1,5 +1,9 @@
 package com.ecommerce.bicicle.dto;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -58,5 +62,16 @@ public class ItemImgUrlsDto implements Serializable {
     public ItemImgUrlsDto setImgServer(String imgServer) {
         this.imgServer = imgServer;
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemImgUrlsDto{" +
+                "id=" + id +
+                ", itemId=" + itemId +
+                ", createdTime=" + createdTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", imgServer='" + imgServer + '\'' +
+                '}';
     }
 }

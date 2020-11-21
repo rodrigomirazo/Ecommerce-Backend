@@ -73,19 +73,23 @@ public class ItemServiceImpl implements ItemService {
 
         Map<Integer, List<Integer>> requestedFloatingChars = new HashMap<>();
 
-        for (int i = 0; i < itemFilterDto.getItemFloatingChars().size(); i++) {
+        try {
+            for (int i = 0; i < itemFilterDto.getItemFloatingChars().size(); i++) {
 
-            List<Integer> filterCahrsDtos =
-            itemFilterDto.getItemFloatingChars()
-                    .get(i).getCatalogList().stream()
-                    .filter(floatCatalog -> floatCatalog.getIsSelected() )
-                    .map(floatCatalog -> floatCatalog.getCharId())
-                    .collect(Collectors.toList());
+                List<Integer> filterCahrsDtos =
+                        itemFilterDto.getItemFloatingChars()
+                                .get(i).getCatalogList().stream()
+                                .filter(floatCatalog -> floatCatalog.getIsSelected())
+                                .map(floatCatalog -> floatCatalog.getCharId())
+                                .collect(Collectors.toList());
 
-            if(!filterCahrsDtos.isEmpty()) {
-                requestedFloatingChars.put(itemFilterDto.getItemFloatingChars().get(i).getFloatingCharId(),
-                        filterCahrsDtos);
+                if (!filterCahrsDtos.isEmpty()) {
+                    requestedFloatingChars.put(itemFilterDto.getItemFloatingChars().get(i).getFloatingCharId(),
+                            filterCahrsDtos);
+                }
             }
+        } catch (NullPointerException e) {
+
         }
 
         //Search by name
@@ -176,7 +180,7 @@ public class ItemServiceImpl implements ItemService {
         }
         List<ItemEntity> items = itemRepository.findByUser(userEntity.get());
 
-        return items.parallelStream().map(item -> new ItemSavedDto(item)).collect(Collectors.toList());
+        return items.parallelStream().map(item -> itemSaveMapper.toItemSaveDto(item)).collect(Collectors.toList());
     }
 
     @Override
@@ -213,7 +217,7 @@ public class ItemServiceImpl implements ItemService {
 
         List<ItemFloatingCharsRelEntity> relResult = itemFloatingCharsRelRepository.findByItemId(item.getId());
         //3. Map to Dto
-        return new ItemSavedDto(item);
+        return itemSaveMapper.toItemSaveDto(item);
     }
 
     @Override
