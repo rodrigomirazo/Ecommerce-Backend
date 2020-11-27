@@ -6,15 +6,28 @@ import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 import com.ecommerce.bicicle.service.ItemImgUrlsService;
 import com.ecommerce.bicicle.service.ItemService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.activation.FileTypeMap;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.websocket.server.PathParam;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -39,6 +52,9 @@ public class ItemController {
     @Autowired
     private ItemImgUrlsService itemImgUrlsService;
 
+    @Autowired
+    private ServletContext servletContext;
+
     @RequestMapping(value = itemUri + "/{itemId}", method = {RequestMethod.GET})
     public @ResponseBody
     ItemSavedDto getItemById(@PathVariable(value = "itemId")  Integer itemId) {
@@ -57,6 +73,20 @@ public class ItemController {
             @PathVariable(value = "userId") Integer userId
     ) {
         return itemService.getItemsByUser(userId);
+    }
+
+    //
+    @RequestMapping(value = itemUri + "/image/{imageName}", method = {RequestMethod.GET})
+    public @ResponseBody
+    byte[] getItemImage(
+            @PathVariable(value = "imageName") String imageName
+    ) throws IOException {
+
+        BufferedImage bufferedImage = ImageIO.read(new File( "/Users/rodrigomirazo/dev/Ecloth-ui/src/assets/uploaded/" + imageName));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, "png", bos );
+        byte[] data = bos.toByteArray();
+        return data;
     }
 
     @RequestMapping(value = itemUri + "/criteria", method = {RequestMethod.POST})
@@ -117,9 +147,10 @@ public class ItemController {
             e.printStackTrace();
         }
 
-        itemImgUrls.setImgUrl(pathStr);
+        itemImgUrls.setImgUrl(ITEM_FILE_PREFIX + "_" + itemId + "_" + savedItemImg.getId() + ".png");
         itemImgUrlsService.save(itemImgUrls);
 
         return "redirect:/uploadStatus";
     }
+
 }

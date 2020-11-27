@@ -20,9 +20,6 @@ public class ItemImgUrlsEntity {
     @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "img_server")
-    private String imgServer;
-
     public ItemImgUrlsEntity() {
     }
 
@@ -59,15 +56,6 @@ public class ItemImgUrlsEntity {
 
     public ItemImgUrlsEntity setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-        return this;
-    }
-
-    public String getImgServer() {
-        return imgServer;
-    }
-
-    public ItemImgUrlsEntity setImgServer(String imgServer) {
-        this.imgServer = imgServer;
         return this;
     }
 }

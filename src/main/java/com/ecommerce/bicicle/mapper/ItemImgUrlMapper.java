@@ -3,6 +3,11 @@ package com.ecommerce.bicicle.mapper;
 import com.ecommerce.bicicle.dto.ItemImgUrlsDto;
 import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 import org.springframework.stereotype.Component;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,21 +27,28 @@ public class ItemImgUrlMapper {
     /** SETTERS & GETTERS **/
     public ItemImgUrlsDto toItemImgUrlsDto(ItemImgUrlsEntity itemImgUrlsEntity) {
 
+        itemImgUrlsEntity.getImgUrl();
+        BufferedImage bufferedImage = null;
+        try {
+            bufferedImage = ImageIO.read(new File( "//Users//rodrigomirazo//dev//Ecloth-ui//src//assets//uploaded//item_file_136_92.png" ));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return new ItemImgUrlsDto()
                 .setId(itemImgUrlsEntity.getId())
                 .setItemId(itemImgUrlsEntity.getItemId())
                 .setImgUrl(itemImgUrlsEntity.getImgUrl())
-                .setCreatedTime(itemImgUrlsEntity.getCreatedTime())
-                .setImgServer(itemImgUrlsEntity.getImgServer());
+                .setCreatedTime(itemImgUrlsEntity.getCreatedTime());
     }
+
     public ItemImgUrlsEntity toItemImgUrlsEntity(ItemImgUrlsDto itemImgUrlsDto) {
 
         return new ItemImgUrlsEntity()
                 .setId(itemImgUrlsDto.getId())
                 .setItemId(itemImgUrlsDto.getItemId())
                 .setImgUrl(itemImgUrlsDto.getImgUrl())
-                .setCreatedTime(itemImgUrlsDto.getCreatedTime())
-                .setImgServer(itemImgUrlsDto.getImgServer());
+                .setCreatedTime(itemImgUrlsDto.getCreatedTime());
     }
 
     /** ITERABLE **/
