@@ -103,7 +103,7 @@ public class ItemController {
         itemImgUrls.setItemId(itemId);
         ItemImgUrlsEntity savedItemImg = itemImgUrlsService.save(itemImgUrls);
 
-        String pathStr = this.imgFilePath + ITEM_FILE_PREFIX + "_" + itemId + "_" + savedItemImg.getId();
+        String pathStr = this.imgFilePath + ITEM_FILE_PREFIX + "_" + itemId + "_" + savedItemImg.getId() + ".png";
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();

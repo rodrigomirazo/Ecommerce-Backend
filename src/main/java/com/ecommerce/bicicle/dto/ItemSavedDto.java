@@ -1,11 +1,7 @@
 package com.ecommerce.bicicle.dto;
 
-import com.ecommerce.bicicle.entity.ItemEntity;
-
-import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemSavedDto implements Serializable {
 
@@ -31,7 +27,7 @@ public class ItemSavedDto implements Serializable {
     private String model;
     private String suspension;
     private String ruedos;
-    private String casette;
+    private String cassette;
     private String series;
     private String gearLevel;
     private String multiplication;
@@ -233,12 +229,12 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
-    public String getCasette() {
-        return casette;
+    public String getCassette() {
+        return cassette;
     }
 
-    public ItemSavedDto setCasette(String casette) {
-        this.casette = casette;
+    public ItemSavedDto setCassette(String cassette) {
+        this.cassette = cassette;
         return this;
     }
 
@@ -347,7 +343,7 @@ public class ItemSavedDto implements Serializable {
                 ", model='" + model + '\'' +
                 ", suspension='" + suspension + '\'' +
                 ", ruedos='" + ruedos + '\'' +
-                ", casette='" + casette + '\'' +
+                ", casette='" + cassette + '\'' +
                 ", series='" + series + '\'' +
                 ", gearLevel='" + gearLevel + '\'' +
                 ", multiplication='" + multiplication + '\'' +

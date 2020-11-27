@@ -64,7 +64,7 @@ public class ItemEntity {
     private String ruedos;
 
     @Column(name = "casette")
-    private String casette;
+    private String cassette;
 
     @Column(name = "series")
     private String series;
@@ -294,12 +294,12 @@ public class ItemEntity {
         return this;
     }
 
-    public String getCasette() {
-        return casette;
+    public String getCassette() {
+        return cassette;
     }
 
-    public ItemEntity setCasette(String casette) {
-        this.casette = casette;
+    public ItemEntity setCassette(String cassette) {
+        this.cassette = cassette;
         return this;
     }
 
@@ -405,7 +405,7 @@ public class ItemEntity {
                 ", model='" + model + '\'' +
                 ", suspension='" + suspension + '\'' +
                 ", ruedos='" + ruedos + '\'' +
-                ", casette='" + casette + '\'' +
+                ", casette='" + cassette + '\'' +
                 ", series='" + series + '\'' +
                 ", gearLevel='" + gearLevel + '\'' +
                 ", multiplication='" + multiplication + '\'' +

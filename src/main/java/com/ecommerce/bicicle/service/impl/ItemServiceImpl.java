@@ -95,7 +95,7 @@ public class ItemServiceImpl implements ItemService {
         //Search by name
         try {
             if(itemFilterDto.getSearchBar() != null && !itemFilterDto.getSearchBar().isEmpty()) {
-                predicates.add(cb.equal(root.get("name"), itemFilterDto.getSearchBar()));
+                predicates.add(cb.like(root.get("model"), "%"+itemFilterDto.getSearchBar() + "%"));
             }
         } catch (NullPointerException n) {
 
