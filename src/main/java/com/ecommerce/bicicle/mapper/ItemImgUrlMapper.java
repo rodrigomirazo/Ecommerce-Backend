@@ -27,14 +27,6 @@ public class ItemImgUrlMapper {
     /** SETTERS & GETTERS **/
     public ItemImgUrlsDto toItemImgUrlsDto(ItemImgUrlsEntity itemImgUrlsEntity) {
 
-        itemImgUrlsEntity.getImgUrl();
-        BufferedImage bufferedImage = null;
-        try {
-            bufferedImage = ImageIO.read(new File( "//Users//rodrigomirazo//dev//Ecloth-ui//src//assets//uploaded//item_file_136_92.png" ));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         return new ItemImgUrlsDto()
                 .setId(itemImgUrlsEntity.getId())
                 .setItemId(itemImgUrlsEntity.getItemId())

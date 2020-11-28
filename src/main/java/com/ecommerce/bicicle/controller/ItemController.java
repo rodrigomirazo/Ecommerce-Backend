@@ -6,7 +6,6 @@ import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 import com.ecommerce.bicicle.service.ItemImgUrlsService;
 import com.ecommerce.bicicle.service.ItemService;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
