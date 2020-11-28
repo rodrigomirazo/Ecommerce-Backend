@@ -20,11 +20,15 @@ public class UserMapper {
 
         return new UserDto()
                 .setId(userEntity.getId())
+                .setName(userEntity.getName())
+                .setLastname(userEntity.getLastname())
                 .setEmail(userEntity.getEmail())
                 .setUserName(userEntity.getUserName())
                 .setUserProfileImg(userEntity.getUserProfileImg())
                 .setPassword(userEntity.getPassword())
-                .setCreatedTime(userEntity.getCreatedTime());
+                .setCreatedTime(userEntity.getCreatedTime())
+                .setUserProfileImg(userEntity.getUserProfileImg())
+                .setUserDescription(userEntity.getUserDescription());
     }
 
     public List<UserEntity> toUserList(List<UserDto> users) {
@@ -35,11 +39,15 @@ public class UserMapper {
 
         return new UserEntity()
                 .setId(userDto.getId())
+                .setName(userDto.getName())
+                .setLastname(userDto.getLastname())
                 .setEmail(userDto.getEmail())
                 .setUserName(userDto.getUserName())
                 .setPassword(userDto.getPassword())
                 .setCreatedTime(userDto.getCreatedTime())
-                .setUserProfileImg(userDto.getUserProfileImg());
+                .setUserProfileImg(userDto.getUserProfileImg())
+                .setUserProfileImg(userDto.getUserProfileImg())
+                .setUserDescription(userDto.getUserDescription());
     }
 
     public List<UserEntity> toUserDtoList(Iterable<UserEntity> userIterableEntities) {
