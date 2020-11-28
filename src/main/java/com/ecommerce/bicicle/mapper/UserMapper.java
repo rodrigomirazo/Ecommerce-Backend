@@ -21,7 +21,7 @@ public class UserMapper {
         return new UserDto()
                 .setId(userEntity.getId())
                 .setEmail(userEntity.getEmail())
-                .setUsername(userEntity.getUsername())
+                .setUserName(userEntity.getUserName())
                 .setUserProfileImg(userEntity.getUserProfileImg())
                 .setPassword(userEntity.getPassword())
                 .setCreatedTime(userEntity.getCreatedTime());
@@ -36,7 +36,7 @@ public class UserMapper {
         return new UserEntity()
                 .setId(userDto.getId())
                 .setEmail(userDto.getEmail())
-                .setUsername(userDto.getUsername())
+                .setUserName(userDto.getUserName())
                 .setPassword(userDto.getPassword())
                 .setCreatedTime(userDto.getCreatedTime())
                 .setUserProfileImg(userDto.getUserProfileImg());

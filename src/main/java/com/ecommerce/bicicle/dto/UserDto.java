@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 
@@ -17,15 +19,30 @@ public class UserDto implements Serializable {
     private int id;
 
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
-    private String username;
+    private String userName;
+
+    @NotBlank(message = Constants.JSON_BLANK_FIELD)
+    private String name;
+
+    @NotBlank(message = Constants.JSON_BLANK_FIELD)
+    private String lastname;
+
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private String email;
+
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private String password;
+
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private Timestamp createdTime;
+
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private String userProfileImg;
+
+    private String userDescription;
+
+    @NotBlank(message = Constants.JSON_BLANK_FIELD)
+    private String token;
 
     public UserDto() {
     }
@@ -39,12 +56,30 @@ public class UserDto implements Serializable {
         return this;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public UserDto setUsername(String username) {
-        this.username = username;
+    public UserDto setUserName(String userName) {
+        this.userName = userName;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UserDto setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public UserDto setLastname(String lastname) {
+        this.lastname = lastname;
         return this;
     }
 
@@ -82,5 +117,59 @@ public class UserDto implements Serializable {
     public UserDto setUserProfileImg(String userProfileImg) {
         this.userProfileImg = userProfileImg;
         return this;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public UserDto setToken(String token) {
+        this.token = token;
+        return this;
+    }
+
+    public String getUserDescription() {
+        return userDescription;
+    }
+
+    public UserDto setUserDescription(String userDescription) {
+        this.userDescription = userDescription;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", createdTime=" + createdTime +
+                ", userProfileImg='" + userProfileImg + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserDto)) return false;
+        UserDto userDto = (UserDto) o;
+        return getId() == userDto.getId() &&
+                Objects.equals(getUserName(), userDto.getUserName()) &&
+                Objects.equals(getName(), userDto.getName()) &&
+                Objects.equals(getLastname(), userDto.getLastname()) &&
+                Objects.equals(getEmail(), userDto.getEmail()) &&
+                Objects.equals(getPassword(), userDto.getPassword()) &&
+                Objects.equals(getCreatedTime(), userDto.getCreatedTime()) &&
+                Objects.equals(getUserProfileImg(), userDto.getUserProfileImg()) &&
+                Objects.equals(getToken(), userDto.getToken());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUserName(), getName(), getLastname(), getEmail(), getPassword(), getCreatedTime(), getUserProfileImg(), getToken());
     }
 }

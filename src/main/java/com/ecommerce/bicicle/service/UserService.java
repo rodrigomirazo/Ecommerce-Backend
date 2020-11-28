@@ -10,6 +10,8 @@ public interface UserService {
 
     UserDto get(Integer userId);
 
+    UserDto getByUsername(String userName);
+
     UserDto save(UserDto user);
 
     void delete(Integer userId);

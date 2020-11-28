@@ -3,11 +3,6 @@ package com.ecommerce.bicicle.mapper;
 import com.ecommerce.bicicle.dto.ItemImgUrlsDto;
 import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 import org.springframework.stereotype.Component;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

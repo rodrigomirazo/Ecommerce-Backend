@@ -28,11 +28,11 @@ public class UserController {
         return itemEntities;
     }
 
-    @RequestMapping(value = userUri+"/{userId}", method = {RequestMethod.GET})
+    @RequestMapping(value = userUri+"/{username}", method = {RequestMethod.GET})
     public @ResponseBody
-    UserDto get(@PathVariable("userId") Integer userId) {
+    UserDto getByUsername(@PathVariable("username") String userName) {
 
-        UserDto itemEntities = userService.get(userId);
+        UserDto itemEntities = userService.getByUsername(userName);
 
         return itemEntities;
     }
