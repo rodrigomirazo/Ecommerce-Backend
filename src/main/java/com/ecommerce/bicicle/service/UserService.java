@@ -12,6 +12,8 @@ public interface UserService {
 
     UserDto getByUsername(String userName);
 
+    UserDto authenticate(UserDto userDto);
+
     UserDto save(UserDto user);
 
     void delete(Integer userId);

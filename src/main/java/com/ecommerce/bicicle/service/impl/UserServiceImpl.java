@@ -20,6 +20,12 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    public UserDto authenticate(UserDto userDto) {
+
+        return null;
+    }
+
+    @Override
     public List<UserDto> get() {
 
         Iterable<UserEntity> userEntities = userRepository.findAll();

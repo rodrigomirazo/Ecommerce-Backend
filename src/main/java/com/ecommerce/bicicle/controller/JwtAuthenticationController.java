@@ -1,10 +1,8 @@
 package com.ecommerce.bicicle.controller;
+import java.util.Objects;
 
-import com.ecommerce.bicicle.constants.EndpointNames;
 import com.ecommerce.bicicle.dto.JwtRequestDto;
 import com.ecommerce.bicicle.dto.JwtResponse;
-import com.ecommerce.bicicle.dto.UserDto;
-import com.ecommerce.bicicle.service.UserService;
 import com.ecommerce.bicicle.service.impl.JwtUserDetailsService;
 import com.ecommerce.bicicle.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +12,18 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@CrossOrigin
+/*
 @RestController
-@RequestMapping(value = EndpointNames.URI)
-public class UserController {
-
-    private static final String userUri = EndpointNames.USER_CONTROLLER;
-
+@CrossOrigin
+*/
+public class JwtAuthenticationController {
+/*
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -34,28 +33,7 @@ public class UserController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @Autowired
-    private UserService userService;
-
-    @RequestMapping(value = userUri, method = {RequestMethod.GET})
-    public @ResponseBody
-    List<UserDto> get() {
-
-        List<UserDto> itemEntities = userService.get();
-
-        return itemEntities;
-    }
-
-    @RequestMapping(value = userUri+"/{username}", method = {RequestMethod.GET})
-    public @ResponseBody
-    UserDto getByUsername(@PathVariable("username") String userName) {
-
-        UserDto itemEntities = userService.getByUsername(userName);
-
-        return itemEntities;
-    }
-
-    @RequestMapping(value = userUri + "/authenticate", method = RequestMethod.POST)
+    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -68,22 +46,6 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
-    @RequestMapping(value = userUri, method = {RequestMethod.PUT})
-    public @ResponseBody
-    UserDto put(@RequestBody UserDto userDto) {
-
-        UserDto savedItemUser = userService.save(userDto);
-
-        return savedItemUser;
-    }
-
-    @RequestMapping(value = userUri, method = {RequestMethod.DELETE})
-    public @ResponseBody
-    void delete(@RequestParam Integer itemId) {
-
-        userService.delete(itemId);
-    }
-
     private void authenticate(String username, String password) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
@@ -93,4 +55,5 @@ public class UserController {
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }
+    */
 }

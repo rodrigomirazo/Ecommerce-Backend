@@ -58,7 +58,7 @@ public class UserMapper {
 
     public UserDto toUserDto(Optional<UserEntity> userOptionalEntities) {
         if(!userOptionalEntities.isPresent()) {
-            return new UserDto();
+            return null;
         }
         return toUserDto(userOptionalEntities.get());
     }
