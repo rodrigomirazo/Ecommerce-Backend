@@ -1,11 +1,13 @@
 package com.ecommerce.bicicle.config;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
+import com.ecommerce.bicicle.constants.EndpointRoles;
 import com.ecommerce.bicicle.util.JwtAuthenticationEntryPoint;
 import com.ecommerce.bicicle.util.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -58,14 +60,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 // dont authenticate this particular request
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST, EndpointNames.URI + EndpointNames.ITEM_CONTROLLER).authenticated()
 
-                .antMatchers(
-                        EndpointNames.URI + EndpointNames.USER_CONTROLLER + "/authenticate"
-                        //EndpointNames.URI + EndpointNames.USER_CONTROLLER + "/authenticate",
-                        //EndpointNames.URI + EndpointNames.USER_CONTROLLER + "/authenticate"
-                ).permitAll().
+                .anyRequest()
+                //.antMatchers(EndpointNames.URI + EndpointNames.USER_CONTROLLER + "/authenticate")
+                .permitAll().
                 // all other requests need to be authenticated
-                        anyRequest().authenticated().and().
+                //anyRequest().authenticated().
+                and().
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
                 exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()

@@ -7,10 +7,7 @@ public class EndpointNames {
     public static final String ITEM_CATEGORY_CONTROLLER = "/itemCat";
     public static final String ITEM_FLOATING_CHARS_CONTROLLER = "/itemFloatingChars";
     public static final String ITEM_FLOATING_CHARS_CAT_CONTROLLER = "/itemFloatingCharsCat";
-
-    public static final String ITEM_COLOR_CAT_CONTROLLER = "/itemColorCat";
     public static final String ITEM_COMMENTS_CONTROLLER = "/itemComments";
-    public static final String ITEM_IMG_URLS_CONTROLLER = "/itemImgUrl";
     public static final String ITEM_CONTROLLER = "/item";
     public static final String ITEM_TRANSACTION_HISTORY_CONTROLLER = "/itemTransactionHistory";
     public static final String ITEM_TRANSACTION_CONTROLLER = "/itemTransaction";
