@@ -54,6 +54,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getByUsernameAndPassword(String userName, String password) {
+        Optional<UserEntity> userEntities = userRepository.getByUserNameAndPassword(userName, password);
+        UserDto userDto = userMapper.toUserDto(userEntities);
+        return userDto;
+    }
+
+    @Override
     public UserDto save(UserDto user) {
 
         UserEntity userEntity = userRepository.save(userMapper.toUserEntity(user));

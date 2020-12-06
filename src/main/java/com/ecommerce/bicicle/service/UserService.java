@@ -12,6 +12,8 @@ public interface UserService {
 
     UserDto getByUsername(String userName);
 
+    UserDto getByUsernameAndPassword(String userName, String password);
+
     UserDto authenticate(UserDto userDto);
 
     UserDto save(UserDto user);

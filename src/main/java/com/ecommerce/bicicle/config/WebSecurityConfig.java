@@ -1,7 +1,6 @@
 package com.ecommerce.bicicle.config;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
-import com.ecommerce.bicicle.constants.EndpointRoles;
 import com.ecommerce.bicicle.util.JwtAuthenticationEntryPoint;
 import com.ecommerce.bicicle.util.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;

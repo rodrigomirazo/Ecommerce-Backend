@@ -33,6 +33,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
+        String password = null;
         String jwtToken = null;
         // JWT Token is in the form "Bearer token". Remove Bearer word and get
         // only the Token
@@ -51,6 +52,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            SecurityContextHolder.getContext().getAuthentication();
+            SecurityContextHolder.getContext().getAuthentication().getCredentials();
 
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 

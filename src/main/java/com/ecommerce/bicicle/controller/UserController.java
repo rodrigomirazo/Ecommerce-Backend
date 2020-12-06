@@ -13,9 +13,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -58,14 +61,19 @@ public class UserController {
     @RequestMapping(value = userUri + "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
-        authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        UserDto userInDB = userService.getByUsernameAndPassword(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        UserDetails userDetails;
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+        if (userInDB != null) {
+            userDetails = new User(userInDB.getUserName(), userInDB.getPassword(), new ArrayList<>());
+        } else {
+            throw new UsernameNotFoundException("User not found with username: " + authenticationRequest.getUsername());
+        }
 
         final String token = jwtTokenUtil.generateToken(userDetails);
+        userInDB.setToken(token);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(userInDB);
     }
 
     @RequestMapping(value = userUri, method = {RequestMethod.PUT})
