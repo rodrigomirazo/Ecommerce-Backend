@@ -81,7 +81,7 @@ public class ItemController {
             @PathVariable(value = "imageName") String imageName
     ) throws IOException {
 
-        BufferedImage bufferedImage = ImageIO.read(new File( "/Users/rodrigomirazo/dev/Ecloth-ui/src/assets/uploaded/" + imageName));
+        BufferedImage bufferedImage = ImageIO.read(new File( this.imgFilePath + imageName));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ImageIO.write(bufferedImage, "png", bos );
         byte[] data = bos.toByteArray();

@@ -59,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 // dont authenticate this particular request
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, EndpointNames.URI + EndpointNames.ITEM_CONTROLLER).authenticated()
+                //.antMatchers(HttpMethod.GET, "/")
+                //.antMatchers(HttpMethod.POST, EndpointNames.URI + EndpointNames.ITEM_CONTROLLER).authenticated()
 
                 .anyRequest()
                 //.antMatchers(EndpointNames.URI + EndpointNames.USER_CONTROLLER + "/authenticate")
@@ -69,7 +70,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 and().
                 // make sure we use stateless session; session won't be used to
                 // store user's state.
-                exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+                exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Add a filter to validate the tokens with every request
