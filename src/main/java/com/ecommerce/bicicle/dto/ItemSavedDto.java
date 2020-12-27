@@ -24,6 +24,7 @@ public class ItemSavedDto implements Serializable {
     private List<ItemImgUrlsDto> itemImgUrls;
     private List<FloatingCharsRelDto> itemFloatingChars;
     private String backRear;
+    private String frontRear;
     private String model;
     private String suspension;
     private String ruedos;
@@ -202,6 +203,15 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
+    public String getFrontRear() {
+        return frontRear;
+    }
+
+    public ItemSavedDto setFrontRear(String frontRear) {
+        this.frontRear = frontRear;
+        return this;
+    }
+
     public String getModel() {
         return model;
     }
@@ -340,10 +350,11 @@ public class ItemSavedDto implements Serializable {
                 ", itemImgUrls=" + itemImgUrls +
                 ", itemFloatingChars=" + itemFloatingChars +
                 ", backRear='" + backRear + '\'' +
+                ", frontRear='" + frontRear + '\'' +
                 ", model='" + model + '\'' +
                 ", suspension='" + suspension + '\'' +
                 ", ruedos='" + ruedos + '\'' +
-                ", casette='" + cassette + '\'' +
+                ", cassette='" + cassette + '\'' +
                 ", series='" + series + '\'' +
                 ", gearLevel='" + gearLevel + '\'' +
                 ", multiplication='" + multiplication + '\'' +

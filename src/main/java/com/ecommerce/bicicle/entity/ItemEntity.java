@@ -54,6 +54,9 @@ public class ItemEntity {
     @Column(name = "back_rear")
     private String backRear;
 
+    @Column(name = "front_rear")
+    private String frontRear;
+
     @Column(name = "model")
     private String model;
 
@@ -264,6 +267,15 @@ public class ItemEntity {
 
     public ItemEntity setBackRear(String backRear) {
         this.backRear = backRear;
+        return this;
+    }
+
+    public String getFrontRear() {
+        return frontRear;
+    }
+
+    public ItemEntity setFrontRear(String frontRear) {
+        this.frontRear = frontRear;
         return this;
     }
 
