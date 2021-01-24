@@ -1,6 +1,7 @@
 package com.ecommerce.bicicle.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -63,6 +64,9 @@ public class ItemEntity {
     @Column(name = "suspension")
     private String suspension;
 
+    @Column(name = "back_suspension")
+    private String backSuspension;
+
     @Column(name = "ruedos")
     private String ruedos;
 
@@ -105,6 +109,9 @@ public class ItemEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "itemId")
     private List<ItemImgUrlsEntity> itemImgUrls;
+
+    @Column(name = "created_time")
+    private Timestamp createdTime;
 
     public ItemEntity() { }
 
@@ -297,6 +304,15 @@ public class ItemEntity {
         return this;
     }
 
+    public String getBackSuspension() {
+        return backSuspension;
+    }
+
+    public ItemEntity setBackSuspension(String backSuspension) {
+        this.backSuspension = backSuspension;
+        return this;
+    }
+
     public String getRuedos() {
         return ruedos;
     }
@@ -393,6 +409,15 @@ public class ItemEntity {
 
     public ItemEntity setComponentsRate(int componentsRate) {
         this.componentsRate = componentsRate;
+        return this;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public ItemEntity setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
         return this;
     }
 

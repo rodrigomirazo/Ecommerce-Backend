@@ -12,7 +12,7 @@ public class ItemTransactionHistory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "transaction_id")
-    private ItemTransaction itemTransaction;
+    private ItemTransactionEntity itemTransaction;
 
     @Column(name = "action")
     private String action;
@@ -32,11 +32,11 @@ public class ItemTransactionHistory {
         return this;
     }
 
-    public ItemTransaction getItemTransaction() {
+    public ItemTransactionEntity getItemTransaction() {
         return itemTransaction;
     }
 
-    public ItemTransactionHistory setItemTransaction(ItemTransaction itemTransaction) {
+    public ItemTransactionHistory setItemTransaction(ItemTransactionEntity itemTransaction) {
         this.itemTransaction = itemTransaction;
         return this;
     }

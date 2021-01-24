@@ -1,6 +1,7 @@
 package com.ecommerce.bicicle.dto;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ItemSavedDto implements Serializable {
@@ -27,6 +28,7 @@ public class ItemSavedDto implements Serializable {
     private String frontRear;
     private String model;
     private String suspension;
+    private String backSuspension;
     private String ruedos;
     private String cassette;
     private String series;
@@ -38,6 +40,7 @@ public class ItemSavedDto implements Serializable {
     private int ruedosRate;
     private int wheelsRate;
     private int componentsRate;
+    private Timestamp createdTime;
 
     public ItemSavedDto() { }
 
@@ -230,6 +233,15 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
+    public String getBackSuspension() {
+        return backSuspension;
+    }
+
+    public ItemSavedDto setBackSuspension(String backSuspension) {
+        this.backSuspension = backSuspension;
+        return this;
+    }
+
     public String getRuedos() {
         return ruedos;
     }
@@ -326,6 +338,15 @@ public class ItemSavedDto implements Serializable {
 
     public ItemSavedDto setComponentsRate(int componentsRate) {
         this.componentsRate = componentsRate;
+        return this;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public ItemSavedDto setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
         return this;
     }
 

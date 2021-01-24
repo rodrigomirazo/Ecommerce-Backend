@@ -2,6 +2,7 @@ package com.ecommerce.bicicle.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +35,11 @@ public class UserEntity {
 
     @Column(name = "user_description")
     private String userDescription;
+
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private List<UserAddressEntity> userAddresses;
 
     public UserEntity() {
     }
@@ -119,6 +125,15 @@ public class UserEntity {
         return this;
     }
 
+    public List<UserAddressEntity> getUserAddresses() {
+        return userAddresses;
+    }
+
+    public UserEntity setUserAddresses(List<UserAddressEntity> userAddresses) {
+        this.userAddresses = userAddresses;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
@@ -131,6 +146,7 @@ public class UserEntity {
                 ", createdTime=" + createdTime +
                 ", userProfileImg='" + userProfileImg + '\'' +
                 ", userDescription='" + userDescription + '\'' +
+                ", userAddress=" + userAddresses +
                 '}';
     }
 
@@ -147,11 +163,12 @@ public class UserEntity {
                 Objects.equals(getPassword(), that.getPassword()) &&
                 Objects.equals(getCreatedTime(), that.getCreatedTime()) &&
                 Objects.equals(getUserProfileImg(), that.getUserProfileImg()) &&
-                Objects.equals(getUserDescription(), that.getUserDescription());
+                Objects.equals(getUserDescription(), that.getUserDescription()) &&
+                Objects.equals(getUserAddresses(), that.getUserAddresses());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserName(), getName(), getLastname(), getEmail(), getPassword(), getCreatedTime(), getUserProfileImg(), getUserDescription());
+        return Objects.hash(getId(), getUserName(), getName(), getLastname(), getEmail(), getPassword(), getCreatedTime(), getUserProfileImg(), getUserDescription(), getUserAddresses());
     }
 }

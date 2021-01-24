@@ -16,7 +16,7 @@ public class UserRateHistory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "transaction_id")
-    private ItemTransaction itemTransaction;
+    private ItemTransactionEntity itemTransaction;
 
     @Column(name = "rate")
     private int rate;
@@ -42,11 +42,11 @@ public class UserRateHistory {
         return this;
     }
 
-    public ItemTransaction getItemTransaction() {
+    public ItemTransactionEntity getItemTransaction() {
         return itemTransaction;
     }
 
-    public UserRateHistory setItemTransaction(ItemTransaction itemTransaction) {
+    public UserRateHistory setItemTransaction(ItemTransactionEntity itemTransaction) {
         this.itemTransaction = itemTransaction;
         return this;
     }

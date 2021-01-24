@@ -2,6 +2,7 @@ package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
 import com.ecommerce.bicicle.dto.UserAddressDto;
+import com.ecommerce.bicicle.service.UserAddressService;
 import com.ecommerce.bicicle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,13 @@ public class UserAddressController {
     private static final String userAddressUri = EndpointNames.USER_ADDRESS_CONTROLLER;
 
     @Autowired
-    private UserService userService;
+    private UserAddressService userAddressService;
 
     @RequestMapping(value = userAddressUri, method = {RequestMethod.GET})
     public @ResponseBody
     List<UserAddressDto> get() {
 
-        //List<UserAddressDto> itemEntities = userService.get();
+        List<UserAddressDto> itemEntities = userAddressService.get();
 
         return null;
     }
@@ -31,15 +32,15 @@ public class UserAddressController {
     public @ResponseBody
     UserAddressDto put(UserAddressDto userAddressDto) {
 
-        //UserAddressDto saveItemUser = userService.save(userAddressDto);
+        //UserAddressDto saveItemUser = userAddressService.save(userAddressDto);
 
         return null;
     }
 
     @RequestMapping(value = userAddressUri, method = {RequestMethod.DELETE})
     public @ResponseBody
-    void delete(Integer itemId) {
+    void delete(String itemId) {
 
-        userService.delete(itemId);
+        userAddressService.delete(itemId);
     }
 }

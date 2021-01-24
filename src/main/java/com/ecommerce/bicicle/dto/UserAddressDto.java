@@ -6,19 +6,19 @@ import java.io.Serializable;
 public class UserAddressDto implements Serializable {
 
     private static final long serialVersionUID = 6061630455851019613L;
-    private int id;
-    private UserDto user;
-    private String name;
-    private String lastnames;
-    private String street;
-    private String intNumber;
-    private String extNumber;
-    private String zipCode;
-    private String state;
-    private String city;
-    private String suburb;
-    private String reference;
-    private String phoneNumber;
+        private int id;
+        private String userId;
+        private String name;
+        private String lastnames;
+        private String street;
+        private String intNumber;
+        private String extNumber;
+        private String zipCode;
+        private String state;
+        private String city;
+        private String suburb;
+        private String reference;
+        private String phoneNumber;
 
     public UserAddressDto() {
     }
@@ -32,12 +32,12 @@ public class UserAddressDto implements Serializable {
         return this;
     }
 
-    public UserDto getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public UserAddressDto setUser(UserDto user) {
-        this.user = user;
+    public UserAddressDto setUserId(String userId) {
+        this.userId = userId;
         return this;
     }
 

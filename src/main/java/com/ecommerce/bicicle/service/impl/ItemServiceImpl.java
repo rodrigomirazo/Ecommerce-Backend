@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -159,6 +161,8 @@ public class ItemServiceImpl implements ItemService {
             }
         });
 
+        itemsFilter.stream().sorted((o1, o2) -> o1.getCreatedTime().compareTo(o2.getCreatedTime()));
+
         return itemsFilter;
     }
 
@@ -200,6 +204,7 @@ public class ItemServiceImpl implements ItemService {
         //1. Map to Entity
         ItemEntity item = itemSaveMapper.toItemEntity(itemDTo);
         //2. Save
+        item.setCreatedTime(getTimeStamp());
         item = this.itemRepository.save(item);
 
         List<FloatingCharsRelDto> floatingCharsRelated = itemDTo.getItemFloatingChars();
@@ -228,6 +233,12 @@ public class ItemServiceImpl implements ItemService {
         } catch (EmptyResultDataAccessException e) {
             System.out.println("already deleted");
         }
+    }
+
+    private Timestamp getTimeStamp() {
+
+        Calendar cal = Calendar.getInstance();
+        return new Timestamp(cal.toInstant().toEpochMilli());
     }
 
 }

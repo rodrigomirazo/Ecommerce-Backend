@@ -2,6 +2,7 @@ package com.ecommerce.bicicle.mapper;
 
 import com.ecommerce.bicicle.dto.UserDto;
 import com.ecommerce.bicicle.entity.UserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,6 +12,9 @@ import java.util.stream.StreamSupport;
 
 @Component
 public class UserMapper {
+
+    @Autowired
+    private UserAddressMapper userAddressMapper;
 
     public List<UserDto> toUserDtoList(List<UserEntity> users) {
         return users.stream().map(this::toUserDto).collect(Collectors.toList());
@@ -28,7 +32,8 @@ public class UserMapper {
                 .setPassword(userEntity.getPassword())
                 .setCreatedTime(userEntity.getCreatedTime())
                 .setUserProfileImg(userEntity.getUserProfileImg())
-                .setUserDescription(userEntity.getUserDescription());
+                .setUserDescription(userEntity.getUserDescription())
+                .setUserAddresses(userAddressMapper.toUserAddressDtoList(userEntity.getUserAddresses()));
     }
 
     public List<UserEntity> toUserList(List<UserDto> users) {
@@ -61,6 +66,13 @@ public class UserMapper {
             return null;
         }
         return toUserDto(userOptionalEntities.get());
+    }
+
+    public UserEntity toUserEntity(Optional<UserEntity> userOptionalEntities) {
+        if(!userOptionalEntities.isPresent()) {
+            return null;
+        }
+        return toUserEntity(userOptionalEntities);
     }
 
 }

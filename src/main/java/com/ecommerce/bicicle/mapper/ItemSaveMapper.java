@@ -49,6 +49,7 @@ public class ItemSaveMapper {
                 .setFrontRear(itemEntity.getFrontRear())
                 .setModel(itemEntity.getModel())
                 .setSuspension(itemEntity.getSuspension())
+                .setBackSuspension(itemEntity.getBackSuspension())
                 .setRuedos(itemEntity.getRuedos())
                 .setCassette(itemEntity.getCassette())
                 .setSeries(itemEntity.getSeries())
@@ -69,7 +70,8 @@ public class ItemSaveMapper {
                                         .setFloatingCharCatId(itemFloatingChars.getFloatingCharCatId())
 
                     ).collect(Collectors.toList())
-                );
+                )
+                .setCreatedTime(itemEntity.getCreatedTime());
     }
 
     public List<ItemEntity> toUserList(List<ItemSavedDto> users) {
@@ -96,6 +98,7 @@ public class ItemSaveMapper {
                 .setFrontRear(itemSaveDto.getFrontRear())
                 .setModel(itemSaveDto.getModel())
                 .setSuspension(itemSaveDto.getSuspension())
+                .setBackSuspension(itemSaveDto.getBackSuspension())
                 .setRuedos(itemSaveDto.getRuedos())
                 .setCassette(itemSaveDto.getCassette())
                 .setSeries(itemSaveDto.getSeries())
@@ -117,7 +120,8 @@ public class ItemSaveMapper {
                                     .setFloatingCharId(floatChar.getFloatingCharId())
                                     .setFloatingCharCatId(floatChar.getFloatingCharCatId())
                         ).collect(Collectors.toList())
-                );
+                )
+                .setCreatedTime(itemSaveDto.getCreatedTime());
     }
 
     public List<ItemEntity> toItemSaveDtoList(Iterable<ItemEntity> userIterableEntities) {

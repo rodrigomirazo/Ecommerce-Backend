@@ -2,10 +2,12 @@ package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
 import com.ecommerce.bicicle.dto.ItemSavedDto;
-import com.ecommerce.bicicle.service.ItemService;
+import com.ecommerce.bicicle.dto.ItemTransactionDto;
+import com.ecommerce.bicicle.service.ItemTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transaction;
 import java.util.List;
 
 @CrossOrigin
@@ -16,30 +18,28 @@ public class ItemTransactionController {
     private static final String itemTransactionUri = EndpointNames.ITEM_TRANSACTION_CONTROLLER;
     
     @Autowired
-    private ItemService itemService;
+    private ItemTransactionService itemTransactionService;
 
     @RequestMapping(value = itemTransactionUri, method = {RequestMethod.GET})
     public @ResponseBody
-    List<ItemSavedDto> getItem() {
+    ItemTransactionDto getByItemIdandUserId(Integer itemId, Integer userId) {
 
-        List<ItemSavedDto> itemEntities = itemService.get();
-
-        return itemEntities;
+        return itemTransactionService.getByItemId(itemId, userId);
     }
 
     @RequestMapping(value = itemTransactionUri, method = {RequestMethod.PUT})
     public @ResponseBody
-    ItemSavedDto getItem(ItemSavedDto item) {
+    ItemTransactionDto getItem(ItemTransactionDto itemTransactionDto) {
 
-        ItemSavedDto saveItemUser = itemService.save(item);
+        ItemTransactionDto saveItemUser = itemTransactionService.save(itemTransactionDto);
 
         return saveItemUser;
     }
 
     @RequestMapping(value = itemTransactionUri, method = {RequestMethod.DELETE})
     public @ResponseBody
-    void getItem(Integer itemId) {
+    void getItem(Integer transactionId) {
 
-        itemService.delete(itemId);
+        itemTransactionService.delete(transactionId);
     }
 }

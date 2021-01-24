@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -43,6 +44,8 @@ public class UserDto implements Serializable {
 
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private String token;
+
+    private List<UserAddressDto> userAddresses;
 
     public UserDto() {
     }
@@ -134,6 +137,15 @@ public class UserDto implements Serializable {
 
     public UserDto setUserDescription(String userDescription) {
         this.userDescription = userDescription;
+        return this;
+    }
+
+    public List<UserAddressDto> getUserAddresses() {
+        return userAddresses;
+    }
+
+    public UserDto setUserAddresses(List<UserAddressDto> userAddresses) {
+        this.userAddresses = userAddresses;
         return this;
     }
 

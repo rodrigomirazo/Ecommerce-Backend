@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "item_transaction")
-public class ItemTransaction {
+public class ItemTransactionEntity {
 
     @Id
     private int id;
@@ -25,11 +25,11 @@ public class ItemTransaction {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "buyer_address_id")
-    private UserAddress buyerAddress;
+    private UserAddressEntity buyerAddress;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_address_id")
-    private UserAddress vendorAddress;
+    private UserAddressEntity vendorAddress;
 
     @Column(name = "payment_method")
     private String paymentMethod;
@@ -43,14 +43,14 @@ public class ItemTransaction {
     @Column(name = "rate")
     private int rate;
 
-    public ItemTransaction() {
+    public ItemTransactionEntity() {
     }
 
     public int getId() {
         return id;
     }
 
-    public ItemTransaction setId(int id) {
+    public ItemTransactionEntity setId(int id) {
         this.id = id;
         return this;
     }
@@ -59,7 +59,7 @@ public class ItemTransaction {
         return item;
     }
 
-    public ItemTransaction setItem(ItemEntity item) {
+    public ItemTransactionEntity setItem(ItemEntity item) {
         this.item = item;
         return this;
     }
@@ -68,7 +68,7 @@ public class ItemTransaction {
         return userVendor;
     }
 
-    public ItemTransaction setUserVendor(UserEntity userVendor) {
+    public ItemTransactionEntity setUserVendor(UserEntity userVendor) {
         this.userVendor = userVendor;
         return this;
     }
@@ -77,7 +77,7 @@ public class ItemTransaction {
         return userBuyer;
     }
 
-    public ItemTransaction setUserBuyer(UserEntity userBuyer) {
+    public ItemTransactionEntity setUserBuyer(UserEntity userBuyer) {
         this.userBuyer = userBuyer;
         return this;
     }
@@ -86,25 +86,25 @@ public class ItemTransaction {
         return transactionStatus;
     }
 
-    public ItemTransaction setTransactionStatus(String transactionStatus) {
+    public ItemTransactionEntity setTransactionStatus(String transactionStatus) {
         this.transactionStatus = transactionStatus;
         return this;
     }
 
-    public UserAddress getBuyerAddress() {
+    public UserAddressEntity getBuyerAddress() {
         return buyerAddress;
     }
 
-    public ItemTransaction setBuyerAddress(UserAddress buyerAddress) {
+    public ItemTransactionEntity setBuyerAddress(UserAddressEntity buyerAddress) {
         this.buyerAddress = buyerAddress;
         return this;
     }
 
-    public UserAddress getVendorAddress() {
+    public UserAddressEntity getVendorAddress() {
         return vendorAddress;
     }
 
-    public ItemTransaction setVendorAddress(UserAddress vendorAddress) {
+    public ItemTransactionEntity setVendorAddress(UserAddressEntity vendorAddress) {
         this.vendorAddress = vendorAddress;
         return this;
     }
@@ -113,7 +113,7 @@ public class ItemTransaction {
         return paymentMethod;
     }
 
-    public ItemTransaction setPaymentMethod(String paymentMethod) {
+    public ItemTransactionEntity setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
         return this;
     }
@@ -122,7 +122,7 @@ public class ItemTransaction {
         return totalPayment;
     }
 
-    public ItemTransaction setTotalPayment(String totalPayment) {
+    public ItemTransactionEntity setTotalPayment(String totalPayment) {
         this.totalPayment = totalPayment;
         return this;
     }
@@ -131,7 +131,7 @@ public class ItemTransaction {
         return trackingNumber;
     }
 
-    public ItemTransaction setTrackingNumber(String trackingNumber) {
+    public ItemTransactionEntity setTrackingNumber(String trackingNumber) {
         this.trackingNumber = trackingNumber;
         return this;
     }
@@ -140,7 +140,7 @@ public class ItemTransaction {
         return rate;
     }
 
-    public ItemTransaction setRate(int rate) {
+    public ItemTransactionEntity setRate(int rate) {
         this.rate = rate;
         return this;
     }
