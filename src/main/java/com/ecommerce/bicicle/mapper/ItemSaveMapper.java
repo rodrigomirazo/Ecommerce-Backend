@@ -71,7 +71,9 @@ public class ItemSaveMapper {
 
                     ).collect(Collectors.toList())
                 )
-                .setCreatedTime(itemEntity.getCreatedTime());
+                .setCreatedTime(itemEntity.getCreatedTime())
+                .setPaymentConfirmed(itemEntity.getPaymentConfirmed())
+                .setApprovedByAdmnin(itemEntity.getApprovedByAdmnin());
     }
 
     public List<ItemEntity> toUserList(List<ItemSavedDto> users) {
@@ -121,7 +123,9 @@ public class ItemSaveMapper {
                                     .setFloatingCharCatId(floatChar.getFloatingCharCatId())
                         ).collect(Collectors.toList())
                 )
-                .setCreatedTime(itemSaveDto.getCreatedTime());
+                .setCreatedTime(itemSaveDto.getCreatedTime())
+                .setPaymentConfirmed(itemSaveDto.getPaymentConfirmed())
+                .setApprovedByAdmnin(itemSaveDto.getApprovedByAdmnin());
     }
 
     public List<ItemEntity> toItemSaveDtoList(Iterable<ItemEntity> userIterableEntities) {

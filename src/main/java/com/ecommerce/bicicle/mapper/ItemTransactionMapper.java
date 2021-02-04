@@ -17,6 +17,12 @@ public class ItemTransactionMapper {
     private ItemMapper itemMapper;
 
     @Autowired
+    private ItemTransactionMapper itemTransactionMapper;
+
+    @Autowired
+    private ItemTransactionHistoryMapper itemTransactionHistoryMapper;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
@@ -45,6 +51,8 @@ public class ItemTransactionMapper {
                 .setTotalPayment( itemTransactionEntity.getTotalPayment() )
                 .setTrackingNumber( itemTransactionEntity.getTrackingNumber() )
                 .setRate( itemTransactionEntity.getRate() )
+                .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryDtoList( itemTransactionEntity.getItemTransactionHistory()))
+                .setCreatedTime(itemTransactionEntity.getCreatedTime())
                 ;
     }
 
@@ -61,7 +69,10 @@ public class ItemTransactionMapper {
                 .setPaymentMethod( itemTransactionDto.getPaymentMethod() )
                 .setTotalPayment( itemTransactionDto.getTotalPayment() )
                 .setTrackingNumber( itemTransactionDto.getTrackingNumber() )
-                .setRate( itemTransactionDto.getRate() );
+                .setRate( itemTransactionDto.getRate() )
+                .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryEntityList( itemTransactionDto.getItemTransactionHistory()))
+                .setCreatedTime(itemTransactionDto.getCreatedTime())
+                ;
     }
 
     /** ITERABLE **/

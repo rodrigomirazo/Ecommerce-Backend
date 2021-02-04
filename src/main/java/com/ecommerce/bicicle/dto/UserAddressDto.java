@@ -6,19 +6,21 @@ import java.io.Serializable;
 public class UserAddressDto implements Serializable {
 
     private static final long serialVersionUID = 6061630455851019613L;
-        private int id;
-        private String userId;
-        private String name;
-        private String lastnames;
-        private String street;
-        private String intNumber;
-        private String extNumber;
-        private String zipCode;
-        private String state;
-        private String city;
-        private String suburb;
-        private String reference;
-        private String phoneNumber;
+    private int id;
+    private String userId;
+    private String name;
+    private String lastnames;
+    private String street;
+    private String intNumber;
+    private String extNumber;
+    private String zipCode;
+    private String state;
+    private String city;
+    private String suburb;
+    private String reference;
+    private String phoneNumber;
+    private boolean savedInProfile;
+    private String streetRef;
 
     public UserAddressDto() {
     }
@@ -137,6 +139,24 @@ public class UserAddressDto implements Serializable {
 
     public UserAddressDto setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public boolean getSavedInProfile() {
+        return savedInProfile;
+    }
+
+    public UserAddressDto setSavedInProfile(boolean savedInProfile) {
+        this.savedInProfile = savedInProfile;
+        return this;
+    }
+
+    public String getStreetRef() {
+        return streetRef;
+    }
+
+    public UserAddressDto setStreetRef(String streetRef) {
+        this.streetRef = streetRef;
         return this;
     }
 }

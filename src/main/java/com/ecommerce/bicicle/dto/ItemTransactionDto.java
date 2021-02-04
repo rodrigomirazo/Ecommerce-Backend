@@ -1,10 +1,15 @@
 package com.ecommerce.bicicle.dto;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+
+import javax.persistence.Column;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class ItemTransactionDto implements Serializable {
 
-    private static final long serialVersionUID = 1474610357147019047L;
+    private static final long serialVersionUID = 8580770524812806057L;
     private int id;
     private ItemDto item;
     private UserDto userVendor;
@@ -15,11 +20,15 @@ public class ItemTransactionDto implements Serializable {
     private String paymentMethod;
     private String totalPayment;
     private String trackingNumber;
-    private int rate;
+    private Integer rate;
+    private List<ItemTransactionHistoryDto> itemTransactionHistory;
+    private Timestamp createdTime;
+    private boolean approvedByAdmnin;
+    private boolean paymentConfirmed;
 
     public ItemTransactionDto() {
     }
-
+    //@JsonGetter("_id")
     public int getId() {
         return id;
     }
@@ -28,7 +37,7 @@ public class ItemTransactionDto implements Serializable {
         this.id = id;
         return this;
     }
-
+    //@JsonGetter("_item")
     public ItemDto getItem() {
         return item;
     }
@@ -37,7 +46,7 @@ public class ItemTransactionDto implements Serializable {
         this.item = item;
         return this;
     }
-
+    //@JsonGetter("_userVendor")
     public UserDto getUserVendor() {
         return userVendor;
     }
@@ -46,7 +55,7 @@ public class ItemTransactionDto implements Serializable {
         this.userVendor = userVendor;
         return this;
     }
-
+    //@JsonGetter("_userBuyer")
     public UserDto getUserBuyer() {
         return userBuyer;
     }
@@ -56,6 +65,7 @@ public class ItemTransactionDto implements Serializable {
         return this;
     }
 
+    //@JsonGetter("_transactionStatus")
     public String getTransactionStatus() {
         return transactionStatus;
     }
@@ -65,6 +75,7 @@ public class ItemTransactionDto implements Serializable {
         return this;
     }
 
+    //@JsonGetter("_buyerAddress")
     public UserAddressDto getBuyerAddress() {
         return buyerAddress;
     }
@@ -74,6 +85,7 @@ public class ItemTransactionDto implements Serializable {
         return this;
     }
 
+    //@JsonGetter("_vendorAddress")
     public UserAddressDto getVendorAddress() {
         return vendorAddress;
     }
@@ -82,7 +94,7 @@ public class ItemTransactionDto implements Serializable {
         this.vendorAddress = vendorAddress;
         return this;
     }
-
+    //@JsonGetter("_paymentMethod")
     public String getPaymentMethod() {
         return paymentMethod;
     }
@@ -91,7 +103,7 @@ public class ItemTransactionDto implements Serializable {
         this.paymentMethod = paymentMethod;
         return this;
     }
-
+    //@JsonGetter("_totalPayment")
     public String getTotalPayment() {
         return totalPayment;
     }
@@ -100,7 +112,7 @@ public class ItemTransactionDto implements Serializable {
         this.totalPayment = totalPayment;
         return this;
     }
-
+    //@JsonGetter("_trackingNumber")
     public String getTrackingNumber() {
         return trackingNumber;
     }
@@ -109,14 +121,49 @@ public class ItemTransactionDto implements Serializable {
         this.trackingNumber = trackingNumber;
         return this;
     }
-
-    public int getRate() {
+    //@JsonGetter("_rate")
+    public Integer getRate() {
         return rate;
     }
 
-    public ItemTransactionDto setRate(int rate) {
+    public ItemTransactionDto setRate(Integer rate) {
         this.rate = rate;
         return this;
     }
+    //@JsonGetter("_itemTransactionHistory")
+    public List<ItemTransactionHistoryDto> getItemTransactionHistory() {
+        return itemTransactionHistory;
+    }
 
+    public ItemTransactionDto setItemTransactionHistory(List<ItemTransactionHistoryDto> itemTransactionHistory) {
+        this.itemTransactionHistory = itemTransactionHistory;
+        return this;
+    }
+    //@JsonGetter("_createdTime")
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public ItemTransactionDto setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public boolean isApprovedByAdmnin() {
+        return approvedByAdmnin;
+    }
+
+    public ItemTransactionDto setApprovedByAdmnin(boolean approvedByAdmnin) {
+        this.approvedByAdmnin = approvedByAdmnin;
+        return this;
+    }
+
+    public boolean isPaymentConfirmed() {
+        return paymentConfirmed;
+    }
+
+    public ItemTransactionDto setPaymentConfirmed(boolean paymentConfirmed) {
+        this.paymentConfirmed = paymentConfirmed;
+        return this;
+    }
 }

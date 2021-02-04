@@ -36,7 +36,6 @@ public class UserEntity {
     @Column(name = "user_description")
     private String userDescription;
 
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private List<UserAddressEntity> userAddresses;
@@ -146,7 +145,7 @@ public class UserEntity {
                 ", createdTime=" + createdTime +
                 ", userProfileImg='" + userProfileImg + '\'' +
                 ", userDescription='" + userDescription + '\'' +
-                ", userAddress=" + userAddresses +
+                ", userAddresses=" + userAddresses +
                 '}';
     }
 

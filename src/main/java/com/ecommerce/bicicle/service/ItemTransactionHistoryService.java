@@ -1,12 +1,12 @@
 package com.ecommerce.bicicle.service;
 
-import com.ecommerce.bicicle.entity.ItemTransactionHistory;
+import com.ecommerce.bicicle.entity.ItemTransactionHistoryEntity;
 import java.util.List;
 
 public interface ItemTransactionHistoryService {
-    List<ItemTransactionHistory> get();
+    List<ItemTransactionHistoryEntity> get();
 
-    ItemTransactionHistory save(ItemTransactionHistory ItemTransaction);
+    ItemTransactionHistoryEntity save(ItemTransactionHistoryEntity ItemTransaction);
 
     void delete(Long itemTransactionHistoryId);
 }

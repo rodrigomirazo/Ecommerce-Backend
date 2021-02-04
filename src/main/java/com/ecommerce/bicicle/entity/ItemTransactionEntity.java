@@ -1,12 +1,15 @@
 package com.ecommerce.bicicle.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "item_transaction")
 public class ItemTransactionEntity {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -41,7 +44,14 @@ public class ItemTransactionEntity {
     private String trackingNumber;
 
     @Column(name = "rate")
-    private int rate;
+    private Integer rate;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    @JoinColumn(name = "transaction_id")
+    private List<ItemTransactionHistoryEntity> itemTransactionHistory;
+
+    @Column(name = "created_time")
+    private Timestamp createdTime;
 
     public ItemTransactionEntity() {
     }
@@ -136,12 +146,30 @@ public class ItemTransactionEntity {
         return this;
     }
 
-    public int getRate() {
+    public Integer getRate() {
         return rate;
     }
 
-    public ItemTransactionEntity setRate(int rate) {
+    public ItemTransactionEntity setRate(Integer rate) {
         this.rate = rate;
+        return this;
+    }
+
+    public List<ItemTransactionHistoryEntity> getItemTransactionHistory() {
+        return itemTransactionHistory;
+    }
+
+    public ItemTransactionEntity setItemTransactionHistory(List<ItemTransactionHistoryEntity> itemTransactionHistory) {
+        this.itemTransactionHistory = itemTransactionHistory;
+        return this;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public ItemTransactionEntity setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
         return this;
     }
 

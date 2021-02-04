@@ -34,6 +34,10 @@ public class UserAddressEntity {
     private String reference;
     @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "saved_in_profile")
+    private boolean savedInProfile;
+    @Column(name = "street_ref")
+    private String streetRef;
 
     public UserAddressEntity() {
     }
@@ -152,6 +156,24 @@ public class UserAddressEntity {
 
     public UserAddressEntity setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public boolean isSavedInProfile() {
+        return savedInProfile;
+    }
+
+    public UserAddressEntity setSavedInProfile(boolean savedInProfile) {
+        this.savedInProfile = savedInProfile;
+        return this;
+    }
+
+    public String getStreetRef() {
+        return streetRef;
+    }
+
+    public UserAddressEntity setStreetRef(String streetRef) {
+        this.streetRef = streetRef;
         return this;
     }
 }

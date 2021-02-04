@@ -8,13 +8,13 @@ public interface ItemTransactionService {
 
     ItemTransactionDto getById(Integer itemTransactionId);
 
-    List<ItemTransactionDto> getByUserVendor(Integer userVendorId);
+    List<ItemTransactionDto> getByUserVendor(String userVendorAccount);
 
-    List<ItemTransactionDto> getByUserBuyer(Integer userBuyerId);
+    List<ItemTransactionDto> getByUserBuyer(String userBuyer);
 
-    ItemTransactionDto getByItemId(Integer itemTransactionId, Integer userId);
+    ItemTransactionDto getByItemIdAndUserBuyer(Integer itemTransactionId, String userBuyerAccount, Integer transactionId);
+
+    ItemTransactionDto getByItemIdAndUserVendor(Integer itemTransactionId, String userBuyerAccount, Integer transactionId);
 
     ItemTransactionDto save(ItemTransactionDto itemTransaction);
-
-    void delete(Integer itemTransactionId);
 }

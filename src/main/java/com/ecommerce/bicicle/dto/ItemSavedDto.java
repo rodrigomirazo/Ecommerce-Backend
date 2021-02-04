@@ -1,5 +1,6 @@
 package com.ecommerce.bicicle.dto;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -41,6 +42,8 @@ public class ItemSavedDto implements Serializable {
     private int wheelsRate;
     private int componentsRate;
     private Timestamp createdTime;
+    private boolean approvedByAdmnin;
+    private boolean paymentConfirmed;
 
     public ItemSavedDto() { }
 
@@ -347,6 +350,24 @@ public class ItemSavedDto implements Serializable {
 
     public ItemSavedDto setCreatedTime(Timestamp createdTime) {
         this.createdTime = createdTime;
+        return this;
+    }
+
+    public boolean getApprovedByAdmnin() {
+        return approvedByAdmnin;
+    }
+
+    public ItemSavedDto setApprovedByAdmnin(boolean approvedByAdmnin) {
+        this.approvedByAdmnin = approvedByAdmnin;
+        return this;
+    }
+
+    public boolean getPaymentConfirmed() {
+        return paymentConfirmed;
+    }
+
+    public ItemSavedDto setPaymentConfirmed(boolean paymentConfirmed) {
+        this.paymentConfirmed = paymentConfirmed;
         return this;
     }
 

@@ -1,25 +1,36 @@
-package com.ecommerce.bicicle.dto;
+package com.ecommerce.bicicle.entity;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 
-public class ItemTransactionHistoryDto implements Serializable {
+@Entity
+@Table(name = "item_transaction_history")
+public class ItemTransactionHistoryEntity {
 
-    private static final long serialVersionUID = -1703022289240174602L;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "transaction_id")
     private Integer itemTransactionId;
+
+    @Column(name = "action")
     private String action;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "created_time")
     private Timestamp createdTime;
 
-    public ItemTransactionHistoryDto() {
+    public ItemTransactionHistoryEntity() {
     }
 
     public int getId() {
         return id;
     }
 
-    public ItemTransactionHistoryDto setId(int id) {
+    public ItemTransactionHistoryEntity setId(int id) {
         this.id = id;
         return this;
     }
@@ -28,7 +39,7 @@ public class ItemTransactionHistoryDto implements Serializable {
         return itemTransactionId;
     }
 
-    public ItemTransactionHistoryDto setItemTransactionId(Integer itemTransactionId) {
+    public ItemTransactionHistoryEntity setItemTransactionId(Integer itemTransactionId) {
         this.itemTransactionId = itemTransactionId;
         return this;
     }
@@ -37,7 +48,7 @@ public class ItemTransactionHistoryDto implements Serializable {
         return action;
     }
 
-    public ItemTransactionHistoryDto setAction(String action) {
+    public ItemTransactionHistoryEntity setAction(String action) {
         this.action = action;
         return this;
     }
@@ -46,7 +57,7 @@ public class ItemTransactionHistoryDto implements Serializable {
         return description;
     }
 
-    public ItemTransactionHistoryDto setDescription(String description) {
+    public ItemTransactionHistoryEntity setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -55,7 +66,7 @@ public class ItemTransactionHistoryDto implements Serializable {
         return createdTime;
     }
 
-    public ItemTransactionHistoryDto setCreatedTime(Timestamp createdTime) {
+    public ItemTransactionHistoryEntity setCreatedTime(Timestamp createdTime) {
         this.createdTime = createdTime;
         return this;
     }

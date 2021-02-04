@@ -113,6 +113,12 @@ public class ItemEntity {
     @Column(name = "created_time")
     private Timestamp createdTime;
 
+    @Column(name = "approved_by_admin")
+    private boolean approvedByAdmnin;
+
+    @Column(name = "payment_confirmed")
+    private boolean paymentConfirmed;
+
     public ItemEntity() { }
 
     public Integer getId() {
@@ -418,6 +424,24 @@ public class ItemEntity {
 
     public ItemEntity setCreatedTime(Timestamp createdTime) {
         this.createdTime = createdTime;
+        return this;
+    }
+
+    public boolean getApprovedByAdmnin() {
+        return approvedByAdmnin;
+    }
+
+    public ItemEntity setApprovedByAdmnin(boolean approvedByAdmnin) {
+        this.approvedByAdmnin = approvedByAdmnin;
+        return this;
+    }
+
+    public boolean getPaymentConfirmed() {
+        return paymentConfirmed;
+    }
+
+    public ItemEntity setPaymentConfirmed(boolean paymentConfirmed) {
+        this.paymentConfirmed = paymentConfirmed;
         return this;
     }
 

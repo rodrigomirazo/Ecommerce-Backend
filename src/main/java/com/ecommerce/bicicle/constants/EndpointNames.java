@@ -17,7 +17,7 @@ public class EndpointNames {
     public static final String USER_RATE_HISTORY_CONTROLLER = "/userRateHistory";
     public static final String USER_CONTROLLER = "/user";
     public static final String USER_PROFILE_CONTROLLER = "/user/profile";
-
+    public static final String EMAIL_SERVICE_CONTROLLER = "/emailService";
 
     public static final String URI = "/ecommerce/bicicle/api/v1";
 
