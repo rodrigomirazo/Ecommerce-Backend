@@ -20,22 +20,22 @@ public class ItemImgUrlMapper {
     }
 
     /** SETTERS & GETTERS **/
-    public ItemImgUrlsDto toItemImgUrlsDto(ItemImgUrlsEntity itemImgUrlsEntity) {
+    public ItemImgUrlsDto toItemImgUrlsDto(ItemImgUrlsEntity itemImgUrls) {
 
         return new ItemImgUrlsDto()
-                .setId(itemImgUrlsEntity.getId())
-                .setItemId(itemImgUrlsEntity.getItemId())
-                .setImgUrl(itemImgUrlsEntity.getImgUrl())
-                .setCreatedTime(itemImgUrlsEntity.getCreatedTime());
+                .setId(itemImgUrls.getId())
+                .setItemId(itemImgUrls.getItemId())
+                .setImgUrl(itemImgUrls.getImgUrl())
+                .setCreatedTime(itemImgUrls.getCreatedTime());
     }
 
-    public ItemImgUrlsEntity toItemImgUrlsEntity(ItemImgUrlsDto itemImgUrlsDto) {
+    public ItemImgUrlsEntity toItemImgUrlsEntity(ItemImgUrlsDto itemImgUrls) {
 
         return new ItemImgUrlsEntity()
-                .setId(itemImgUrlsDto.getId())
-                .setItemId(itemImgUrlsDto.getItemId())
-                .setImgUrl(itemImgUrlsDto.getImgUrl())
-                .setCreatedTime(itemImgUrlsDto.getCreatedTime());
+                .setId(itemImgUrls.getId())
+                .setItemId(itemImgUrls.getItemId())
+                .setImgUrl(itemImgUrls.getImgUrl())
+                .setCreatedTime(itemImgUrls.getCreatedTime());
     }
 
     /** ITERABLE **/

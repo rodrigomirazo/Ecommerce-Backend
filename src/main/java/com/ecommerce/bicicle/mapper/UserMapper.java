@@ -20,39 +20,41 @@ public class UserMapper {
         return users.stream().map(this::toUserDto).collect(Collectors.toList());
     }
 
-    public UserDto toUserDto(UserEntity userEntity) {
+    public UserDto toUserDto(UserEntity user) {
 
         return new UserDto()
-                .setId(userEntity.getId())
-                .setName(userEntity.getName())
-                .setLastname(userEntity.getLastname())
-                .setEmail(userEntity.getEmail())
-                .setUserName(userEntity.getUserName())
-                .setUserProfileImg(userEntity.getUserProfileImg())
-                .setPassword(userEntity.getPassword())
-                .setCreatedTime(userEntity.getCreatedTime())
-                .setUserProfileImg(userEntity.getUserProfileImg())
-                .setUserDescription(userEntity.getUserDescription())
-                .setUserAddresses(userAddressMapper.toUserAddressDtoList(userEntity.getUserAddresses()));
+                .setId(user.getId())
+                .setName(user.getName())
+                .setLastname(user.getLastname())
+                .setEmail(user.getEmail())
+                .setUserName(user.getUserName())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setPassword(user.getPassword())
+                .setCreatedTime(user.getCreatedTime())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setUserDescription(user.getUserDescription())
+                .setContent(user.getContent())
+                .setUserAddresses(userAddressMapper.toUserAddressDtoList(user.getUserAddresses()));
     }
 
     public List<UserEntity> toUserList(List<UserDto> users) {
         return users.stream().map(this::toUserEntity).collect(Collectors.toList());
     }
 
-    public UserEntity toUserEntity(UserDto userDto) {
+    public UserEntity toUserEntity(UserDto user) {
 
         return new UserEntity()
-                .setId(userDto.getId())
-                .setName(userDto.getName())
-                .setLastname(userDto.getLastname())
-                .setEmail(userDto.getEmail())
-                .setUserName(userDto.getUserName())
-                .setPassword(userDto.getPassword())
-                .setCreatedTime(userDto.getCreatedTime())
-                .setUserProfileImg(userDto.getUserProfileImg())
-                .setUserProfileImg(userDto.getUserProfileImg())
-                .setUserDescription(userDto.getUserDescription());
+                .setId(user.getId())
+                .setName(user.getName())
+                .setLastname(user.getLastname())
+                .setEmail(user.getEmail())
+                .setUserName(user.getUserName())
+                .setPassword(user.getPassword())
+                .setCreatedTime(user.getCreatedTime())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setContent(user.getContent())
+                .setUserDescription(user.getUserDescription());
     }
 
     public List<UserEntity> toUserDtoList(Iterable<UserEntity> userIterableEntities) {

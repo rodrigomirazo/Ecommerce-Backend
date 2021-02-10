@@ -40,6 +40,9 @@ public class UserEntity {
     @JoinColumn(name = "user_id")
     private List<UserAddressEntity> userAddresses;
 
+    @Column(name = "content")
+    private String content;
+
     public UserEntity() {
     }
 
@@ -130,6 +133,15 @@ public class UserEntity {
 
     public UserEntity setUserAddresses(List<UserAddressEntity> userAddresses) {
         this.userAddresses = userAddresses;
+        return this;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public UserEntity setContent(String content) {
+        this.content = content;
         return this;
     }
 

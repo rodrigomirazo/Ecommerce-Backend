@@ -47,6 +47,9 @@ public class UserDto implements Serializable {
 
     private List<UserAddressDto> userAddresses;
 
+    private String content;
+
+
     public UserDto() {
     }
 
@@ -146,6 +149,15 @@ public class UserDto implements Serializable {
 
     public UserDto setUserAddresses(List<UserAddressDto> userAddresses) {
         this.userAddresses = userAddresses;
+        return this;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public UserDto setContent(String content) {
+        this.content = content;
         return this;
     }
 

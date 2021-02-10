@@ -16,48 +16,48 @@ public class UserAddressMapper {
         return userAddresss.stream().map(this::toUserAddressDto).collect(Collectors.toList());
     }
 
-    public UserAddressDto toUserAddressDto(UserAddressEntity userAddressEntity) {
+    public UserAddressDto toUserAddressDto(UserAddressEntity userAddress) {
 
         return new UserAddressDto()
-                .setId(userAddressEntity.getId())
-                .setName(userAddressEntity.getName())
-                .setUserId(userAddressEntity.getUserId())
-                .setLastnames(userAddressEntity.getLastnames())
-                .setStreet( userAddressEntity.getStreet())
-                .setStreetRef(userAddressEntity.getStreetRef())
-                .setIntNumber( userAddressEntity.getIntNumber())
-                .setExtNumber( userAddressEntity.getExtNumber())
-                .setZipCode( userAddressEntity.getZipCode())
-                .setState( userAddressEntity.getState())
-                .setCity( userAddressEntity.getCity())
-                .setSuburb( userAddressEntity.getSuburb())
-                .setReference( userAddressEntity.getReference())
-                .setPhoneNumber( userAddressEntity.getPhoneNumber())
-                .setStreetRef( userAddressEntity.getStreetRef() );
+                .setId(userAddress.getId())
+                .setName(userAddress.getName())
+                .setUserId(userAddress.getUserId())
+                .setLastnames(userAddress.getLastnames())
+                .setStreet( userAddress.getStreet())
+                .setStreetRef(userAddress.getStreetRef())
+                .setIntNumber( userAddress.getIntNumber())
+                .setExtNumber( userAddress.getExtNumber())
+                .setZipCode( userAddress.getZipCode())
+                .setState( userAddress.getState())
+                .setCity( userAddress.getCity())
+                .setSuburb( userAddress.getSuburb())
+                .setReference( userAddress.getReference())
+                .setPhoneNumber( userAddress.getPhoneNumber())
+                .setStreetRef( userAddress.getStreetRef() );
     }
 
     public List<UserAddressEntity> toUserAddressList(List<UserAddressDto> userAddresss) {
         return userAddresss.stream().map(this::toUserAddressEntity).collect(Collectors.toList());
     }
 
-    public UserAddressEntity toUserAddressEntity(UserAddressDto userAddressDto) {
+    public UserAddressEntity toUserAddressEntity(UserAddressDto userAddress) {
 
         return new UserAddressEntity()
-                .setId(userAddressDto.getId())
-                .setName(userAddressDto.getName())
-                .setUserId(userAddressDto.getUserId())
-                .setLastnames(userAddressDto.getLastnames())
-                .setStreet( userAddressDto.getStreet())
-                .setStreetRef(userAddressDto.getStreetRef())
-                .setIntNumber( userAddressDto.getIntNumber())
-                .setExtNumber( userAddressDto.getExtNumber())
-                .setZipCode( userAddressDto.getZipCode())
-                .setState( userAddressDto.getState())
-                .setCity( userAddressDto.getCity())
-                .setSuburb( userAddressDto.getSuburb())
-                .setReference( userAddressDto.getReference())
-                .setPhoneNumber( userAddressDto.getPhoneNumber())
-                .setStreetRef( userAddressDto.getStreetRef() );
+                .setId(userAddress.getId())
+                .setName(userAddress.getName())
+                .setUserId(userAddress.getUserId())
+                .setLastnames(userAddress.getLastnames())
+                .setStreet( userAddress.getStreet())
+                .setStreetRef(userAddress.getStreetRef())
+                .setIntNumber( userAddress.getIntNumber())
+                .setExtNumber( userAddress.getExtNumber())
+                .setZipCode( userAddress.getZipCode())
+                .setState( userAddress.getState())
+                .setCity( userAddress.getCity())
+                .setSuburb( userAddress.getSuburb())
+                .setReference( userAddress.getReference())
+                .setPhoneNumber( userAddress.getPhoneNumber())
+                .setStreetRef( userAddress.getStreetRef() );
     }
 
     public List<UserAddressEntity> toUserAddressDtoList(Iterable<UserAddressEntity> userAddressIterableEntities) {

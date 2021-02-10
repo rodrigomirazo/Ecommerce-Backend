@@ -7,7 +7,10 @@ import com.ecommerce.bicicle.dto.UserDto;
 import com.ecommerce.bicicle.service.UserService;
 import com.ecommerce.bicicle.service.impl.JwtUserDetailsService;
 import com.ecommerce.bicicle.util.JwtTokenUtil;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -22,7 +25,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping(value = EndpointNames.URI)
-public class UserProfileController {
+public class UserProfileController <T> {
 
     private static final String userProfileUri = EndpointNames.USER_PROFILE_CONTROLLER;
 
@@ -41,9 +44,14 @@ public class UserProfileController {
     @RequestMapping(value = userProfileUri + "/isValid", method = RequestMethod.POST)
     public ResponseEntity<Boolean> createAuthenticationToken(@RequestBody UserDto userDto) throws Exception {
 
-        Boolean isValid = jwtTokenUtil.validateToken(userDto.getToken(), userDto.getUserName());
-
-        return ResponseEntity.ok(isValid);
+        try {
+            Boolean isValid = jwtTokenUtil.validateToken(userDto.getToken(), userDto.getUserName());
+            return ResponseEntity.ok(isValid);
+        } catch (MalformedJwtException MF) {
+            return ResponseEntity.ok(false);
+        } catch (ExpiredJwtException MF) {
+            return ResponseEntity.ok(false);
+        }
     }
 
 }

@@ -31,25 +31,25 @@ public class ItemTransactionHistoryMapper {
     }
 
     /** SETTERS & GETTERS **/
-    public ItemTransactionHistoryDto toItemTransactionHistoryDto(ItemTransactionHistoryEntity itemTransactionHistoryEntity) {
+    public ItemTransactionHistoryDto toItemTransactionHistoryDto(ItemTransactionHistoryEntity itemTransactionHistory) {
 
         return new ItemTransactionHistoryDto()
-                .setId(itemTransactionHistoryEntity.getId())
-                .setItemTransactionId(itemTransactionHistoryEntity.getItemTransactionId())
-                .setAction(itemTransactionHistoryEntity.getAction())
-                .setDescription(itemTransactionHistoryEntity.getDescription())
-                .setCreatedTime(itemTransactionHistoryEntity.getCreatedTime())
+                .setId(itemTransactionHistory.getId())
+                .setItemTransactionId(itemTransactionHistory.getItemTransactionId())
+                .setAction(itemTransactionHistory.getAction())
+                .setDescription(itemTransactionHistory.getDescription())
+                .setCreatedTime(itemTransactionHistory.getCreatedTime())
                 ;
     }
 
-    public ItemTransactionHistoryEntity toItemTransactionHistoryEntity(ItemTransactionHistoryDto itemTransactionHistoryDto) {
+    public ItemTransactionHistoryEntity toItemTransactionHistoryEntity(ItemTransactionHistoryDto itemTransactionHistory) {
 
         return new ItemTransactionHistoryEntity()
-                .setId(itemTransactionHistoryDto.getId())
-                .setItemTransactionId(itemTransactionHistoryDto.getItemTransactionId())
-                .setAction(itemTransactionHistoryDto.getAction())
-                .setDescription(itemTransactionHistoryDto.getDescription())
-                .setCreatedTime(itemTransactionHistoryDto.getCreatedTime());
+                .setId(itemTransactionHistory.getId())
+                .setItemTransactionId(itemTransactionHistory.getItemTransactionId())
+                .setAction(itemTransactionHistory.getAction())
+                .setDescription(itemTransactionHistory.getDescription())
+                .setCreatedTime(itemTransactionHistory.getCreatedTime());
     }
 
     /** ITERABLE **/

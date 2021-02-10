@@ -37,41 +37,41 @@ public class ItemTransactionMapper {
     }
 
     /** SETTERS & GETTERS **/
-    public ItemTransactionDto toItemTransactionDto(ItemTransactionEntity itemTransactionEntity) {
+    public ItemTransactionDto toItemTransactionDto(ItemTransactionEntity itemTransaction) {
 
         return new ItemTransactionDto()
-                .setId(itemTransactionEntity.getId())
-                .setItem( itemMapper.toItemDto( itemTransactionEntity.getItem() ) )
-                .setUserVendor( userMapper.toUserDto(itemTransactionEntity.getUserVendor()) )
-                .setUserBuyer( userMapper.toUserDto(itemTransactionEntity.getUserBuyer()) )
-                .setTransactionStatus( itemTransactionEntity.getTransactionStatus() )
-                .setBuyerAddress( userAddressMapper.toUserAddressDto( itemTransactionEntity.getBuyerAddress()))
-                .setVendorAddress( userAddressMapper.toUserAddressDto( itemTransactionEntity.getVendorAddress()))
-                .setPaymentMethod( itemTransactionEntity.getPaymentMethod() )
-                .setTotalPayment( itemTransactionEntity.getTotalPayment() )
-                .setTrackingNumber( itemTransactionEntity.getTrackingNumber() )
-                .setRate( itemTransactionEntity.getRate() )
-                .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryDtoList( itemTransactionEntity.getItemTransactionHistory()))
-                .setCreatedTime(itemTransactionEntity.getCreatedTime())
+                .setId(itemTransaction.getId())
+                .setItem( itemMapper.toItemDto( itemTransaction.getItem() ) )
+                .setUserVendor( userMapper.toUserDto(itemTransaction.getUserVendor()) )
+                .setUserBuyer( userMapper.toUserDto(itemTransaction.getUserBuyer()) )
+                .setTransactionStatus( itemTransaction.getTransactionStatus() )
+                .setBuyerAddress( userAddressMapper.toUserAddressDto( itemTransaction.getBuyerAddress()))
+                .setVendorAddress( userAddressMapper.toUserAddressDto( itemTransaction.getVendorAddress()))
+                .setPaymentMethod( itemTransaction.getPaymentMethod() )
+                .setTotalPayment( itemTransaction.getTotalPayment() )
+                .setTrackingNumber( itemTransaction.getTrackingNumber() )
+                .setRate( itemTransaction.getRate() )
+                .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryDtoList( itemTransaction.getItemTransactionHistory()))
+                .setCreatedTime(itemTransaction.getCreatedTime())
                 ;
     }
 
-    public ItemTransactionEntity toItemTransactionEntity(ItemTransactionDto itemTransactionDto) {
+    public ItemTransactionEntity toItemTransactionEntity(ItemTransactionDto itemTransaction) {
 
         return new ItemTransactionEntity()
-                .setId(itemTransactionDto.getId())
-                .setItem( itemMapper.toItemEntity( itemTransactionDto.getItem() ) )
-                .setUserVendor( userMapper.toUserEntity(itemTransactionDto.getUserVendor()) )
-                .setUserBuyer( userMapper.toUserEntity(itemTransactionDto.getUserBuyer()) )
-                .setTransactionStatus( itemTransactionDto.getTransactionStatus() )
-                .setBuyerAddress( userAddressMapper.toUserAddressEntity( itemTransactionDto.getBuyerAddress()))
-                .setVendorAddress( userAddressMapper.toUserAddressEntity( itemTransactionDto.getVendorAddress()))
-                .setPaymentMethod( itemTransactionDto.getPaymentMethod() )
-                .setTotalPayment( itemTransactionDto.getTotalPayment() )
-                .setTrackingNumber( itemTransactionDto.getTrackingNumber() )
-                .setRate( itemTransactionDto.getRate() )
-                .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryEntityList( itemTransactionDto.getItemTransactionHistory()))
-                .setCreatedTime(itemTransactionDto.getCreatedTime())
+                .setId(itemTransaction.getId())
+                .setItem( itemMapper.toItemEntity( itemTransaction.getItem() ) )
+                .setUserVendor( userMapper.toUserEntity(itemTransaction.getUserVendor()) )
+                .setUserBuyer( userMapper.toUserEntity(itemTransaction.getUserBuyer()) )
+                .setTransactionStatus( itemTransaction.getTransactionStatus() )
+                .setBuyerAddress( userAddressMapper.toUserAddressEntity( itemTransaction.getBuyerAddress()))
+                .setVendorAddress( userAddressMapper.toUserAddressEntity( itemTransaction.getVendorAddress()))
+                .setPaymentMethod( itemTransaction.getPaymentMethod() )
+                .setTotalPayment( itemTransaction.getTotalPayment() )
+                .setTrackingNumber( itemTransaction.getTrackingNumber() )
+                .setRate( itemTransaction.getRate() )
+                .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryEntityList( itemTransaction.getItemTransactionHistory()))
+                .setCreatedTime(itemTransaction.getCreatedTime())
                 ;
     }
 
