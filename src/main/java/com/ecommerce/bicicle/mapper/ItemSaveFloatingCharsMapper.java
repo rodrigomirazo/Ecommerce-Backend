@@ -1,25 +1,34 @@
 package com.ecommerce.bicicle.mapper;
 
-import com.ecommerce.bicicle.dto.FloatingCharsRelDto;
-import com.ecommerce.bicicle.dto.ItemSavedDto;
-import com.ecommerce.bicicle.dto.UserDto;
-import com.ecommerce.bicicle.entity.*;
+import com.ecommerce.bicicle.dto.*;
+import com.ecommerce.bicicle.entity.ItemEntity;
+import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
+import com.ecommerce.bicicle.service.FloatingCharsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
-public class ItemSaveMapper {
-    
+public class ItemSaveFloatingCharsMapper {
+
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
+    private ItemSaveMapper itemSaveMapper;
+
+    @Autowired
     private ItemImgUrlMapper itemImgUrlMapper;
+
+    @Autowired
+    private FloatingCharsService floatingCharsService;
+
+    List<ItemFloatingCharsDto> itemFloatingChars;
 
     public List<ItemSavedDto> toItemSaveDtoList(List<ItemEntity> users) {
         return users.stream().map(this::toItemSaveDto).collect(Collectors.toList());
@@ -63,6 +72,8 @@ public class ItemSaveMapper {
                 .setComponentsRate(item.getComponentsRate())
                 .setItemImgUrls( itemImgUrlMapper.toItemImgUrlsDtoList(item.getItemImgUrls()))
                 .setItemFloatingChars(
+                        crossFloatingChars(item)
+                        /*
                         item.getItemFloatingCharsRel().stream().map(itemFloatingChars ->
 
                                 new FloatingCharsRelDto()
@@ -70,6 +81,7 @@ public class ItemSaveMapper {
                                         .setFloatingCharCatId(itemFloatingChars.getFloatingCharCatId())
 
                     ).collect(Collectors.toList())
+                        */
                 )
                 .setCreatedTime(item.getCreatedTime())
                 .setPaymentConfirmed(item.getPaymentConfirmed())
@@ -122,14 +134,52 @@ public class ItemSaveMapper {
                                     .setItemId(item.getId())
                                     .setFloatingCharId(floatChar.getFloatingCharId())
                                     .setFloatingCharCatId(floatChar.getFloatingCharCatId())
-
-
                         ).collect(Collectors.toList())
                 )
                 .setCreatedTime(item.getCreatedTime())
                 .setPaymentConfirmed(item.getPaymentConfirmed())
                 .setDiagnostApproved(item.getDiagnostApproved())
                 .setDiagnostTime(item.getDiagnostTime());
+    }
+
+    private String crossItemType(ItemEntity itemEntity) {
+        ItemSavedDto itemSavedDto = itemSaveMapper.toItemSaveDto(itemEntity);
+
+        return "";
+    }
+
+    private List<FloatingCharsRelDto> crossFloatingChars(ItemEntity itemEntity) {
+
+        this.itemFloatingChars = this.floatingCharsService.getItemFloatingCharsDtos();
+        ItemSavedDto itemSavedDto = itemSaveMapper.toItemSaveDto(itemEntity);
+        List<FloatingCharsRelDto> floatingCharsCROSSED = new ArrayList<>();
+
+        itemSavedDto.getItemFloatingChars().forEach(floatCharsList -> {
+
+            List<ItemFloatingCharsDto> floatingCharFilterList =
+            this.itemFloatingChars.stream().filter(floatingChar ->
+                    floatingChar.getFloatingCharId() == floatCharsList.getFloatingCharId()
+            ).collect(Collectors.toList());
+
+            ItemFloatingCharsDto floatingCharFilter = floatingCharFilterList.get(0);
+
+            List<ItemFloatingCharsCatDto> itemFloatingCharsCatList =
+            floatingCharFilter.getCatalogList().stream().filter(
+                    itemFloatingCharsCat -> itemFloatingCharsCat.getCharId() == floatCharsList.getFloatingCharCatId()
+            ).collect(Collectors.toList());
+
+            ItemFloatingCharsCatDto itemFloatingCharsCatDto = new ItemFloatingCharsCatDto();
+            if(itemFloatingCharsCatList.size() > 0) {
+                itemFloatingCharsCatDto = itemFloatingCharsCatList.get(0);
+                floatCharsList.setFloatingCharName( itemFloatingCharsCatDto.getCharName() );
+                floatCharsList.setFloatingCharCatName( floatingCharFilter.getFloatingCharName() );
+            }
+
+            floatingCharsCROSSED.add(floatCharsList);
+
+        });
+
+        return floatingCharsCROSSED;
     }
 
     public List<ItemEntity> toItemSaveDtoList(Iterable<ItemEntity> userIterableEntities) {

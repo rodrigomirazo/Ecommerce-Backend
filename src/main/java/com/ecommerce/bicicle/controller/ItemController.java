@@ -8,24 +8,18 @@ import com.ecommerce.bicicle.service.ItemImgUrlsService;
 import com.ecommerce.bicicle.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.activation.FileTypeMap;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
-import javax.websocket.server.PathParam;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.InputStream;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -88,11 +82,76 @@ public class ItemController {
         return data;
     }
 
+    @RequestMapping(value = itemUri + "/approvedOrRejected", method = {RequestMethod.GET})
+    public @ResponseBody
+    List<ItemSavedDto> getItemsapprovedOrRejected(
+            @RequestParam() @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam() @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end,
+
+            @RequestParam(required = false) Boolean diagnostApproved,
+            @RequestParam(required = false) Integer pageNum,
+            @RequestParam(required = false) Integer pageSize
+    ) {
+
+        if ( pageNum == null ) {
+            pageNum = 0;
+        }
+        if ( pageSize == null ) {
+            pageSize = 15;
+        }
+
+        Timestamp tsStart = Timestamp.valueOf(start);
+        Timestamp tsEnd = Timestamp.valueOf(end);
+
+        return itemService.getItemsToApprovedOrRejected(diagnostApproved, tsStart, tsEnd, pageNum, pageSize);
+    }
+
+    @RequestMapping(value = itemUri + "/notYetApproved", method = {RequestMethod.GET})
+    public @ResponseBody
+    List<ItemSavedDto> getItemsNotYetApproved(
+            @RequestParam() @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
+            @RequestParam() @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end,
+
+            @RequestParam(required = false) Integer pageNum,
+            @RequestParam(required = false) Integer pageSize
+    ) {
+
+        if ( pageNum == null ) {
+            pageNum = 0;
+        }
+        if ( pageSize == null ) {
+            pageSize = 15;
+        }
+
+        Timestamp tsStart = Timestamp.valueOf(start);
+        Timestamp tsEnd = Timestamp.valueOf(end);
+
+        return itemService.getItemsToApprovedOrRejected(null, tsStart, tsEnd, pageNum, pageSize);
+    }
+
+    @RequestMapping(value = itemUri + "/diagnost/{itemId}/{passed}", method = {RequestMethod.POST})
+    public @ResponseBody
+    ItemSavedDto getItem(
+            @PathVariable(value = "itemId") Integer itemId,
+            @PathVariable(value = "passed") boolean passed
+    ) {
+        return itemService.itemSavedDiagnost(itemId, passed);
+    }
+
     @RequestMapping(value = itemUri + "/criteria", method = {RequestMethod.POST})
     public @ResponseBody
     List<ItemSavedDto> getFilteredItems(
             @RequestBody ItemFilterDto itemFilterDto
+            //, @PathVariable(value = "pageNum") Integer pageNum, @PathVariable(value = "pageSize") Integer pageSize
     ) {
+        /*
+        if ( pageNum == null ) {
+            pageNum = 0;
+        }
+        if ( pageSize == null ) {
+            pageSize = 15;
+        }
+        */
         return itemService.getFilteredItems(itemFilterDto);
     }
 

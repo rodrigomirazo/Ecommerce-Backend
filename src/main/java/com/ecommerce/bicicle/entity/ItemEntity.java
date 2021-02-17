@@ -113,11 +113,14 @@ public class ItemEntity {
     @Column(name = "created_time")
     private Timestamp createdTime;
 
-    @Column(name = "approved_by_admin")
-    private boolean approvedByAdmnin;
-
     @Column(name = "payment_confirmed")
     private boolean paymentConfirmed;
+
+    @Column(name = "diagnost_approved")
+    private Boolean diagnostApproved;
+
+    @Column(name = "diagnost_time")
+    private Timestamp diagnostTime;
 
     public ItemEntity() { }
 
@@ -427,21 +430,30 @@ public class ItemEntity {
         return this;
     }
 
-    public boolean getApprovedByAdmnin() {
-        return approvedByAdmnin;
-    }
-
-    public ItemEntity setApprovedByAdmnin(boolean approvedByAdmnin) {
-        this.approvedByAdmnin = approvedByAdmnin;
-        return this;
-    }
-
     public boolean getPaymentConfirmed() {
         return paymentConfirmed;
     }
 
     public ItemEntity setPaymentConfirmed(boolean paymentConfirmed) {
         this.paymentConfirmed = paymentConfirmed;
+        return this;
+    }
+
+    public Boolean getDiagnostApproved() {
+        return diagnostApproved;
+    }
+
+    public ItemEntity setDiagnostApproved(Boolean diagnostApproved) {
+        this.diagnostApproved = diagnostApproved;
+        return this;
+    }
+
+    public Timestamp getDiagnostTime() {
+        return diagnostTime;
+    }
+
+    public ItemEntity setDiagnostTime(Timestamp diagnostTime) {
+        this.diagnostTime = diagnostTime;
         return this;
     }
 

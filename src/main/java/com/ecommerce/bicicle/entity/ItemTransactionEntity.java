@@ -53,6 +53,21 @@ public class ItemTransactionEntity {
     @Column(name = "created_time")
     private Timestamp createdTime;
 
+    @Column(name = "service")
+    private Boolean service;
+    @Column(name = "service_time")
+    private Timestamp serviceTime;
+
+    @Column(name = "sent")
+    private Boolean sent;
+    @Column(name = "sent_time")
+    private Timestamp sentTime;
+
+    @Column(name = "recieved")
+    private Boolean recieved;
+    @Column(name = "recieved_time")
+    private Timestamp recievedTime;
+
     public ItemTransactionEntity() {
     }
 
@@ -173,4 +188,57 @@ public class ItemTransactionEntity {
         return this;
     }
 
+    public Boolean getService() {
+        return service;
+    }
+
+    public ItemTransactionEntity setService(Boolean service) {
+        this.service = service;
+        return this;
+    }
+
+    public Timestamp getServiceTime() {
+        return serviceTime;
+    }
+
+    public ItemTransactionEntity setServiceTime(Timestamp serviceTime) {
+        this.serviceTime = serviceTime;
+        return this;
+    }
+
+    public Boolean getSent() {
+        return sent;
+    }
+
+    public ItemTransactionEntity setSent(Boolean sent) {
+        this.sent = sent;
+        return this;
+    }
+
+    public Timestamp getSentTime() {
+        return sentTime;
+    }
+
+    public ItemTransactionEntity setSentTime(Timestamp sentTime) {
+        this.sentTime = sentTime;
+        return this;
+    }
+
+    public Boolean getRecieved() {
+        return recieved;
+    }
+
+    public ItemTransactionEntity setRecieved(Boolean recieved) {
+        this.recieved = recieved;
+        return this;
+    }
+
+    public Timestamp getRecievedTime() {
+        return recievedTime;
+    }
+
+    public ItemTransactionEntity setRecievedTime(Timestamp recievedTime) {
+        this.recievedTime = recievedTime;
+        return this;
+    }
 }

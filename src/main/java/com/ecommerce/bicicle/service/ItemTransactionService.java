@@ -17,4 +17,10 @@ public interface ItemTransactionService {
     ItemTransactionDto getByItemIdAndUserVendor(Integer itemTransactionId, String userBuyerAccount, Integer transactionId);
 
     ItemTransactionDto save(ItemTransactionDto itemTransaction);
+
+    ItemTransactionDto itemWashAndService(Integer itemTransactionId, boolean service);
+
+    ItemTransactionDto itemSent(Integer itemTransactionId, boolean sent);
+
+    ItemTransactionDto itemReceived(Integer itemTransactionId, boolean receive);
 }

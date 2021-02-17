@@ -14,10 +14,7 @@ import java.util.stream.StreamSupport;
 public class ItemTransactionMapper {
 
     @Autowired
-    private ItemMapper itemMapper;
-
-    @Autowired
-    private ItemTransactionMapper itemTransactionMapper;
+    private ItemSaveFloatingCharsMapper itemMapper;
 
     @Autowired
     private ItemTransactionHistoryMapper itemTransactionHistoryMapper;
@@ -41,7 +38,7 @@ public class ItemTransactionMapper {
 
         return new ItemTransactionDto()
                 .setId(itemTransaction.getId())
-                .setItem( itemMapper.toItemDto( itemTransaction.getItem() ) )
+                .setItem( itemMapper.toItemSaveDto( itemTransaction.getItem() ) )
                 .setUserVendor( userMapper.toUserDto(itemTransaction.getUserVendor()) )
                 .setUserBuyer( userMapper.toUserDto(itemTransaction.getUserBuyer()) )
                 .setTransactionStatus( itemTransaction.getTransactionStatus() )
@@ -53,6 +50,12 @@ public class ItemTransactionMapper {
                 .setRate( itemTransaction.getRate() )
                 .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryDtoList( itemTransaction.getItemTransactionHistory()))
                 .setCreatedTime(itemTransaction.getCreatedTime())
+                .setService(itemTransaction.getService())
+                .setServiceTime(itemTransaction.getServiceTime())
+                .setSent(itemTransaction.getSent())
+                .setSentTime(itemTransaction.getSentTime())
+                .setRecieved(itemTransaction.getRecieved())
+                .setRecievedTime(itemTransaction.getRecievedTime())
                 ;
     }
 
@@ -72,6 +75,12 @@ public class ItemTransactionMapper {
                 .setRate( itemTransaction.getRate() )
                 .setItemTransactionHistory( itemTransactionHistoryMapper.toItemTransactionHistoryEntityList( itemTransaction.getItemTransactionHistory()))
                 .setCreatedTime(itemTransaction.getCreatedTime())
+                .setService(itemTransaction.getService())
+                .setServiceTime(itemTransaction.getServiceTime())
+                .setSent(itemTransaction.getSent())
+                .setSentTime(itemTransaction.getSentTime())
+                .setRecieved(itemTransaction.getRecieved())
+                .setRecievedTime(itemTransaction.getRecievedTime())
                 ;
     }
 

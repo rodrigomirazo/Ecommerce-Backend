@@ -1,11 +1,10 @@
 package com.ecommerce.bicicle.service.impl;
 
 import com.ecommerce.bicicle.constants.TransactionStatus;
+import com.ecommerce.bicicle.dto.ItemFloatingCharsDto;
 import com.ecommerce.bicicle.dto.ItemTransactionDto;
-import com.ecommerce.bicicle.dto.ItemTransactionHistoryDto;
 import com.ecommerce.bicicle.dto.UserAddressDto;
 import com.ecommerce.bicicle.entity.*;
-import com.ecommerce.bicicle.mapper.ItemTransactionHistoryMapper;
 import com.ecommerce.bicicle.mapper.ItemTransactionMapper;
 import com.ecommerce.bicicle.mapper.UserAddressMapper;
 import com.ecommerce.bicicle.mapper.UserMapper;
@@ -13,11 +12,15 @@ import com.ecommerce.bicicle.repository.ItemEntityRepository;
 import com.ecommerce.bicicle.repository.ItemTransactionRepository;
 import com.ecommerce.bicicle.repository.UserAddressRepository;
 import com.ecommerce.bicicle.repository.UserRepository;
+import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.service.ItemTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +48,9 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
     @Autowired
     UserAddressRepository userAddressRepository;
 
+    @Autowired
+    FloatingCharsService floatingCharsService;
+
     @Override
     public ItemTransactionDto getById(Integer itemTransactionId) {
 
@@ -57,7 +63,13 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         Optional<UserEntity> userOptionalVendor = userRepository.getByUserName(userVendorAccount);
         if(userOptionalVendor.isPresent()) {
             UserEntity userEntity = userMapper.toUserEntity(userOptionalVendor);
-            return itemTransactionMapper.toItemTransactionDtoList(itemTransRepository.findByUserVendor(userEntity));
+
+            List<ItemFloatingCharsDto> floatingCharsDtos = floatingCharsService.getItemFloatingCharsDtos();
+
+            List<ItemTransactionDto> itemTransactionDtos = itemTransactionMapper.toItemTransactionDtoList(
+                    itemTransRepository.findByUserVendorAndTransactionStatusIn(userEntity, shoppingTransaction())
+            );
+            return itemTransactionDtos;
         }
         return new ArrayList<>();
     }
@@ -68,9 +80,22 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         Optional<UserEntity> userOptionalBuyer = userRepository.getByUserName(userBuyer);
         if(userOptionalBuyer.isPresent()) {
             UserEntity userEntity = userMapper.toUserEntity(userOptionalBuyer);
-            return itemTransactionMapper.toItemTransactionDtoList(itemTransRepository.findByUserVendor(userEntity));
+
+            List<ItemTransactionDto> itemTransactionDtos  = itemTransactionMapper.toItemTransactionDtoList(itemTransRepository.findByUserBuyerAndTransactionStatusIn(userEntity, shoppingTransaction()));
+            return itemTransactionDtos;
         }
         return new ArrayList<>();
+    }
+
+    private List<String> shoppingTransaction() {
+        List<String> statusList = new ArrayList<>();
+        statusList.add(TransactionStatus.TRANSACT_STATUS_CLIENT_AUTHORIZATION);
+        statusList.add(TransactionStatus.TRANSACT_STATUS_USER_VENDOR_NOTIFIED);
+        statusList.add(TransactionStatus.TRANSACT_STATUS_USER_SALER_NOTIFIED);
+        statusList.add(TransactionStatus.TRANSACT_STATUS_USER_ADMINISTRATORS_NOTIFIED);
+        statusList.add(TransactionStatus.TRANSACT_STATUS_USER_VENDOR_INCLUSE_TRACK_ID);
+
+        return statusList;
     }
 
     @Override
@@ -172,6 +197,9 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         ItemTransactionHistoryEntity itemTransactionHistory = itemTransactionEntity.getItemTransactionHistory().get(0);
         if(itemTransactionEntity.getItemTransactionHistory().get(0).getItemTransactionId().equals(-1)) {
             itemTransactionEntity.setItemTransactionHistory(null);
+        } else {
+            Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
+            itemTransactionHistory.setCreatedTime(timestamp);
         }
 
         ItemTransactionEntity itemTransactionEntityResp = itemTransRepository.save(itemTransactionEntity);
@@ -180,6 +208,8 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         //
 
         if(itemTransactionEntity.getItemTransactionHistory() == null) {
+            Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
+            itemTransactionHistory.setCreatedTime(timestamp);
             itemTransactionHistory.setItemTransactionId(itemTransactionEntityResp.getId());
             List<ItemTransactionHistoryEntity> historyDtos = new ArrayList<>();
             historyDtos.add(itemTransactionHistory);
@@ -198,5 +228,45 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         ItemTransactionDto itemTransactionDto = itemTransactionMapper.toItemTransactionDto(itemTransactionEntityResp);
 
         return itemTransactionDto;
+    }
+
+    /*
+        Delivery Flow
+     */
+
+    public ItemTransactionDto itemWashAndService(Integer itemTransactionId, boolean service) {
+
+        ItemTransactionEntity itemEntity = itemTransRepository.findById(itemTransactionId).get();
+        itemEntity.setService(service);
+        itemEntity.setServiceTime(getTimeStamp());
+
+        itemEntity = itemTransRepository.save(itemEntity);
+        return itemTransactionMapper.toItemTransactionDto(itemEntity);
+    }
+
+    public ItemTransactionDto itemSent(Integer itemTransactionId, boolean sent) {
+
+        ItemTransactionEntity itemEntity = itemTransRepository.findById(itemTransactionId).get();
+        itemEntity.setSent(sent);
+        itemEntity.setSentTime(getTimeStamp());
+
+        itemEntity = itemTransRepository.save(itemEntity);
+        return itemTransactionMapper.toItemTransactionDto(itemEntity);
+    }
+
+    public ItemTransactionDto itemReceived(Integer itemTransactionId, boolean receive) {
+
+        ItemTransactionEntity itemEntity = itemTransRepository.findById(itemTransactionId).get();
+        itemEntity.setRecieved(receive);
+        itemEntity.setRecievedTime(getTimeStamp());
+
+        itemEntity = itemTransRepository.save(itemEntity);
+        return itemTransactionMapper.toItemTransactionDto(itemEntity);
+    }
+
+    private Timestamp getTimeStamp() {
+
+        Calendar cal = Calendar.getInstance();
+        return new Timestamp(cal.toInstant().toEpochMilli());
     }
 }

@@ -5,19 +5,22 @@ import com.ecommerce.bicicle.entity.ItemEntity;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
 import com.ecommerce.bicicle.entity.UserEntity;
 import com.ecommerce.bicicle.mapper.ItemMapper;
+import com.ecommerce.bicicle.mapper.ItemSaveFloatingCharsMapper;
 import com.ecommerce.bicicle.mapper.ItemSaveMapper;
 import com.ecommerce.bicicle.repository.ItemEntityRepository;
 import com.ecommerce.bicicle.repository.ItemFloatingCharsRelRepository;
+import com.ecommerce.bicicle.repository.ItemPageRepository;
 import com.ecommerce.bicicle.repository.UserRepository;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.*;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -30,6 +33,9 @@ public class ItemServiceImpl implements ItemService {
     private ItemEntityRepository itemRepository;
 
     @Autowired
+    private ItemPageRepository itemPageRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -40,6 +46,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private ItemSaveMapper itemSaveMapper;
+
+    @Autowired
+    private ItemSaveFloatingCharsMapper floatingCharsMapper;
 
     @Autowired
     private EntityManager em;
@@ -63,6 +72,53 @@ public class ItemServiceImpl implements ItemService {
         List<ItemEntity> items = itemRepository.findByItemTypeCatId(itemTypeCatId);
 
         return itemSaveMapper.toItemSaveDtoList(items);
+    }
+
+    @Override
+    public List<ItemSavedDto> getItemsToApprovedOrRejected(
+            Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize) {
+
+        Pageable page = PageRequest.of(pageNum, pageSize);
+        List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetween(
+                diagnostApproved, createdTimeStart, createdTimeEnd, page
+        );
+
+        List<ItemSavedDto> itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(items);
+        return itemSavedDtos;
+    }
+
+    @Override
+    public List<ItemSavedDto> getItemsNotYetApproved(
+            Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize) {
+
+        Pageable page = PageRequest.of(pageNum, pageSize);
+        List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetween(null,
+                createdTimeStart, createdTimeEnd, page
+        );
+
+        List<ItemSavedDto> itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(items);
+        return itemSavedDtos;
+    }
+
+    @Override
+    public ItemSavedDto itemSavedDiagnost(Integer itemId, boolean passed) {
+
+        Optional<ItemEntity> itemEntity = itemRepository.findById(itemId);
+
+        itemEntity.get().getItemFloatingCharsRel();
+
+        if(!itemEntity.isPresent()) {
+            return null;
+        }
+
+        ItemEntity item = itemEntity.get();
+        item.setDiagnostApproved(passed);
+        item.setDiagnostTime(getTimeStamp());
+
+        item = itemRepository.save(item);
+
+        ItemSavedDto itemSavedDto = floatingCharsMapper.toItemSaveDto(item);
+        return itemSavedDto;
     }
 
     @Override
@@ -93,6 +149,12 @@ public class ItemServiceImpl implements ItemService {
         } catch (NullPointerException e) {
 
         }
+
+        //Filter approved only
+        predicates.add(cb.equal(root.get("diagnostApproved"), true));
+
+        //Filter not Bought items
+        predicates.add(cb.equal(root.get("paymentConfirmed"), false));
 
         //Search by name
         try {
@@ -135,7 +197,9 @@ public class ItemServiceImpl implements ItemService {
         predicateArray = predicates.toArray(predicateArray);
         criteriaQ.select(root).where(predicateArray);
 
-        List<ItemEntity> itemEntities = em.createQuery(criteriaQ).getResultList();
+        List<ItemEntity> itemEntities = em
+                .createQuery(criteriaQ)
+                .getResultList();
         List<ItemSavedDto> itemSavedDtos = itemSaveMapper.toItemSaveDtoList(itemEntities);
 
         // No Floating Chars selected
@@ -191,6 +255,9 @@ public class ItemServiceImpl implements ItemService {
     public ItemSavedDto getItemsById(int itemId) {
 
         Optional<ItemEntity> itemEntity = itemRepository.findById(itemId);
+
+        itemEntity.get().getItemFloatingCharsRel();
+
         if(!itemEntity.isPresent()) {
             return null;
         }

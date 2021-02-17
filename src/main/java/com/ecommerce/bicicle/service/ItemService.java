@@ -3,6 +3,7 @@ package com.ecommerce.bicicle.service;
 import com.ecommerce.bicicle.dto.ItemFilterDto;
 import com.ecommerce.bicicle.dto.ItemSavedDto;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ItemService {
@@ -14,6 +15,15 @@ public interface ItemService {
     List<ItemSavedDto> getItemsByType(int itemTypeCatId);
 
     List<ItemSavedDto> getFilteredItems(ItemFilterDto itemFilterDto);
+
+    List<ItemSavedDto> getItemsToApprovedOrRejected(
+            Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize);
+
+    List<ItemSavedDto> getItemsNotYetApproved(
+            Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize);
+
+
+    ItemSavedDto itemSavedDiagnost(Integer itemId, boolean passed);
 
     List<ItemSavedDto> getItemsByUser(int userId);
 

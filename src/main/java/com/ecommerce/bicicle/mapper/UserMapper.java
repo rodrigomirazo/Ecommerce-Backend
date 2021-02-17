@@ -74,7 +74,7 @@ public class UserMapper {
         if(!userOptionalEntities.isPresent()) {
             return null;
         }
-        return toUserEntity(userOptionalEntities);
+        return userOptionalEntities.get();
     }
 
 }

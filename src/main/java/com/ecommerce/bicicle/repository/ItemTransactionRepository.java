@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ItemTransactionRepository extends CrudRepository<ItemTransactionEntity, Integer> {
 
-    List<ItemTransactionEntity> findByUserVendor(UserEntity userVendor);
-    List<ItemTransactionEntity> findByUserBuyer(UserEntity userBuyer);
+    List<ItemTransactionEntity> findByUserVendorAndTransactionStatusIn(UserEntity userVendor, List<String> transactionStatus);
+    List<ItemTransactionEntity> findByUserBuyerAndTransactionStatusIn(UserEntity userBuyer, List<String> transactionStatus);
 
     ItemTransactionEntity findByIdAndUserBuyerAndItem(Integer id, UserEntity userBuyer, ItemEntity itemEntity);
     ItemTransactionEntity findByIdAndUserVendorAndItem(Integer id, UserEntity userVendor, ItemEntity itemEntity);

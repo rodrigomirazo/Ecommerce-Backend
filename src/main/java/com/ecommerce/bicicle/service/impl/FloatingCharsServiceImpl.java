@@ -14,15 +14,17 @@ import com.ecommerce.bicicle.repository.ItemFloatingCharsRelRepository;
 import com.ecommerce.bicicle.repository.ItemFloatingCharsRepository;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
-public class FloatingCharsServiceImpl implements FloatingCharsService {
+@Component
+public class FloatingCharsServiceImpl implements FloatingCharsService
+{
 
     @Autowired
     private ItemFloatingCharsRepository itemFloatingCharsRepository;
@@ -42,7 +44,6 @@ public class FloatingCharsServiceImpl implements FloatingCharsService {
     @Autowired
     ItemFloatingCharsItemRelMapper charsItemRelMapper;
 
-
     public ItemFloatingCharsDto saveFloatingCharsDtos(ItemFloatingCharsDto itemFloatingCharRequest) {
 
         // Map to Emntity
@@ -57,6 +58,7 @@ public class FloatingCharsServiceImpl implements FloatingCharsService {
         return itemFloatingCharsDto;
     }
 
+    @Cacheable("itemFloatingChars")
     public List<ItemFloatingCharsDto> getItemFloatingCharsDtos() {
 
         // Retrieve from DB
@@ -82,7 +84,6 @@ public class FloatingCharsServiceImpl implements FloatingCharsService {
         //Persist
         itemFloatingCharsRepository.deleteById(itemFloatingCharId);
     }
-
 
     public ItemFloatingCharsCatDto saveItemFloatingCharsCat(Integer floatingCharsCat, ItemFloatingCharsCatDto itemFloatingCharsCatRequest) throws Exception {
 

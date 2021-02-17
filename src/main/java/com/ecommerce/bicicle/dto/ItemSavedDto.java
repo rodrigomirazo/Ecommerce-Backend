@@ -12,6 +12,7 @@ public class ItemSavedDto implements Serializable {
     private int statusId;
     private int itemColorId;
     private int itemTypeCatId;
+    private String itemTypeCatName;
     private int itemTransactionId;
     private String name;
     private Integer year;
@@ -42,8 +43,9 @@ public class ItemSavedDto implements Serializable {
     private int wheelsRate;
     private int componentsRate;
     private Timestamp createdTime;
-    private boolean approvedByAdmnin;
     private boolean paymentConfirmed;
+    private Boolean diagnostApproved;
+    private Timestamp diagnostTime;
 
     public ItemSavedDto() { }
 
@@ -80,6 +82,15 @@ public class ItemSavedDto implements Serializable {
 
     public ItemSavedDto setItemTypeCatId(int itemTypeCatId) {
         this.itemTypeCatId = itemTypeCatId;
+        return this;
+    }
+
+    public String getItemTypeCatName() {
+        return itemTypeCatName;
+    }
+
+    public ItemSavedDto setItemTypeCatName(String itemTypeCatName) {
+        this.itemTypeCatName = itemTypeCatName;
         return this;
     }
 
@@ -353,21 +364,30 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
-    public boolean getApprovedByAdmnin() {
-        return approvedByAdmnin;
-    }
-
-    public ItemSavedDto setApprovedByAdmnin(boolean approvedByAdmnin) {
-        this.approvedByAdmnin = approvedByAdmnin;
-        return this;
-    }
-
     public boolean getPaymentConfirmed() {
         return paymentConfirmed;
     }
 
     public ItemSavedDto setPaymentConfirmed(boolean paymentConfirmed) {
         this.paymentConfirmed = paymentConfirmed;
+        return this;
+    }
+
+    public Boolean getDiagnostApproved() {
+        return diagnostApproved;
+    }
+
+    public ItemSavedDto setDiagnostApproved(Boolean diagnostApproved) {
+        this.diagnostApproved = diagnostApproved;
+        return this;
+    }
+
+    public Timestamp getDiagnostTime() {
+        return diagnostTime;
+    }
+
+    public ItemSavedDto setDiagnostTime(Timestamp diagnostTime) {
+        this.diagnostTime = diagnostTime;
         return this;
     }
 

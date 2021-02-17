@@ -1,14 +1,10 @@
 package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
-import com.ecommerce.bicicle.dto.ItemFloatingCharsCatDto;
-import com.ecommerce.bicicle.dto.ItemFloatingCharsDto;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @CrossOrigin
 @RestController
