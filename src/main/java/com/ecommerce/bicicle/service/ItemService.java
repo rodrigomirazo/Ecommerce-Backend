@@ -23,7 +23,7 @@ public interface ItemService {
             Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize);
 
 
-    ItemSavedDto itemSavedDiagnost(Integer itemId, boolean passed);
+    ItemSavedDto itemSavedDiagnost(Integer itemId, Boolean passed, String comments);
 
     List<ItemSavedDto> getItemsByUser(int userId);
 

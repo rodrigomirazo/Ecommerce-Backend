@@ -10,11 +10,15 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.sql.Timestamp;
 import java.util.List;
 
-public interface ItemPageRepository extends PagingAndSortingRepository<ItemEntity, Integer> {
+public interface ItemPageRepository extends CrudRepository<ItemEntity, Integer> {
 
-    List<ItemEntity> findByDiagnostApprovedAndCreatedTimeBetween(
+    Page<ItemEntity> findAllByDiagnostApprovedAndCreatedTimeBetween(
             Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd,
             Pageable pageable);
+
+    List<ItemEntity> findByDiagnostApprovedAndCreatedTimeBetween(
+            Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd);
+
 
     //List<ItemEntity> findByDiagnostApprovedEqualsNullAndCreatedTimeBetween(
     //        Timestamp createdTimeStart, Timestamp createdTimeEnd, Pageable pageable);

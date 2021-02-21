@@ -46,6 +46,7 @@ public class ItemSavedDto implements Serializable {
     private boolean paymentConfirmed;
     private Boolean diagnostApproved;
     private Timestamp diagnostTime;
+    private String diagnostComments;
 
     public ItemSavedDto() { }
 
@@ -388,6 +389,15 @@ public class ItemSavedDto implements Serializable {
 
     public ItemSavedDto setDiagnostTime(Timestamp diagnostTime) {
         this.diagnostTime = diagnostTime;
+        return this;
+    }
+
+    public String getDiagnostComments() {
+        return diagnostComments;
+    }
+
+    public ItemSavedDto setDiagnostComments(String diagnostComments) {
+        this.diagnostComments = diagnostComments;
         return this;
     }
 

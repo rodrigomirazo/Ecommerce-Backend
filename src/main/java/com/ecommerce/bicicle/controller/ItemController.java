@@ -129,13 +129,17 @@ public class ItemController {
         return itemService.getItemsToApprovedOrRejected(null, tsStart, tsEnd, pageNum, pageSize);
     }
 
-    @RequestMapping(value = itemUri + "/diagnost/{itemId}/{passed}", method = {RequestMethod.POST})
+    @RequestMapping(value = itemUri + "/diagnost/{itemId}/{passed}/{comments}", method = {RequestMethod.POST})
     public @ResponseBody
     ItemSavedDto getItem(
             @PathVariable(value = "itemId") Integer itemId,
-            @PathVariable(value = "passed") boolean passed
+            @PathVariable(value = "passed") Boolean passed,
+            @PathVariable(value = "comments") String commentsB64
     ) {
-        return itemService.itemSavedDiagnost(itemId, passed);
+        byte[] decodedBytes = Base64.getDecoder().decode(commentsB64);
+        String comments = new String(decodedBytes);
+
+        return itemService.itemSavedDiagnost(itemId, passed, comments);
     }
 
     @RequestMapping(value = itemUri + "/criteria", method = {RequestMethod.POST})

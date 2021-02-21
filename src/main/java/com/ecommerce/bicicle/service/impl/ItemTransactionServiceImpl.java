@@ -67,6 +67,7 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
             List<ItemFloatingCharsDto> floatingCharsDtos = floatingCharsService.getItemFloatingCharsDtos();
 
             List<ItemTransactionDto> itemTransactionDtos = itemTransactionMapper.toItemTransactionDtoList(
+                    //itemTransRepository.findByUserBuyerAndTransactionStatusIn(userEntity, shoppingTransaction())
                     itemTransRepository.findByUserVendorAndTransactionStatusIn(userEntity, shoppingTransaction())
             );
             return itemTransactionDtos;
@@ -81,7 +82,10 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         if(userOptionalBuyer.isPresent()) {
             UserEntity userEntity = userMapper.toUserEntity(userOptionalBuyer);
 
-            List<ItemTransactionDto> itemTransactionDtos  = itemTransactionMapper.toItemTransactionDtoList(itemTransRepository.findByUserBuyerAndTransactionStatusIn(userEntity, shoppingTransaction()));
+            List<ItemTransactionDto> itemTransactionDtos  = itemTransactionMapper.toItemTransactionDtoList(
+                    itemTransRepository.findByUserBuyerAndTransactionStatusIn(userEntity, shoppingTransaction())
+                    //itemTransRepository.findByUserVendorAndTransactionStatusIn(userEntity, shoppingTransaction())
+            );
             return itemTransactionDtos;
         }
         return new ArrayList<>();
@@ -149,7 +153,7 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
             return new ItemTransactionDto();
         }
         try {
-            Optional<UserEntity> userOptional = userRepository.findById(itemTransaction.getUserBuyer().getId());
+            Optional<UserEntity> userOptional = userRepository.findById(itemTransaction.getUserVendor().getId());
             if(userOptional.isPresent()) {
                 userEntityVendor = userOptional.get();
             } else {

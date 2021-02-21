@@ -5,6 +5,8 @@ import com.ecommerce.bicicle.entity.ItemEntity;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -86,7 +88,9 @@ public class ItemSaveFloatingCharsMapper {
                 .setCreatedTime(item.getCreatedTime())
                 .setPaymentConfirmed(item.getPaymentConfirmed())
                 .setDiagnostApproved(item.getDiagnostApproved())
-                .setDiagnostTime(item.getDiagnostTime());
+                .setDiagnostTime(item.getDiagnostTime())
+                .setDiagnostComments(item.getDiagnostComments())
+                ;
     }
 
     public List<ItemEntity> toUserList(List<ItemSavedDto> users) {
@@ -139,7 +143,9 @@ public class ItemSaveFloatingCharsMapper {
                 .setCreatedTime(item.getCreatedTime())
                 .setPaymentConfirmed(item.getPaymentConfirmed())
                 .setDiagnostApproved(item.getDiagnostApproved())
-                .setDiagnostTime(item.getDiagnostTime());
+                .setDiagnostTime(item.getDiagnostTime())
+                .setDiagnostComments(item.getDiagnostComments())
+                ;
     }
 
     private String crossItemType(ItemEntity itemEntity) {
@@ -186,6 +192,22 @@ public class ItemSaveFloatingCharsMapper {
         return StreamSupport.stream(
                 userIterableEntities.spliterator(), true)
                 .collect(Collectors.toList());
+    }
+
+    public Page<ItemSavedDto> toItemSaveDtoPage(Page<ItemEntity> userIterableEntities) {
+
+        List<ItemSavedDto> list =
+        userIterableEntities.stream().map(itemEntity -> toItemSaveDto(itemEntity)).collect(Collectors.toList());
+
+        return new PageImpl<>(list);
+    }
+
+    public List<ItemSavedDto> toItemSaveDtoList(Page<ItemEntity> userIterableEntities) {
+
+        List<ItemSavedDto> list =
+                userIterableEntities.stream().map(itemEntity -> toItemSaveDto(itemEntity)).collect(Collectors.toList());
+
+        return list;
     }
 
     public ItemSavedDto toItemSaveDto(Optional<ItemEntity> userOptionalEntities) {

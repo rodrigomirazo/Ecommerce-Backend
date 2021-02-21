@@ -74,7 +74,9 @@ public class ItemSaveMapper {
                 .setCreatedTime(item.getCreatedTime())
                 .setPaymentConfirmed(item.getPaymentConfirmed())
                 .setDiagnostApproved(item.getDiagnostApproved())
-                .setDiagnostTime(item.getDiagnostTime());
+                .setDiagnostTime(item.getDiagnostTime())
+                .setDiagnostComments(item.getDiagnostComments())
+                ;
     }
 
     public List<ItemEntity> toUserList(List<ItemSavedDto> users) {
@@ -129,7 +131,9 @@ public class ItemSaveMapper {
                 .setCreatedTime(item.getCreatedTime())
                 .setPaymentConfirmed(item.getPaymentConfirmed())
                 .setDiagnostApproved(item.getDiagnostApproved())
-                .setDiagnostTime(item.getDiagnostTime());
+                .setDiagnostTime(item.getDiagnostTime())
+                .setDiagnostComments(item.getDiagnostComments())
+                ;
     }
 
     public List<ItemEntity> toItemSaveDtoList(Iterable<ItemEntity> userIterableEntities) {

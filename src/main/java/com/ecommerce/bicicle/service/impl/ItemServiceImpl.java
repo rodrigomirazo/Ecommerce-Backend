@@ -80,11 +80,18 @@ public class ItemServiceImpl implements ItemService {
 
         Pageable page = PageRequest.of(pageNum, pageSize);
         List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetween(
-                diagnostApproved, createdTimeStart, createdTimeEnd, page
+                diagnostApproved, createdTimeStart, createdTimeEnd
         );
 
-        List<ItemSavedDto> itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(items);
-        return itemSavedDtos;
+        List<ItemSavedDto> itemSavedDtosList = floatingCharsMapper.toItemSaveDtoList(items);
+
+        /*
+        PagedListHolder pageHold = new PagedListHolder(itemSavedDtosList);
+        pageHold.setPageSize(items.getSize()); // number of items per page
+        pageHold.setPage(items.getPageable().getPageNumber());
+        pageHold.setMaxLinkedPages(items.getTotalPages());
+*/
+        return itemSavedDtosList;
     }
 
     @Override
@@ -93,15 +100,21 @@ public class ItemServiceImpl implements ItemService {
 
         Pageable page = PageRequest.of(pageNum, pageSize);
         List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetween(null,
-                createdTimeStart, createdTimeEnd, page
+                createdTimeStart, createdTimeEnd
         );
 
-        List<ItemSavedDto> itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(items);
-        return itemSavedDtos;
+        List<ItemSavedDto> itemSavedDtosList = floatingCharsMapper.toItemSaveDtoList(items);
+/*
+        PagedListHolder pageHold = new PagedListHolder(itemSavedDtosList);
+        pageHold.setPageSize(items.getSize()); // number of items per page
+        pageHold.setPage(items.getPageable().getPageNumber());
+        pageHold.setMaxLinkedPages(items.getTotalPages());
+*/
+        return itemSavedDtosList;
     }
 
     @Override
-    public ItemSavedDto itemSavedDiagnost(Integer itemId, boolean passed) {
+    public ItemSavedDto itemSavedDiagnost(Integer itemId, Boolean passed, String comments) {
 
         Optional<ItemEntity> itemEntity = itemRepository.findById(itemId);
 
@@ -114,6 +127,7 @@ public class ItemServiceImpl implements ItemService {
         ItemEntity item = itemEntity.get();
         item.setDiagnostApproved(passed);
         item.setDiagnostTime(getTimeStamp());
+        item.setDiagnostComments(comments);
 
         item = itemRepository.save(item);
 

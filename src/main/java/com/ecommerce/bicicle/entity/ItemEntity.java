@@ -122,6 +122,9 @@ public class ItemEntity {
     @Column(name = "diagnost_time")
     private Timestamp diagnostTime;
 
+    @Column(name = "diagnost_comments")
+    private String diagnostComments;
+
     public ItemEntity() { }
 
     public Integer getId() {
@@ -454,6 +457,15 @@ public class ItemEntity {
 
     public ItemEntity setDiagnostTime(Timestamp diagnostTime) {
         this.diagnostTime = diagnostTime;
+        return this;
+    }
+
+    public String getDiagnostComments() {
+        return diagnostComments;
+    }
+
+    public ItemEntity setDiagnostComments(String diagnostComments) {
+        this.diagnostComments = diagnostComments;
         return this;
     }
 
