@@ -20,6 +20,7 @@ public class ItemTransactionDto implements Serializable {
     private String paymentMethod;
     private String totalPayment;
     private String trackingNumber;
+    private String trackerCompany;
     private Integer rate;
     private List<ItemTransactionHistoryDto> itemTransactionHistory;
     private Timestamp createdTime;
@@ -131,6 +132,16 @@ public class ItemTransactionDto implements Serializable {
         this.trackingNumber = trackingNumber;
         return this;
     }
+
+    public String getTrackerCompany() {
+        return trackerCompany;
+    }
+
+    public ItemTransactionDto setTrackerCompany(String trackerCompany) {
+        this.trackerCompany = trackerCompany;
+        return this;
+    }
+
     //@JsonGetter("_rate")
     public Integer getRate() {
         return rate;

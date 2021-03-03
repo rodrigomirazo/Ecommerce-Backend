@@ -42,6 +42,8 @@ public class ItemTransactionEntity {
 
     @Column(name = "tracking_number")
     private String trackingNumber;
+    @Column(name = "tracking_company")
+    private String trackerCompany;
 
     @Column(name = "rate")
     private Integer rate;
@@ -158,6 +160,15 @@ public class ItemTransactionEntity {
 
     public ItemTransactionEntity setTrackingNumber(String trackingNumber) {
         this.trackingNumber = trackingNumber;
+        return this;
+    }
+
+    public String getTrackerCompany() {
+        return trackerCompany;
+    }
+
+    public ItemTransactionEntity setTrackerCompany(String trackerCompany) {
+        this.trackerCompany = trackerCompany;
         return this;
     }
 
