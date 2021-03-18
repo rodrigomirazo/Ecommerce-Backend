@@ -22,7 +22,7 @@ public class UserMapper {
 
     public UserDto toUserDto(UserEntity user) {
 
-        return new UserDto()
+        UserDto mappedUser = new UserDto()
                 .setId(user.getId())
                 .setName(user.getName())
                 .setLastname(user.getLastname())
@@ -33,8 +33,13 @@ public class UserMapper {
                 .setCreatedTime(user.getCreatedTime())
                 .setUserProfileImg(user.getUserProfileImg())
                 .setUserDescription(user.getUserDescription())
-                .setContent(user.getContent())
-                .setUserAddresses(userAddressMapper.toUserAddressDtoList(user.getUserAddresses()));
+                .setContent(user.getContent());
+
+        if(user.getUserAddresses() != null) {
+            mappedUser.setUserAddresses(userAddressMapper.toUserAddressDtoList(user.getUserAddresses()));
+        }
+
+        return mappedUser;
     }
 
     public List<UserEntity> toUserList(List<UserDto> users) {

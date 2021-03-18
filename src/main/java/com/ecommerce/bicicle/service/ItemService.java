@@ -27,7 +27,7 @@ public interface ItemService {
 
     List<ItemSavedDto> getItemsByUser(int userId);
 
-    ItemSavedDto save(ItemSavedDto ItemDTo);
+    ItemSavedDto save(ItemSavedDto ItemDTo, Integer userId);
 
     void delete(Integer userVendorId);
 }

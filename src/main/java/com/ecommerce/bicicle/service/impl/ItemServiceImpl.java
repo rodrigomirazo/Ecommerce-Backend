@@ -13,6 +13,8 @@ import com.ecommerce.bicicle.repository.ItemPageRepository;
 import com.ecommerce.bicicle.repository.UserRepository;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.service.ItemService;
+import com.ecommerce.bicicle.service.UserService;
+import com.ecommerce.bicicle.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;
@@ -55,6 +57,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Autowired
     private FloatingCharsService floatingCharsService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public List<ItemSavedDto> get() {
@@ -281,7 +289,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public ItemSavedDto save(ItemSavedDto itemDTo) {
+    public ItemSavedDto save(ItemSavedDto itemDTo, Integer userId) {
+
+        UserDto user = userService.get(userId);
+        itemDTo.setUser(user);
+
         //1. Map to Entity
         ItemEntity item = itemSaveMapper.toItemEntity(itemDTo);
         //2. Save
@@ -303,6 +315,9 @@ public class ItemServiceImpl implements ItemService {
 
         List<ItemFloatingCharsRelEntity> relResult = itemFloatingCharsRelRepository.findByItemId(item.getId());
         //3. Map to Dto
+        if( item.getRuedosRate() > 0) {
+            emailService.sendUploadItemNotification(itemDTo);
+        }
         return itemSaveMapper.toItemSaveDto(item);
     }
 

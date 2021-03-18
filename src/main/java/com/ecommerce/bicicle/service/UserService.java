@@ -8,6 +8,8 @@ public interface UserService {
 
     List<UserDto> get();
 
+    List<UserDto> getUserAdmins();
+
     UserDto get(Integer userId);
 
     UserDto getByUsername(String userName);

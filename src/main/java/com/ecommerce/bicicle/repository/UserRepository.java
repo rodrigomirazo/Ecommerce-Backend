@@ -3,6 +3,7 @@ package com.ecommerce.bicicle.repository;
 import com.ecommerce.bicicle.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<UserEntity, Integer> {
@@ -20,5 +21,12 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
      * @return
      */
     Optional<UserEntity> getByUserNameAndPassword(String userName, String password);
+
+    /**
+     * Lookup user by Profile COntent
+     * @param content
+     * @return
+     */
+    List<UserEntity> getByContent(String content);
 
 }

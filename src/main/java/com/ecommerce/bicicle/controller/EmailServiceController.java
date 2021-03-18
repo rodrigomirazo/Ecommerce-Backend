@@ -6,6 +6,9 @@ import com.ecommerce.bicicle.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = EndpointNames.URI)
@@ -18,15 +21,12 @@ public class EmailServiceController {
 
     @Autowired
     private EmailService emailService;
-    /**
-     * Floating Chars
-     */
 
-    @RequestMapping(value = emailServiceEndpoint + "/{emailId}" + "/{userName}", method = {RequestMethod.GET})
+    @RequestMapping(value = emailServiceEndpoint + "/purchase/{transactionId}", method = {RequestMethod.GET})
     public @ResponseBody
-    String sendMail(@PathVariable(value = "emailId") String emailId, @PathVariable(value = "userName") String userName) {
+    String sendMail(@PathVariable(value = "transactionId") Integer transactionId) throws IOException, MessagingException {
 
-        emailService.sendMail(emailId, userName);
+        emailService.sendPurchaseNotification(transactionId);
 
         return "sent Email";
     }

@@ -159,11 +159,11 @@ public class ItemController {
         return itemService.getFilteredItems(itemFilterDto);
     }
 
-    @RequestMapping(value = itemUri, method = {RequestMethod.POST})
+    @RequestMapping(value = itemUri + "/{userId}", method = {RequestMethod.POST})
     public @ResponseBody
-    ItemSavedDto saveItem(@RequestBody ItemSavedDto item) {
+    ItemSavedDto saveItem(@RequestBody ItemSavedDto item, @PathVariable(value = "userId") Integer userId) {
 
-        return itemService.save(item);
+        return itemService.save(item, userId);
     }
 
     @RequestMapping(value = itemUri + "/{itemId}", method = {RequestMethod.DELETE})

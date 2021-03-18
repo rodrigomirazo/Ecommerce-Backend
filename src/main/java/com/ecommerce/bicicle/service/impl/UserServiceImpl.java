@@ -36,6 +36,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getUserAdmins() {
+
+        List<UserEntity> userEntities = userRepository.getByContent("BAAW_PARTNER");
+
+        List<UserDto> userEntitiesList = userMapper.toUserDtoList(userEntities);
+
+        return userEntitiesList;
+    }
+
+    @Override
     public UserDto get(Integer userId) {
         Optional<UserEntity> userEntities = userRepository.findById(userId);
 

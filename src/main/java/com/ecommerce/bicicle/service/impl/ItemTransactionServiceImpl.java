@@ -14,11 +14,14 @@ import com.ecommerce.bicicle.repository.UserAddressRepository;
 import com.ecommerce.bicicle.repository.UserRepository;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.service.ItemTransactionService;
+import com.ecommerce.bicicle.util.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.*;
+
+import static com.ecommerce.bicicle.constants.TransactionStatus.*;
 
 @Service
 public class ItemTransactionServiceImpl implements ItemTransactionService {
@@ -46,6 +49,9 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
 
     @Autowired
     FloatingCharsService floatingCharsService;
+
+    @Autowired
+    private EmailService emailService;
 
     @Override
     public ItemTransactionDto getById(Integer itemTransactionId) {
@@ -88,7 +94,7 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
     private List<String> shoppingTransaction() {
         List<String> statusList = new ArrayList<>();
         statusList.add(TransactionStatus.TRANSACT_STATUS_CLIENT_AUTHORIZATION);
-        statusList.add(TransactionStatus.TRANSACT_STATUS_SERVICED_COMPLETED);
+        statusList.add(TRANSACT_STATUS_SERVICED_COMPLETED);
         statusList.add(TransactionStatus.TRANSACT_STATUS_SENT_TO_BUYER);
         statusList.add(TransactionStatus.TRANSACT_STATUS_RECEIVED_TO_BUYER);
 
@@ -229,10 +235,15 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         }
 
         if(itemTransaction.getTransactionStatus().equals(TransactionStatus.TRANSACT_STATUS_CLIENT_AUTHORIZATION)) {
+            // Set Payed status for item
             ItemEntity itemEntity = itemTransactionEntityResp.getItem().setPaymentConfirmed(true);
             itemEntity = itemRepository.save(itemEntity);
 
+            // Set Item Entity to transaction
             itemTransactionEntityResp.setItem(itemEntity);
+
+            // Notify Users by EMAIL of transaction
+            emailService.sendPurchaseNotification(itemTransactionEntityResp.getId());
         }
 
         ItemTransactionDto itemTransactionDto = itemTransactionMapper.toItemTransactionDto(itemTransactionEntityResp);
@@ -292,7 +303,21 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
 
         // Save
         itemEntity = itemTransRepository.save(itemEntity);
-        return itemTransactionMapper.toItemTransactionDto(itemEntity);
+        //return itemTransactionMapper.toItemTransactionDto(itemEntity);
+
+        ItemTransactionDto itemTransactionDto = itemTransactionMapper.toItemTransactionDto(itemEntity);
+
+        if(itemTransactionDto.getTransactionStatus().equalsIgnoreCase(TRANSACT_STATUS_SERVICED_COMPLETED)) {
+            this.emailService.sendServiceItemNotification(itemTransactionDto.getItem(), itemTransactionDto);
+
+        }if(itemTransactionDto.getTransactionStatus().equalsIgnoreCase(TRANSACT_STATUS_SENT_TO_BUYER)) {
+            this.emailService.sendSendToBuyerItemNotification(itemTransactionDto.getItem(), itemTransactionDto);
+
+        }if(itemTransactionDto.getTransactionStatus().equalsIgnoreCase(TRANSACT_STATUS_RECEIVED_TO_BUYER)) {
+            this.emailService.sendReceivedItemNotification(itemTransactionDto.getItem(), itemTransactionDto);
+        }
+
+        return itemTransactionDto;
     }
 
     public ItemTransactionDto itemWashAndService(Integer itemTransactionId, boolean service) {
