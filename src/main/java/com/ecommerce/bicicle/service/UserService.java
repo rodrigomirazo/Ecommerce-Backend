@@ -1,5 +1,6 @@
 package com.ecommerce.bicicle.service;
 
+import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.dto.UserDto;
 
 import java.util.List;
@@ -19,6 +20,14 @@ public interface UserService {
     UserDto authenticate(UserDto userDto);
 
     UserDto save(UserDto user);
+
+    UserDto savePassword(UserDto user);
+
+    List<ItemSavedDto> getFavouriteItems(String userName);
+
+    List<ItemSavedDto> addFavouriteItems(String userName, Integer itemId);
+
+    List<ItemSavedDto> removeFavouriteItems(String userName, Integer itemId);
 
     void delete(Integer userId);
 }

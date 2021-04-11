@@ -62,6 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //.antMatchers(HttpMethod.GET, "/")
                 //.antMatchers(HttpMethod.POST, EndpointNames.URI + EndpointNames.ITEM_CONTROLLER).authenticated()
+                //.antMatchers(HttpMethod.POST, EndpointNames.URI + EndpointNames.USER_CONTROLLER).authenticated()
+                //.antMatchers(HttpMethod.PUT, EndpointNames.URI + EndpointNames.USER_CONTROLLER).authenticated()
 
                 .anyRequest()
                 //.antMatchers(EndpointNames.URI + EndpointNames.USER_CONTROLLER + "/authenticate")

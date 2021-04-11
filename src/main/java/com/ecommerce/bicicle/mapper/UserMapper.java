@@ -33,7 +33,8 @@ public class UserMapper {
                 .setCreatedTime(user.getCreatedTime())
                 .setUserProfileImg(user.getUserProfileImg())
                 .setUserDescription(user.getUserDescription())
-                .setContent(user.getContent());
+                .setContent(user.getContent())
+                .setFavorites(user.getFavorites());
 
         if(user.getUserAddresses() != null) {
             mappedUser.setUserAddresses(userAddressMapper.toUserAddressDtoList(user.getUserAddresses()));
@@ -59,7 +60,8 @@ public class UserMapper {
                 .setUserProfileImg(user.getUserProfileImg())
                 .setUserProfileImg(user.getUserProfileImg())
                 .setContent(user.getContent())
-                .setUserDescription(user.getUserDescription());
+                .setUserDescription(user.getUserDescription())
+                .setFavorites(user.getFavorites());
     }
 
     public List<UserEntity> toUserDtoList(Iterable<UserEntity> userIterableEntities) {

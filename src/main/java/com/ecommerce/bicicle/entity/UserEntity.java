@@ -43,6 +43,9 @@ public class UserEntity {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "favorites")
+    private String favorites;
+
     public UserEntity() {
     }
 
@@ -142,6 +145,15 @@ public class UserEntity {
 
     public UserEntity setContent(String content) {
         this.content = content;
+        return this;
+    }
+
+    public String getFavorites() {
+        return favorites;
+    }
+
+    public UserEntity setFavorites(String favorites) {
+        this.favorites = favorites;
         return this;
     }
 

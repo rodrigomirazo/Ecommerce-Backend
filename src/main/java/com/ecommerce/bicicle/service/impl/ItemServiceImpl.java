@@ -14,7 +14,7 @@ import com.ecommerce.bicicle.repository.UserRepository;
 import com.ecommerce.bicicle.service.FloatingCharsService;
 import com.ecommerce.bicicle.service.ItemService;
 import com.ecommerce.bicicle.service.UserService;
-import com.ecommerce.bicicle.util.EmailService;
+import com.ecommerce.bicicle.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.PageRequest;

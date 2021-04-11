@@ -1,8 +1,6 @@
 package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
-import com.ecommerce.bicicle.dto.JwtRequestDto;
-import com.ecommerce.bicicle.dto.JwtResponse;
 import com.ecommerce.bicicle.dto.UserDto;
 import com.ecommerce.bicicle.service.UserService;
 import com.ecommerce.bicicle.service.impl.JwtUserDetailsService;
@@ -10,14 +8,8 @@ import com.ecommerce.bicicle.util.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

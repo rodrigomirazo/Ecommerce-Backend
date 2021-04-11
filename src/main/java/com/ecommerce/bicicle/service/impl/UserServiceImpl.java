@@ -1,14 +1,22 @@
 package com.ecommerce.bicicle.service.impl;
 
+import com.ecommerce.bicicle.dto.ItemSavedDto;
 import com.ecommerce.bicicle.dto.UserDto;
+import com.ecommerce.bicicle.entity.ItemEntity;
 import com.ecommerce.bicicle.entity.UserEntity;
+import com.ecommerce.bicicle.mapper.ItemSaveFloatingCharsMapper;
 import com.ecommerce.bicicle.mapper.UserMapper;
+import com.ecommerce.bicicle.repository.ItemEntityRepository;
 import com.ecommerce.bicicle.repository.UserRepository;
 import com.ecommerce.bicicle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -17,7 +25,13 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Autowired
+    ItemEntityRepository itemEntityRepository;
+
+    @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private ItemSaveFloatingCharsMapper floatingCharsMapper;
 
     @Override
     public UserDto authenticate(UserDto userDto) {
@@ -64,6 +78,101 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<ItemSavedDto> getFavouriteItems(String userName) {
+
+        Optional<UserEntity> userEntities = userRepository.getByUserName(userName);
+        UserDto userDto = userMapper.toUserDto(userEntities);
+
+        List<ItemSavedDto> itemSavedDtos = new ArrayList<>();
+
+        if(userDto.getFavorites() != null) {
+            if( !userDto.getFavorites().equalsIgnoreCase("") ) {
+                String[] favs = userDto.getFavorites().trim().split(",");
+                List<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toList());
+
+                Iterable<ItemEntity> itemIterable = this.itemEntityRepository.findAllById(favList);
+                List<ItemEntity> itemEntities  = floatingCharsMapper.toItemSaveDtoList(itemIterable);
+                itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(itemEntities);
+            }
+        }
+
+        return itemSavedDtos;
+    }
+
+    @Override
+    public List<ItemSavedDto> addFavouriteItems(String userName, Integer itemId) {
+
+        Optional<UserEntity> userEntities = userRepository.getByUserName(userName);
+        UserDto userDto = userMapper.toUserDto(userEntities);
+
+        List<ItemSavedDto> itemSavedDtos = new ArrayList<>();
+
+        if(userDto.getFavorites() != null) {
+            if( !userDto.getFavorites().equalsIgnoreCase("") ) {
+                String[] favs = userDto.getFavorites().split(",");
+                List<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toList());
+                favList.add(itemId);
+
+                //edit user
+                String favString = favList.toString().replace("[", "").replace("]", "");
+                userDto.setFavorites(favString);
+
+                this.userRepository.save(userMapper.toUserEntity(userDto));
+
+                Iterable<ItemEntity> itemIterable = this.itemEntityRepository.findAllById(favList);
+                List<ItemEntity> itemEntities  = floatingCharsMapper.toItemSaveDtoList(itemIterable);
+                itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(itemEntities);
+
+                return itemSavedDtos;
+            }
+        }
+
+        String favString = itemId + "";
+        userDto.setFavorites(favString);
+
+        this.userRepository.save(userMapper.toUserEntity(userDto));
+
+        List<Integer> favList = new ArrayList<>();
+        favList.add(itemId);
+
+        Iterable<ItemEntity> itemIterable = this.itemEntityRepository.findAllById(favList);
+        List<ItemEntity> itemEntities  = floatingCharsMapper.toItemSaveDtoList(itemIterable);
+        itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(itemEntities);
+
+        return itemSavedDtos;
+    }
+
+    @Override
+    public List<ItemSavedDto> removeFavouriteItems(String userName, Integer itemId) {
+
+        Optional<UserEntity> userEntities = userRepository.getByUserName(userName);
+        UserDto userDto = userMapper.toUserDto(userEntities);
+
+        List<ItemSavedDto> itemSavedDtos = new ArrayList<>();
+
+        if(userDto.getFavorites() != null) {
+            if( !userDto.getFavorites().equalsIgnoreCase("") ) {
+                String[] favs = userDto.getFavorites().split(",");
+                List<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toList());
+                favList.remove(itemId);
+
+                //edit user
+                String favString = favList.toString().replace("[", "").replace("]", "");
+                userDto.setFavorites(favString);
+
+                this.userRepository.save(userMapper.toUserEntity(userDto));
+
+                Iterable<ItemEntity> itemIterable = this.itemEntityRepository.findAllById(favList);
+                List<ItemEntity> itemEntities  = floatingCharsMapper.toItemSaveDtoList(itemIterable);
+                itemSavedDtos = floatingCharsMapper.toItemSaveDtoList(itemEntities);
+            }
+        }
+
+        return itemSavedDtos;
+    }
+
+
+    @Override
     public UserDto getByUsernameAndPassword(String userName, String password) {
         Optional<UserEntity> userEntities = userRepository.getByUserNameAndPassword(userName, password);
         UserDto userDto = userMapper.toUserDto(userEntities);
@@ -72,10 +181,47 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto save(UserDto user) {
+        // 1. get User
+        Optional<UserEntity> findUser = userRepository.findById(user.getId());
+        if(!findUser.isPresent()) {
+            return new UserDto();
+        }
 
-        UserEntity userEntity = userRepository.save(userMapper.toUserEntity(user));
+        // 2. set params
+        try {
+            UserEntity userEntity = userMapper.toUserEntity(findUser);
+            userEntity.setUserName(user.getUserName());
+            userEntity.setEmail(user.getEmail());
+            userEntity.setLastname(user.getLastname());
+            userEntity.setName(user.getName());
 
-        return userMapper.toUserDto(userEntity);
+            userEntity = userRepository.save(userEntity);
+
+            return userMapper.toUserDto(userEntity);
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
+        }
+    }
+
+    @Override
+    public UserDto savePassword(UserDto user) {
+        // 1. get User
+        Optional<UserEntity> findUser = userRepository.findById(user.getId());
+        if(!findUser.isPresent()) {
+            return new UserDto();
+        }
+
+        // 2. set params
+        try {
+            UserEntity userEntity = userMapper.toUserEntity(findUser);
+            userEntity.setPassword(user.getPassword());
+
+            userEntity = userRepository.save(userEntity);
+
+            return userMapper.toUserDto(userEntity);
+        } catch (NullPointerException e) {
+            throw new NullPointerException();
+        }
     }
 
     @Override

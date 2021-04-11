@@ -4,6 +4,9 @@ public class EmailContent {
 
     public static final String MAIL_FROM =  "rider911@baaw.mx";
 
+    public static final String MAIL_TYPE_VERIFICATION = "VERIFICATION";
+    public static final String MAIL_TYPE_RESET_PASSWORD = "RESET_PASSWORD";
+
     public static final String MAIL_SUBJECT_BUYER =  "BAAW - Notificacion de Compra";
     public static final String MAIL_SUBJECT_VENDOR =  "BAAW - Notificacion de Venta";
     public static final String MAIL_SUBJECT_ADMINS =  "BAAW Partener - Notificacion de Compra/Venta ";
@@ -14,13 +17,24 @@ public class EmailContent {
     public static final String MAIL_TOKEN_TRANSACTION_ID = "${transactionId}";
     public static final String MAIL_TOKEN_TRANSACTION_DATE = "${transactionDate}";
     public static final String MAIL_TOKEN_CLIENT_NAME = "${clientName}";
+    public static final String MAIL_TOKEN_USER_NAME = "${userName}";
     public static final String MAIL_TOKEN_UPLOAD_VENDOR = "${uploadVendor}";
 
     public static final String MAIL_TOKEN_USER_NOTIFIC = "${userNotification}";
-    public static final String MAIL_TOKEN_ = "${}";
+    public static final String MAIL_TOKEN_RESET_PASSWORD_URL = "${resetPasswordUrl}";
+    public static final String MAIL_TOKEN_RESET_VERIFICATION_URL = "${verificationMailUrl}";
     public static final String MAIL_TOKEN_SENT_TIME = "${mailSentTime}";
     public static final String MAIL_TOKEN_ITEM_COMMENTS = "${itemComments}";
-    //
+    public static final String MAIL_TOKEN_ = "${}";
+
+    //VERIFICATION EMAIL
+    public static final String MAIL_TOKEN_USER_VERIFICATION_SUBJECT = "BAAW - correo de verificación";
+    public static final String MAIL_TOKEN_USER_VERIFICATION_MESSAGE = "Hola " + MAIL_TOKEN_USER_NAME + ", <br>" + "Gracias por preferir registrar tu cuenta de usuario con Baaw, por favor ingresa al sig. link para continuar tuu registro <br><br> " + MAIL_TOKEN_RESET_VERIFICATION_URL;
+
+    //RESET PASSWORD EMAIL
+    public static final String MAIL_TOKEN_RESET_PASSWORD_SUBJECT = "BAAW - Reinicio de Contraseña";
+    public static final String MAIL_TOKEN_RESET_PASSWORD_MESSAGE = "Hola " + MAIL_TOKEN_USER_NAME + ", <br>" + "Hemos recibido tu peticion de reinicio de contrasena, utliza este link para continuar con el proceso <br><br> " + MAIL_TOKEN_RESET_PASSWORD_URL;
+
 
     //UPLOAD SUBJECT
     public static final String MAIL_BODY_UPLOAD_ADMIN_SUBJECT = "Bicicleta agreagda a Baaw";
@@ -45,11 +59,6 @@ public class EmailContent {
     //DIAGNOST ADMIN MESSAGE
     public static final String MAIL_BODY_DIAGNOST_ADMIN_DECLINE_MESSAGE = "Despues de un proceso de validacion, con nuestros expertos en ciclismo <br> " + "hemos tomado la decision de declinar la bicicleta que haz agregado al Market place. <br><br>" +  "Estas son las observaciones que ha recibido tu bicicleta: <br> "+MAIL_TOKEN_ITEM_COMMENTS+" <br>";
     public static final String MAIL_BODY_DIAGNOST_ADMIN_ACCEPTED_MESSAGE = "Despues de un proceso de validacion, queremos informarte que" +  "Se ha agregado de manera exitosa la Bicicleta a nuestro Market Place <br>";
-
-    // PURCHASE SUBJECT
-    public static final String MAIL_BODY_PURCAHSE_BUYER_SUBJECT = "";
-    public static final String MAIL_BODY_PURCAHSE_VENDOR_SUBJECT = "";
-    public static final String MAIL_BODY_PURCAHSE_ADMIN_SUBJECT = "";
 
     // PURCHASE MESSAGE
     public static final String MAIL_BODY_PURCAHSE_BUYER_MESSAGE = "Su compra ha sido efectuda, para el producto "+MAIL_TOKEN_BUYER_LINK+", para mas informacion consulte el siguiente enlace";
@@ -96,7 +105,19 @@ public class EmailContent {
     public static final String MAIL_BODY_RECEIVED_VENDOR_MESSAGE = "La bicileta que vendiste ha sido recibida. <br> Tu deposito va en camino";
     public static final String MAIL_BODY_RECEIVED_ADMIN_MESSAGE = "La bicileta ha sido recibida por el comprador";
 
-    public static final String MAIL_BODY_UPLOAD_ITEM_HEADER =
+    public static final String MAIL_BODY_VERIFICATION_EMAIL_HEADER =
+            "<table style='width: 100%; font-family: Montserrat '>" +
+                    "    <tr>" +
+                    "        <td> </td>" +
+                    "        <td>" +
+                    "        <img src='cid:logo'>" +
+                    "        </td>" +
+                    "        <td style='float: right; font-size: 1.5em;' colspan='1'>" +
+                    "            Fecha del correo: " + MAIL_TOKEN_SENT_TIME +
+                    "        </td>" +
+                    "    </tr>";
+
+    public static final String MAIL_BODY_RESET_PASS_EMAIL_HEADER =
             "<table style='width: 100%; font-family: Montserrat '>" +
                     "    <tr>" +
                     "        <td> </td>" +
@@ -121,6 +142,17 @@ public class EmailContent {
             "            Fecha de transaccion: " + MAIL_TOKEN_TRANSACTION_DATE +
             "        </td>" +
             "    </tr>";
+
+    public static final String MAIL_BODY_USER_MAIL_FOOTER =
+            "   <tr> <td><br></td> </tr>" +
+            "   <tr  style='font-family: Montserrat; font: caption;'>" +
+            "       <td colspan='2'>" +
+            "            En caso de no reconocer este correo, hacer caso omiso de este." +
+            "       </td>" +
+            "       <td></td>" +
+            "   </tr>" +
+            "</table>" +
+            "<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>";
 
     public static final String MAIL_BODY_PURCAHSE_FOOTER =
                     "</table>" +
@@ -171,6 +203,21 @@ public class EmailContent {
         "        </td>" +
         "        <td></td>" +
         "    </tr>";
+
+    public static final String MAIL_BODY_USER_NOTIFICATION =
+            "    <tr>" +
+                    "        <td>" +
+                    "            <h1>Estimad@ " + MAIL_TOKEN_USER_NAME + " </h1>" +
+                    "        </td>" +
+                    "        <td></td>" +
+                    "        <td></td>" +
+                    "    </tr>" +
+                    "    <tr>" +
+                    "        <td style='height: 60px; font-size: 1.5em;' colspan='2'>" +
+                    MAIL_TOKEN_USER_NOTIFIC +
+                    "        </td>" +
+                    "        <td></td>" +
+                    "    </tr>";
 
     public static final String MAIL_FONT_FAMILY =
             "<style>" +

@@ -1,4 +1,4 @@
-package com.ecommerce.bicicle.util;
+package com.ecommerce.bicicle.service;
 
 import com.ecommerce.bicicle.dto.ItemFloatingCharsDto;
 import com.ecommerce.bicicle.dto.ItemSavedDto;
@@ -7,6 +7,7 @@ import com.ecommerce.bicicle.dto.UserDto;
 import com.ecommerce.bicicle.repository.UserRepository;
 import com.ecommerce.bicicle.service.ItemTransactionService;
 import com.ecommerce.bicicle.service.UserService;
+import com.ecommerce.bicicle.util.MailComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.List;
 import javax.mail.MessagingException;
 
@@ -35,6 +37,9 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
+
+    @Autowired
+    private MailComponent mailComponent;
 
     @Autowired
     private ItemTransactionService itemTransactionService;
@@ -154,6 +159,26 @@ public class EmailService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendVerificationMailEmail(String userName, String userMail, String token) {
+
+        String mailMessage = userTokenReplacement(userName, MAIL_TYPE_RESET_PASSWORD,
+                MAIL_BODY_VERIFICATION_EMAIL_HEADER
+                        + MAIL_BODY_USER_NOTIFICATION
+                        + MAIL_BODY_USER_MAIL_FOOTER, token);
+
+        mailComponent.sendMail(mailMessage + "", MAIL_FROM + "", userMail + "", MAIL_TOKEN_USER_VERIFICATION_SUBJECT + "");
+    }
+
+    public void sendResetPasswordEmail(String userName, String userMail, String token) {
+
+        String mailMessage = userTokenReplacement(userName, MAIL_TYPE_VERIFICATION,
+                MAIL_BODY_RESET_PASS_EMAIL_HEADER
+                        + MAIL_BODY_USER_NOTIFICATION
+                        + MAIL_BODY_USER_MAIL_FOOTER, token);
+
+        mailComponent.sendMail(mailMessage + "", MAIL_FROM + "", userMail + "", MAIL_TOKEN_USER_VERIFICATION_SUBJECT + "");
     }
 
     public void sendGenericItemEmail(ItemSavedDto item, ItemTransactionDto itemTransaction, UserDto user,
@@ -284,6 +309,22 @@ public class EmailService {
         String formattedDate = new SimpleDateFormat("dd / MM / YYYY").format(date);
 
         return formattedDate;
+    }
+
+    String userTokenReplacement(String userName, String notificationType, String message, String token) {
+
+        if(notificationType.equalsIgnoreCase(MAIL_TYPE_VERIFICATION)) {
+            message = message.replace(MAIL_TOKEN_USER_NOTIFIC, MAIL_TOKEN_USER_VERIFICATION_MESSAGE);
+        } else if(notificationType.equalsIgnoreCase(MAIL_TYPE_RESET_PASSWORD)) {
+            message = message.replace(MAIL_TOKEN_USER_NOTIFIC, MAIL_TOKEN_RESET_PASSWORD_MESSAGE);
+        }
+
+        message = message.replace(MAIL_TOKEN_USER_NAME, userName);
+        message = message.replace(MAIL_TOKEN_SENT_TIME, dateFormat(new Timestamp(System.currentTimeMillis())) );
+        message = message.replace(MAIL_TOKEN_RESET_VERIFICATION_URL, "<a href='http://baaw.mx/#/user/register?token="+token+"'>http://baaw.mx/#/user/register</a>");
+        message = message.replace(MAIL_TOKEN_RESET_PASSWORD_URL, "<a href='http://baaw.mx/#/user/password?token="+token+"'>http://baaw.mx/#/user/password</a>");
+
+        return message;
     }
 
     String genericTokenReplacement(ItemSavedDto item,

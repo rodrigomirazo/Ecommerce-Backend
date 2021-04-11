@@ -49,6 +49,7 @@ public class UserDto implements Serializable {
 
     private String content;
 
+    private String favorites;
 
     public UserDto() {
     }
@@ -158,6 +159,15 @@ public class UserDto implements Serializable {
 
     public UserDto setContent(String content) {
         this.content = content;
+        return this;
+    }
+
+    public String getFavorites() {
+        return favorites;
+    }
+
+    public UserDto setFavorites(String favorites) {
+        this.favorites = favorites;
         return this;
     }
 
