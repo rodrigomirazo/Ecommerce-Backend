@@ -23,6 +23,22 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
     Optional<UserEntity> getByUserNameAndPassword(String userName, String password);
 
     /**
+     * Lookup user by name and Password
+     * @param userName
+     * @param password
+     * @return
+     */
+    Optional<UserEntity> getByUserNameAndPasswordAndUserVerified(String userName, String password, Boolean userVerified);
+
+    /**
+     * Lookup user by name and Password
+     * @param userName
+     * @param uid
+     * @return
+     */
+    Optional<UserEntity> getByUserNameAndUid(String userName, String uid);
+
+    /**
      * Lookup user by Profile COntent
      * @param content
      * @return

@@ -34,6 +34,8 @@ public class UserDto implements Serializable {
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private String password;
 
+    private String uid;
+
     @NotBlank(message = Constants.JSON_BLANK_FIELD)
     private Timestamp createdTime;
 
@@ -50,6 +52,8 @@ public class UserDto implements Serializable {
     private String content;
 
     private String favorites;
+
+    private Boolean userVerified;
 
     public UserDto() {
     }
@@ -105,6 +109,15 @@ public class UserDto implements Serializable {
 
     public UserDto setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public UserDto setUid(String uid) {
+        this.uid = uid;
         return this;
     }
 
@@ -168,6 +181,15 @@ public class UserDto implements Serializable {
 
     public UserDto setFavorites(String favorites) {
         this.favorites = favorites;
+        return this;
+    }
+
+    public Boolean getUserVerified() {
+        return userVerified;
+    }
+
+    public UserDto setUserVerified(Boolean userVerified) {
+        this.userVerified = userVerified;
         return this;
     }
 

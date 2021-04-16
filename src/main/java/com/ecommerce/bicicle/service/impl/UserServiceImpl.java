@@ -180,6 +180,36 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getByUsernameAndPassword(String userName, String password, Boolean userVerified) {
+        Optional<UserEntity> userEntities = userRepository.getByUserNameAndPasswordAndUserVerified(userName, password, userVerified);
+        UserDto userDto = userMapper.toUserDto(userEntities);
+        return userDto;
+    }
+
+    @Override
+    public UserDto getByUsernameAndPasswordCrossPlatform(String userName, String uid) {
+        Optional<UserEntity> userEntities = userRepository.getByUserNameAndUid(userName, uid);
+
+        UserDto userDto = userMapper.toUserDto(userEntities);
+        return userDto;
+    }
+
+    @Override
+    public UserDto enableUser(UserDto user) {
+        Optional<UserEntity> findUser = userRepository.findById(user.getId());
+        if(!findUser.isPresent()) {
+            return new UserDto();
+        }
+
+        UserEntity userEntity = findUser.get();
+        userEntity.setUserVerified(true);
+        userEntity = userRepository.save(userEntity);
+
+        UserDto userDto = userMapper.toUserDto(userEntity);
+        return userDto;
+    }
+
+    @Override
     public UserDto save(UserDto user) {
         // 1. get User
         Optional<UserEntity> findUser = userRepository.findById(user.getId());
@@ -201,6 +231,17 @@ public class UserServiceImpl implements UserService {
         } catch (NullPointerException e) {
             throw new NullPointerException();
         }
+    }
+
+    @Override
+    public UserDto registerUser(UserDto user) {
+
+        user.setUserVerified(false);
+        UserEntity userEntity = userMapper.toUserEntity(user);
+
+        userEntity = userRepository.save(userEntity);
+
+        return userMapper.toUserDto(userEntity);
     }
 
     @Override
@@ -227,5 +268,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Integer userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public UserDto saveCrossPlatform(UserDto user) {
+
+        // 1. set params
+        try {
+            UserEntity userEntity = userMapper.toUserEntity(user);
+            userEntity.setUserVerified(true);
+
+            Optional<UserEntity> findUser = userRepository.getByUserName(user.getUserName());
+            if(findUser.isPresent()) {
+                // Modify uid only
+                userEntity = findUser.get();
+                userEntity.setUid(user.getUid());
+            }
+
+            userEntity = userRepository.save(userEntity);
+
+            return userMapper.toUserDto(userEntity);
+        } catch (NullPointerException e) {
+            e.getMessage();
+            throw new NullPointerException();
+        }
     }
 }

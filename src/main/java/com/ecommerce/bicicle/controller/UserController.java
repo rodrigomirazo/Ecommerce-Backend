@@ -51,6 +51,12 @@ public class UserController {
         return userService.getByUsername(userName);
     }
 
+    /**
+     * Authenticate with user & password
+     * @param authenticationRequest
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = userUri + "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
@@ -72,17 +78,21 @@ public class UserController {
     @RequestMapping(value = userUri + "/crossLogin", method = RequestMethod.POST)
     public ResponseEntity<?> crossLogin(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
-        UserDto userInDB = userService.getByUsernameAndPassword(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-        UserDetails userDetails = new User(userInDB.getUserName(), userInDB.getPassword(), new ArrayList<>());
+        UserDto userInDB = userService.getByUsernameAndPasswordCrossPlatform(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        UserDetails userDetails;
 
         if (userInDB == null) {
 
             UserDto userDto = new UserDto();
             userDto.setUserName(authenticationRequest.getUsername());
             userDto.setEmail(authenticationRequest.getUsername());
-            userDto.setPassword(authenticationRequest.getPassword());
+            userDto.setUid(authenticationRequest.getPassword());
 
-            userService.save(userDto);
+            userDto = userService.saveCrossPlatform(userDto);
+            userInDB = userService.getByUsernameAndPasswordCrossPlatform(userDto.getUserName(), userDto.getUid());
+            userDetails = new User(authenticationRequest.getUsername(), authenticationRequest.getPassword(), new ArrayList<>());
+        } else {
+            userDetails = new User(userInDB.getUserName(), userInDB.getPassword(), new ArrayList<>());
         }
 
         final String token = jwtTokenUtil.generateToken(userDetails);
@@ -91,7 +101,7 @@ public class UserController {
         return ResponseEntity.ok(userInDB);
     }
 
-    @RequestMapping(value = userUri + "/register", method = RequestMethod.POST)
+    @RequestMapping(value = userUri + "/preRegister", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
         UserDto userInDB = userService.getByUsernameAndPassword(authenticationRequest.getUsername(), authenticationRequest.getPassword());
@@ -104,17 +114,17 @@ public class UserController {
             userDto.setEmail(authenticationRequest.getUsername());
             userDto.setPassword(authenticationRequest.getPassword());
 
-            userDto = userService.save(userDto);
-            userInDB = userService.getByUsernameAndPassword(userDto.getUserName(), userDto.getPassword());
-            userDetails = new User(authenticationRequest.getUsername(), authenticationRequest.getPassword(), new ArrayList<>());
+            userService.registerUser(userDto);
+            //userInDB = userService.getByUsernameAndPassword(userDto.getUserName(), userDto.getUid());
+            //userDetails = new User(authenticationRequest.getUsername(), authenticationRequest.getPassword(), new ArrayList<>());
         } else {
             userDetails = new User(userInDB.getUserName(), userInDB.getPassword(), new ArrayList<>());
         }
 
-        final String token = jwtTokenUtil.generateToken(userDetails);
-        userInDB.setToken(token);
+        //final String token = jwtTokenUtil.generateToken(userDetails);
+        //userInDB.setToken(token);
 
-        return ResponseEntity.ok(userInDB);
+        return ResponseEntity.ok(null);
     }
 
     @RequestMapping(value = "/userUpdate", method = {RequestMethod.POST})
@@ -124,6 +134,14 @@ public class UserController {
             ) {
 
         return userService.save(userDto);
+    }
+
+    @RequestMapping(value = "/enableUser", method = {RequestMethod.POST})
+    public @ResponseBody
+    UserDto enableUser(
+            @RequestBody UserDto userDto
+    ) {
+        return userService.enableUser(userDto);
     }
 
     @RequestMapping(value = "/passwordUpdate", method = {RequestMethod.POST})

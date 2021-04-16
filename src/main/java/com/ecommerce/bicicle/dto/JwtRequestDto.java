@@ -22,4 +22,12 @@ public class JwtRequestDto {
         this.password = password;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "JwtRequestDto{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

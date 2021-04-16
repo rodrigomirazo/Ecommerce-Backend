@@ -176,11 +176,12 @@ public class ItemController {
     /**
      * Upload FIle
      */
-    @PostMapping( itemUri + "/uploadImg/{itemId}")
+    @PostMapping( itemUri + "/uploadImg/{itemId}/{imgId}")
     public String singleFileUpload(
             @RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes,
-            @PathVariable(value = "itemId") Integer itemId
+            @PathVariable(value = "itemId") Integer itemId,
+            @PathVariable(value = "imgId") Integer imgId
             ) {
 
         if (file.isEmpty()) {
@@ -195,7 +196,8 @@ public class ItemController {
         itemImgUrls.setItemId(itemId);
         ItemImgUrlsEntity savedItemImg = itemImgUrlsService.save(itemImgUrls);
 
-        String pathStr = this.imgFilePath + ITEM_FILE_PREFIX + "_" + itemId + "_" + savedItemImg.getId() + ".png";
+        String pathStr = this.imgFilePath + ITEM_FILE_PREFIX + "_" + itemId + "_" + imgId + ".png";
+        System.out.println("Img Name: " + pathStr);
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
@@ -209,7 +211,7 @@ public class ItemController {
             e.printStackTrace();
         }
 
-        itemImgUrls.setImgUrl(ITEM_FILE_PREFIX + "_" + itemId + "_" + savedItemImg.getId() + ".png");
+        itemImgUrls.setImgUrl(ITEM_FILE_PREFIX + "_" + itemId + "_" + imgId + ".png");
         itemImgUrlsService.save(itemImgUrls);
 
         return "redirect:/uploadStatus";

@@ -29,12 +29,15 @@ public class UserMapper {
                 .setEmail(user.getEmail())
                 .setUserName(user.getUserName())
                 .setUserProfileImg(user.getUserProfileImg())
-                .setPassword(user.getPassword())
+                .setPassword(user.getPassword() != null ? user.getPassword() : "" )
+                .setUid(user.getUid() != null ? user.getUid() : "" )
                 .setCreatedTime(user.getCreatedTime())
                 .setUserProfileImg(user.getUserProfileImg())
                 .setUserDescription(user.getUserDescription())
                 .setContent(user.getContent())
-                .setFavorites(user.getFavorites());
+                .setFavorites(user.getFavorites())
+                .setUserVerified(user.getUserVerified())
+                ;
 
         if(user.getUserAddresses() != null) {
             mappedUser.setUserAddresses(userAddressMapper.toUserAddressDtoList(user.getUserAddresses()));
@@ -55,13 +58,16 @@ public class UserMapper {
                 .setLastname(user.getLastname())
                 .setEmail(user.getEmail())
                 .setUserName(user.getUserName())
-                .setPassword(user.getPassword())
+                .setPassword(user.getPassword() != null ? user.getPassword() : "" )
+                .setUid(user.getUid() != null ? user.getUid() : "" )
                 .setCreatedTime(user.getCreatedTime())
                 .setUserProfileImg(user.getUserProfileImg())
                 .setUserProfileImg(user.getUserProfileImg())
                 .setContent(user.getContent())
                 .setUserDescription(user.getUserDescription())
-                .setFavorites(user.getFavorites());
+                .setFavorites(user.getFavorites())
+                .setUserVerified(user.getUserVerified())
+                ;
     }
 
     public List<UserEntity> toUserDtoList(Iterable<UserEntity> userIterableEntities) {

@@ -27,6 +27,9 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "uid")
+    private String uid;
+
     @Column(name = "create_time")
     private Timestamp createdTime;
 
@@ -45,6 +48,9 @@ public class UserEntity {
 
     @Column(name = "favorites")
     private String favorites;
+
+    @Column(name = "user_verified")
+    private Boolean userVerified;
 
     public UserEntity() {
     }
@@ -103,6 +109,15 @@ public class UserEntity {
         return this;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public UserEntity setUid(String uid) {
+        this.uid = uid;
+        return this;
+    }
+
     public Timestamp getCreatedTime() {
         return createdTime;
     }
@@ -154,6 +169,15 @@ public class UserEntity {
 
     public UserEntity setFavorites(String favorites) {
         this.favorites = favorites;
+        return this;
+    }
+
+    public Boolean getUserVerified() {
+        return userVerified;
+    }
+
+    public UserEntity setUserVerified(Boolean userVerified) {
+        this.userVerified = userVerified;
         return this;
     }
 

@@ -17,9 +17,19 @@ public interface UserService {
 
     UserDto getByUsernameAndPassword(String userName, String password);
 
+    UserDto getByUsernameAndPassword(String userName, String password, Boolean userVerified);
+
+    UserDto getByUsernameAndPasswordCrossPlatform(String userName, String password);
+
     UserDto authenticate(UserDto userDto);
 
     UserDto save(UserDto user);
+
+    UserDto saveCrossPlatform(UserDto user);
+
+    UserDto registerUser(UserDto user);
+
+    UserDto enableUser(UserDto user);
 
     UserDto savePassword(UserDto user);
 

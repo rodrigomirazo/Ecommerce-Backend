@@ -6,6 +6,7 @@ import com.ecommerce.bicicle.service.UserAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -23,8 +24,10 @@ public class UserAddressController {
     UserAddressDto getByUserAccount(@PathVariable(value = "userName")  String userName) {
 
         List<UserAddressDto> itemEntities = userAddressService.getByUserName(userName);
-
-        return itemEntities.get(0);
+        if(itemEntities.size() > 0) {
+            return itemEntities.get(0);
+        }
+        return new UserAddressDto();
     }
 
     @RequestMapping(value = userAddressUri, method = {RequestMethod.POST})
