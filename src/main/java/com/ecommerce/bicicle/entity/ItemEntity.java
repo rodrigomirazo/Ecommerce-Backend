@@ -32,7 +32,7 @@ public class ItemEntity {
     private Integer year;
 
     @Column(name = "price")
-    private long price;
+    private double price;
 
     @Column(name = "original_price")
     private long originalPrice;
@@ -190,11 +190,11 @@ public class ItemEntity {
         return this;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public ItemEntity setPrice(long price) {
+    public ItemEntity setPrice(double price) {
         this.price = price;
         return this;
     }

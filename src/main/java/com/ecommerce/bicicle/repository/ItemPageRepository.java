@@ -16,8 +16,8 @@ public interface ItemPageRepository extends CrudRepository<ItemEntity, Integer> 
             Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd,
             Pageable pageable);
 
-    List<ItemEntity> findByDiagnostApprovedAndCreatedTimeBetween(
-            Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd);
+    List<ItemEntity> findByDiagnostApprovedAndCreatedTimeBetweenAndPriceGreaterThan(
+            Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd, double price);
 
 
     //List<ItemEntity> findByDiagnostApprovedEqualsNullAndCreatedTimeBetween(

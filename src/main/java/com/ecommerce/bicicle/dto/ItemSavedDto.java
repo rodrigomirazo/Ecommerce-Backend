@@ -16,7 +16,7 @@ public class ItemSavedDto implements Serializable {
     private int itemTransactionId;
     private String name;
     private Integer year;
-    private long price;
+    private double price;
     private long originalPrice;
     private double discount;
     private String description;
@@ -122,11 +122,11 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public ItemSavedDto setPrice(long price) {
+    public ItemSavedDto setPrice(double price) {
         this.price = price;
         return this;
     }

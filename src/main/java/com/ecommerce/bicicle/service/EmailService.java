@@ -63,7 +63,7 @@ public class EmailService {
         msg.setSubject("Testing from Spring Boot");
         msg.setText("Hello World \n Spring Boot Email");
 
-        javaMailSender.send(msg);
+        //javaMailSender.send(msg);
     }
 
     //UPLOAD
@@ -168,7 +168,7 @@ public class EmailService {
                         + MAIL_BODY_USER_NOTIFICATION
                         + MAIL_BODY_USER_MAIL_FOOTER, token);
 
-        mailComponent.sendMail(mailMessage + "", MAIL_FROM + "", userMail + "", MAIL_TOKEN_USER_VERIFICATION_SUBJECT + "");
+        //mailComponent.sendMail(mailMessage + "", MAIL_FROM + "", userMail + "", MAIL_TOKEN_USER_VERIFICATION_SUBJECT + "");
     }
 
     public void sendResetPasswordEmail(String userName, String userMail, String token) {
@@ -178,7 +178,7 @@ public class EmailService {
                         + MAIL_BODY_USER_NOTIFICATION
                         + MAIL_BODY_USER_MAIL_FOOTER, token);
 
-        mailComponent.sendMail(mailMessage + "", MAIL_FROM + "", userMail + "", MAIL_TOKEN_USER_VERIFICATION_SUBJECT + "");
+        //mailComponent.sendMail(mailMessage + "", MAIL_FROM + "", userMail + "", MAIL_TOKEN_USER_VERIFICATION_SUBJECT + "");
     }
 
     public void sendGenericItemEmail(ItemSavedDto item, ItemTransactionDto itemTransaction, UserDto user,
@@ -207,7 +207,7 @@ public class EmailService {
         }
 
 
-        javaMailSender.send(msg);
+        //javaMailSender.send(msg);
     }
 
     public void sendEmailToAdmins(
@@ -243,7 +243,7 @@ public class EmailService {
         }
 
 
-        javaMailSender.send(msg);
+        //javaMailSender.send(msg);
     }
 
     public void sendEmailToBuyer(
@@ -271,7 +271,7 @@ public class EmailService {
         helper.setText(notification, true);
         helper.addInline("logo", new ClassPathResource("img/logo.png"));
 
-        javaMailSender.send(msg);
+        //javaMailSender.send(msg);
     }
 
     public void sendEmailToVendor(
@@ -300,7 +300,7 @@ public class EmailService {
         helper.setText(notification, true);
         helper.addInline("logo", new ClassPathResource("img/logo.png"));
 
-        javaMailSender.send(msg);
+        //javaMailSender.send(msg);
     }
 
     public String dateFormat(Timestamp timestamp) {

@@ -60,7 +60,7 @@ public class UserController {
     @RequestMapping(value = userUri + "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestDto authenticationRequest) throws Exception {
 
-        UserDto userInDB = userService.getByUsernameAndPassword(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        UserDto userInDB = userService.getByUsername(authenticationRequest.getUsername());
         UserDetails userDetails;
 
         if (userInDB != null) {

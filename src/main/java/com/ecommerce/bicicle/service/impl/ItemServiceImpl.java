@@ -87,8 +87,8 @@ public class ItemServiceImpl implements ItemService {
             Boolean diagnostApproved, Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize) {
 
         Pageable page = PageRequest.of(pageNum, pageSize);
-        List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetween(
-                diagnostApproved, createdTimeStart, createdTimeEnd
+        List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetweenAndPriceGreaterThan(
+                diagnostApproved, createdTimeStart, createdTimeEnd, 0
         );
 
         List<ItemSavedDto> itemSavedDtosList = floatingCharsMapper.toItemSaveDtoList(items);
@@ -107,8 +107,8 @@ public class ItemServiceImpl implements ItemService {
             Timestamp createdTimeStart, Timestamp createdTimeEnd, Integer pageNum, Integer pageSize) {
 
         Pageable page = PageRequest.of(pageNum, pageSize);
-        List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetween(null,
-                createdTimeStart, createdTimeEnd
+        List<ItemEntity> items = itemPageRepository.findByDiagnostApprovedAndCreatedTimeBetweenAndPriceGreaterThan(null,
+                createdTimeStart, createdTimeEnd, 0
         );
 
         List<ItemSavedDto> itemSavedDtosList = floatingCharsMapper.toItemSaveDtoList(items);
@@ -177,6 +177,8 @@ public class ItemServiceImpl implements ItemService {
 
         //Filter not Bought items
         predicates.add(cb.equal(root.get("paymentConfirmed"), false));
+
+        predicates.add(cb.equal(root.get("itemTransactionId"), 0));
 
         //Search by name
         try {

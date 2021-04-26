@@ -214,6 +214,7 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
             itemTransactionHistory.setCreatedTime(timestamp);
         }
 
+        // If CONDITION: to define transaction timestamp
         if(itemTransaction.getTransactionStatus().equals(TransactionStatus.TRANSACT_STATUS_CLIENT_AUTHORIZATION)) {
             Timestamp createdTime = new Timestamp(new Date().getTime());
             itemTransactionEntity.setCreatedTime(createdTime);
@@ -221,9 +222,9 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
         ItemTransactionEntity itemTransactionEntityResp = itemTransRepository.save(itemTransactionEntity);
         itemTransactionEntityResp.getItem().setUser(itemTransactionEntityResp.getUserVendor());
 
-        //
-
+        // If CONDITION: to initialize transaction History
         if(itemTransactionEntity.getItemTransactionHistory() == null) {
+            // Save Transaction
             Timestamp timestamp = new Timestamp(new java.util.Date().getTime());
             itemTransactionHistory.setCreatedTime(timestamp);
             itemTransactionHistory.setItemTransactionId(itemTransactionEntityResp.getId());
@@ -234,6 +235,13 @@ public class ItemTransactionServiceImpl implements ItemTransactionService {
             itemTransactionEntityResp = itemTransRepository.save(itemTransactionEntity);
         }
 
+        // Save TRANSACTION_ID in ITEM on APPROVED_NOT_AUTHORIZE_YET
+        if(itemTransaction.getTransactionStatus().equals(TRANSACT_STATUS_AFTER_TRANSACTION_APPROVED)) {
+            ItemEntity itemEntity = itemTransactionEntityResp.getItem().setItemTransactionId(itemTransactionEntity.getId());
+            itemEntity = itemRepository.save(itemEntity);
+        }
+
+        // If CONDITION: to mark the end of the transaction
         if(itemTransaction.getTransactionStatus().equals(TransactionStatus.TRANSACT_STATUS_CLIENT_AUTHORIZATION)) {
             // Set Payed status for item
             ItemEntity itemEntity = itemTransactionEntityResp.getItem().setPaymentConfirmed(true);
