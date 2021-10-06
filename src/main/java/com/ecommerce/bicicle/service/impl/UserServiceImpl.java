@@ -12,10 +12,7 @@ import com.ecommerce.bicicle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -110,7 +107,7 @@ public class UserServiceImpl implements UserService {
         if(userDto.getFavorites() != null) {
             if( !userDto.getFavorites().equalsIgnoreCase("") ) {
                 String[] favs = userDto.getFavorites().split(",");
-                List<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toList());
+                Set<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toSet());
                 favList.add(itemId);
 
                 //edit user
@@ -153,7 +150,7 @@ public class UserServiceImpl implements UserService {
         if(userDto.getFavorites() != null) {
             if( !userDto.getFavorites().equalsIgnoreCase("") ) {
                 String[] favs = userDto.getFavorites().split(",");
-                List<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toList());
+                Set<Integer> favList = Arrays.stream(favs).map(s -> Integer.parseInt(s.replace(" ", ""))).collect(Collectors.toSet());
                 favList.remove(itemId);
 
                 //edit user
@@ -292,5 +289,25 @@ public class UserServiceImpl implements UserService {
             e.getMessage();
             throw new NullPointerException();
         }
+    }
+
+    String[] removeDuplicates(String[] input) {
+
+        //String[] input = new int[]{1, 1, 3, 7, 7, 8, 9, 9, 9, 10};
+        String current = input[0];
+        boolean found = false;
+
+        for (int i = 0; i < input.length; i++) {
+            if (current == input[i] && !found) {
+                found = true;
+            } else if (current != input[i]) {
+                System.out.print(" " + current);
+                current = input[i];
+                found = false;
+            }
+        }
+        System.out.print("Remove Duplicates " + current);
+
+        return input;
     }
 }
