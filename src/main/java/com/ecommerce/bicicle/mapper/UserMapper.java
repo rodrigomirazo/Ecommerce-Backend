@@ -2,6 +2,7 @@ package com.ecommerce.bicicle.mapper;
 
 import com.ecommerce.bicicle.dto.UserDto;
 import com.ecommerce.bicicle.entity.UserEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,34 +13,61 @@ import java.util.stream.StreamSupport;
 @Component
 public class UserMapper {
 
+    @Autowired
+    private UserAddressMapper userAddressMapper;
+
     public List<UserDto> toUserDtoList(List<UserEntity> users) {
         return users.stream().map(this::toUserDto).collect(Collectors.toList());
     }
 
-    public UserDto toUserDto(UserEntity userEntity) {
+    public UserDto toUserDto(UserEntity user) {
 
-        return new UserDto()
-                .setId(userEntity.getId())
-                .setEmail(userEntity.getEmail())
-                .setUsername(userEntity.getUsername())
-                .setUserProfileImg(userEntity.getUserProfileImg())
-                .setPassword(userEntity.getPassword())
-                .setCreatedTime(userEntity.getCreatedTime());
+        UserDto mappedUser = new UserDto()
+                .setId(user.getId())
+                .setName(user.getName())
+                .setLastname(user.getLastname())
+                .setEmail(user.getEmail())
+                .setUserName(user.getUserName())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setPassword(user.getPassword() != null ? user.getPassword() : "" )
+                .setUid(user.getUid() != null ? user.getUid() : "" )
+                .setCreatedTime(user.getCreatedTime())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setUserDescription(user.getUserDescription())
+                .setContent(user.getContent())
+                .setFavorites(user.getFavorites())
+                .setUserVerified(user.getUserVerified())
+                ;
+
+        if(user.getUserAddresses() != null) {
+            mappedUser.setUserAddresses(userAddressMapper.toUserAddressDtoList(user.getUserAddresses()));
+        }
+
+        return mappedUser;
     }
 
     public List<UserEntity> toUserList(List<UserDto> users) {
         return users.stream().map(this::toUserEntity).collect(Collectors.toList());
     }
 
-    public UserEntity toUserEntity(UserDto userDto) {
+    public UserEntity toUserEntity(UserDto user) {
 
         return new UserEntity()
-                .setId(userDto.getId())
-                .setEmail(userDto.getEmail())
-                .setUsername(userDto.getUsername())
-                .setPassword(userDto.getPassword())
-                .setCreatedTime(userDto.getCreatedTime())
-                .setUserProfileImg(userDto.getUserProfileImg());
+                .setId(user.getId())
+                .setName(user.getName())
+                .setLastname(user.getLastname())
+                .setEmail(user.getEmail())
+                .setUserName(user.getUserName())
+                .setPassword(user.getPassword() != null ? user.getPassword() : "" )
+                .setUid(user.getUid() != null ? user.getUid() : "" )
+                .setCreatedTime(user.getCreatedTime())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setUserProfileImg(user.getUserProfileImg())
+                .setContent(user.getContent())
+                .setUserDescription(user.getUserDescription())
+                .setFavorites(user.getFavorites())
+                .setUserVerified(user.getUserVerified())
+                ;
     }
 
     public List<UserEntity> toUserDtoList(Iterable<UserEntity> userIterableEntities) {
@@ -50,9 +78,16 @@ public class UserMapper {
 
     public UserDto toUserDto(Optional<UserEntity> userOptionalEntities) {
         if(!userOptionalEntities.isPresent()) {
-            return new UserDto();
+            return null;
         }
         return toUserDto(userOptionalEntities.get());
+    }
+
+    public UserEntity toUserEntity(Optional<UserEntity> userOptionalEntities) {
+        if(!userOptionalEntities.isPresent()) {
+            return null;
+        }
+        return userOptionalEntities.get();
     }
 
 }

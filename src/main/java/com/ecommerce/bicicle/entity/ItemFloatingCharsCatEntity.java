@@ -20,6 +20,8 @@ public class ItemFloatingCharsCatEntity {
     public ItemFloatingCharsCatEntity() {
     }
 
+
+
     public int getFloatingCharCatId() {
         return floatingCharCatId;
     }

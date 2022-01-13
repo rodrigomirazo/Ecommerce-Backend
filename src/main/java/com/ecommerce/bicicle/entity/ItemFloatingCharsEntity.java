@@ -16,6 +16,11 @@ public class ItemFloatingCharsEntity {
     public ItemFloatingCharsEntity() {
     }
 
+    public ItemFloatingCharsEntity(int floatingCharId, String charName) {
+        this.floatingCharId = floatingCharId;
+        this.charName = charName;
+    }
+
     public ItemFloatingCharsEntity(int floatingCharId) {
         this.floatingCharId = floatingCharId;
     }

@@ -2,38 +2,51 @@ package com.ecommerce.bicicle.dto;
 
 public class FloatingCharsRelDto {
 
-    private int itemFloatingCharsRelId;
-    private int itemFloatingCharsCatId;
-    private int itemFloatingCharId;
+    // ID for Floating Entity
+    private int floatingCharId;
+    private String floatingCharName;
+
+    // ID for Floating value Entity
+    private int floatingCharCatId;
+    private String floatingCharCatName;
+
 
     public FloatingCharsRelDto() {
     }
 
-    public int getItemFloatingCharsRelId() {
-        return itemFloatingCharsRelId;
+    public int getFloatingCharId() {
+        return floatingCharId;
     }
 
-    public FloatingCharsRelDto setItemFloatingCharsRelId(int itemFloatingCharsRelId) {
-        this.itemFloatingCharsRelId = itemFloatingCharsRelId;
+    public FloatingCharsRelDto setFloatingCharId(int floatingCharId) {
+        this.floatingCharId = floatingCharId;
         return this;
     }
 
-    public int getItemFloatingCharsCatId() {
-        return itemFloatingCharsCatId;
+    public int getFloatingCharCatId() {
+        return floatingCharCatId;
     }
 
-    public FloatingCharsRelDto setItemFloatingCharsCatId(int itemFloatingCharsCatId) {
-        this.itemFloatingCharsCatId = itemFloatingCharsCatId;
+    public FloatingCharsRelDto setFloatingCharCatId(int floatingCharCatId) {
+        this.floatingCharCatId = floatingCharCatId;
         return this;
     }
 
-    public int getItemFloatingCharId() {
-        return itemFloatingCharId;
+    public String getFloatingCharName() {
+        return floatingCharName;
     }
 
-    public FloatingCharsRelDto setItemFloatingCharId(int itemFloatingCharId) {
-        this.itemFloatingCharId = itemFloatingCharId;
+    public FloatingCharsRelDto setFloatingCharName(String floatingCharName) {
+        this.floatingCharName = floatingCharName;
         return this;
     }
 
+    public String getFloatingCharCatName() {
+        return floatingCharCatName;
+    }
+
+    public FloatingCharsRelDto setFloatingCharCatName(String floatingCharCatName) {
+        this.floatingCharCatName = floatingCharCatName;
+        return this;
+    }
 }

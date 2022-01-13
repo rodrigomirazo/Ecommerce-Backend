@@ -1,8 +1,8 @@
 package com.ecommerce.bicicle.dto;
 
-import com.ecommerce.bicicle.entity.ItemEntity;
-
+import javax.persistence.Column;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ItemSavedDto implements Serializable {
@@ -12,9 +12,11 @@ public class ItemSavedDto implements Serializable {
     private int statusId;
     private int itemColorId;
     private int itemTypeCatId;
+    private String itemTypeCatName;
     private int itemTransactionId;
     private String name;
-    private long price;
+    private Integer year;
+    private double price;
     private long originalPrice;
     private double discount;
     private String description;
@@ -22,42 +24,31 @@ public class ItemSavedDto implements Serializable {
     private String sizeId;
     private int lastLevelCategoryId;
     private UserDto user;
-    private List<ItemFloatingCharsRelDto> itemFloatingChars;
+    private List<ItemImgUrlsDto> itemImgUrls;
+    private List<FloatingCharsRelDto> itemFloatingChars;
+    private String backRear;
+    private String frontRear;
+    private String model;
+    private String suspension;
+    private String backSuspension;
+    private String ruedos;
+    private String cassette;
+    private String series;
+    private String gearLevel;
+    private String multiplication;
+    private boolean isModified;
+    private String comments;
+    private int frameRate;
+    private int ruedosRate;
+    private int wheelsRate;
+    private int componentsRate;
+    private Timestamp createdTime;
+    private boolean paymentConfirmed;
+    private Boolean diagnostApproved;
+    private Timestamp diagnostTime;
+    private String diagnostComments;
 
     public ItemSavedDto() { }
-
-    public ItemSavedDto(ItemEntity item) {
-        this.setId( item.getId() );
-        this.setStatusId( item.getStatusId() );
-        this.setItemColorId( item.getItemColorId() );
-        this.setItemTypeCatId( item.getItemTypeCatId() );
-        this.setItemTransactionId( item.getItemTransactionId() );
-        this.setName( item.getName() );
-        this.setPrice( item.getPrice() );
-        this.setOriginalPrice( item.getOriginalPrice() );
-        this.setDiscount( item.getDiscount() );
-        this.setDescription( item.getDescription() );
-        this.setFleetCost( item.getFleetCost() );
-        this.setSizeId( item.getSizeId() );
-        this.setLastLevelCategoryId( item.getLastLevelCategoryId() );
-    }
-
-    public ItemSavedDto(ItemEntity item, List<ItemFloatingCharsRelDto> itemFloatingCharsRelDtoList) {
-        this.setId( item.getId() );
-        this.setStatusId( item.getStatusId() );
-        this.setItemColorId( item.getItemColorId() );
-        this.setItemTypeCatId( item.getItemTypeCatId() );
-        this.setItemTransactionId( item.getItemTransactionId() );
-        this.setName( item.getName() );
-        this.setPrice( item.getPrice() );
-        this.setOriginalPrice( item.getOriginalPrice() );
-        this.setDiscount( item.getDiscount() );
-        this.setDescription( item.getDescription() );
-        this.setFleetCost( item.getFleetCost() );
-        this.setSizeId( item.getSizeId() );
-        this.setLastLevelCategoryId( item.getLastLevelCategoryId() );
-        this.setItemFloatingChars(itemFloatingCharsRelDtoList);
-    }
 
     public Integer getId() {
         return id;
@@ -95,6 +86,15 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
+    public String getItemTypeCatName() {
+        return itemTypeCatName;
+    }
+
+    public ItemSavedDto setItemTypeCatName(String itemTypeCatName) {
+        this.itemTypeCatName = itemTypeCatName;
+        return this;
+    }
+
     public int getItemTransactionId() {
         return itemTransactionId;
     }
@@ -113,11 +113,20 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
-    public long getPrice() {
+    public Integer getYear() {
+        return year;
+    }
+
+    public ItemSavedDto setYear(Integer year) {
+        this.year = year;
+        return this;
+    }
+
+    public double getPrice() {
         return price;
     }
 
-    public ItemSavedDto setPrice(long price) {
+    public ItemSavedDto setPrice(double price) {
         this.price = price;
         return this;
     }
@@ -185,12 +194,248 @@ public class ItemSavedDto implements Serializable {
         return this;
     }
 
-    public List<ItemFloatingCharsRelDto> getItemFloatingChars() {
+    public List<FloatingCharsRelDto> getItemFloatingChars() {
         return itemFloatingChars;
     }
 
-    public ItemSavedDto setItemFloatingChars(List<ItemFloatingCharsRelDto> itemFloatingChars) {
+    public ItemSavedDto setItemFloatingChars(List<FloatingCharsRelDto> itemFloatingChars) {
         this.itemFloatingChars = itemFloatingChars;
         return this;
+    }
+
+    public List<ItemImgUrlsDto> getItemImgUrls() {
+        return itemImgUrls;
+    }
+
+    public ItemSavedDto setItemImgUrls(List<ItemImgUrlsDto> itemImgUrls) {
+        this.itemImgUrls = itemImgUrls;
+        return this;
+    }
+
+    public String getBackRear() {
+        return backRear;
+    }
+
+    public ItemSavedDto setBackRear(String backRear) {
+        this.backRear = backRear;
+        return this;
+    }
+
+    public String getFrontRear() {
+        return frontRear;
+    }
+
+    public ItemSavedDto setFrontRear(String frontRear) {
+        this.frontRear = frontRear;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public ItemSavedDto setModel(String model) {
+        this.model = model;
+        return this;
+    }
+
+    public String getSuspension() {
+        return suspension;
+    }
+
+    public ItemSavedDto setSuspension(String suspension) {
+        this.suspension = suspension;
+        return this;
+    }
+
+    public String getBackSuspension() {
+        return backSuspension;
+    }
+
+    public ItemSavedDto setBackSuspension(String backSuspension) {
+        this.backSuspension = backSuspension;
+        return this;
+    }
+
+    public String getRuedos() {
+        return ruedos;
+    }
+
+    public ItemSavedDto setRuedos(String ruedos) {
+        this.ruedos = ruedos;
+        return this;
+    }
+
+    public String getCassette() {
+        return cassette;
+    }
+
+    public ItemSavedDto setCassette(String cassette) {
+        this.cassette = cassette;
+        return this;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public ItemSavedDto setSeries(String series) {
+        this.series = series;
+        return this;
+    }
+
+    public String getGearLevel() {
+        return gearLevel;
+    }
+
+    public ItemSavedDto setGearLevel(String gearLevel) {
+        this.gearLevel = gearLevel;
+        return this;
+    }
+
+    public String getMultiplication() {
+        return multiplication;
+    }
+
+    public ItemSavedDto setMultiplication(String multiplication) {
+        this.multiplication = multiplication;
+        return this;
+    }
+
+    public boolean getIsModified() {
+        return isModified;
+    }
+
+    public ItemSavedDto setIsModified(boolean modified) {
+        isModified = modified;
+        return this;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public ItemSavedDto setComments(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public int getFrameRate() {
+        return frameRate;
+    }
+
+    public ItemSavedDto setFrameRate(int frameRate) {
+        this.frameRate = frameRate;
+        return this;
+    }
+
+    public int getRuedosRate() {
+        return ruedosRate;
+    }
+
+    public ItemSavedDto setRuedosRate(int ruedosRate) {
+        this.ruedosRate = ruedosRate;
+        return this;
+    }
+
+    public int getWheelsRate() {
+        return wheelsRate;
+    }
+
+    public ItemSavedDto setWheelsRate(int wheelsRate) {
+        this.wheelsRate = wheelsRate;
+        return this;
+    }
+
+    public int getComponentsRate() {
+        return componentsRate;
+    }
+
+    public ItemSavedDto setComponentsRate(int componentsRate) {
+        this.componentsRate = componentsRate;
+        return this;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public ItemSavedDto setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public boolean getPaymentConfirmed() {
+        return paymentConfirmed;
+    }
+
+    public ItemSavedDto setPaymentConfirmed(boolean paymentConfirmed) {
+        this.paymentConfirmed = paymentConfirmed;
+        return this;
+    }
+
+    public Boolean getDiagnostApproved() {
+        return diagnostApproved;
+    }
+
+    public ItemSavedDto setDiagnostApproved(Boolean diagnostApproved) {
+        this.diagnostApproved = diagnostApproved;
+        return this;
+    }
+
+    public Timestamp getDiagnostTime() {
+        return diagnostTime;
+    }
+
+    public ItemSavedDto setDiagnostTime(Timestamp diagnostTime) {
+        this.diagnostTime = diagnostTime;
+        return this;
+    }
+
+    public String getDiagnostComments() {
+        return diagnostComments;
+    }
+
+    public ItemSavedDto setDiagnostComments(String diagnostComments) {
+        this.diagnostComments = diagnostComments;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemSavedDto{" +
+                "id=" + id +
+                ", statusId=" + statusId +
+                ", itemColorId=" + itemColorId +
+                ", itemTypeCatId=" + itemTypeCatId +
+                ", itemTransactionId=" + itemTransactionId +
+                ", name='" + name + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                ", originalPrice=" + originalPrice +
+                ", discount=" + discount +
+                ", description='" + description + '\'' +
+                ", fleetCost=" + fleetCost +
+                ", sizeId='" + sizeId + '\'' +
+                ", lastLevelCategoryId=" + lastLevelCategoryId +
+                ", user=" + user +
+                ", itemImgUrls=" + itemImgUrls +
+                ", itemFloatingChars=" + itemFloatingChars +
+                ", backRear='" + backRear + '\'' +
+                ", frontRear='" + frontRear + '\'' +
+                ", model='" + model + '\'' +
+                ", suspension='" + suspension + '\'' +
+                ", ruedos='" + ruedos + '\'' +
+                ", cassette='" + cassette + '\'' +
+                ", series='" + series + '\'' +
+                ", gearLevel='" + gearLevel + '\'' +
+                ", multiplication='" + multiplication + '\'' +
+                ", isModified=" + isModified +
+                ", comments='" + comments + '\'' +
+                ", frameRate=" + frameRate +
+                ", ruedosRate=" + ruedosRate +
+                ", wheelsRate=" + wheelsRate +
+                ", componentsRate=" + componentsRate +
+                '}';
     }
 }

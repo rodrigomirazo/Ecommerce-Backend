@@ -37,4 +37,13 @@ public class ItemFloatingCharsDto {
         this.catalogList = catalogList;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "ItemFloatingCharsDto{" +
+                "floatingCharId=" + floatingCharId +
+                ", floatingCharName='" + floatingCharName + '\'' +
+                ", catalogList=" + catalogList +
+                '}';
+    }
 }

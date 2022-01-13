@@ -2,10 +2,11 @@ package com.ecommerce.bicicle.controller;
 
 import com.ecommerce.bicicle.constants.EndpointNames;
 import com.ecommerce.bicicle.dto.UserAddressDto;
-import com.ecommerce.bicicle.service.UserService;
+import com.ecommerce.bicicle.service.UserAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -16,30 +17,32 @@ public class UserAddressController {
     private static final String userAddressUri = EndpointNames.USER_ADDRESS_CONTROLLER;
 
     @Autowired
-    private UserService userService;
+    private UserAddressService userAddressService;
 
-    @RequestMapping(value = userAddressUri, method = {RequestMethod.GET})
+    @RequestMapping(value = userAddressUri + "/{userName}", method = {RequestMethod.GET})
     public @ResponseBody
-    List<UserAddressDto> get() {
+    UserAddressDto getByUserAccount(@PathVariable(value = "userName")  String userName) {
 
-        //List<UserAddressDto> itemEntities = userService.get();
-
-        return null;
+        List<UserAddressDto> itemEntities = userAddressService.getByUserName(userName);
+        if(itemEntities.size() > 0) {
+            return itemEntities.get(0);
+        }
+        return new UserAddressDto();
     }
 
-    @RequestMapping(value = userAddressUri, method = {RequestMethod.PUT})
+    @RequestMapping(value = userAddressUri, method = {RequestMethod.POST})
     public @ResponseBody
-    UserAddressDto put(UserAddressDto userAddressDto) {
+    UserAddressDto post(@RequestBody UserAddressDto userAddressDto) {
 
-        //UserAddressDto saveItemUser = userService.save(userAddressDto);
+        UserAddressDto saveItemUser = userAddressService.save(userAddressDto);
 
-        return null;
+        return saveItemUser;
     }
 
     @RequestMapping(value = userAddressUri, method = {RequestMethod.DELETE})
     public @ResponseBody
-    void delete(Integer itemId) {
+    void delete(String itemId) {
 
-        userService.delete(itemId);
+        userAddressService.delete(itemId);
     }
 }

@@ -1,6 +1,8 @@
 package com.ecommerce.bicicle.mapper;
 
 import com.ecommerce.bicicle.dto.ItemFloatingCharsRelDto;
+import com.ecommerce.bicicle.entity.ItemFloatingCharsCatEntity;
+import com.ecommerce.bicicle.entity.ItemFloatingCharsEntity;
 import com.ecommerce.bicicle.entity.ItemFloatingCharsRelEntity;
 import org.springframework.stereotype.Component;
 
@@ -17,26 +19,26 @@ public class ItemFloatingCharsItemRelMapper {
         return users.stream().map(this::toItemFloatingCharsRelDto).collect(Collectors.toList());
     }
 
-    public ItemFloatingCharsRelDto toItemFloatingCharsRelDto(ItemFloatingCharsRelEntity itemFloatingCharsRelEntity) {
+    public ItemFloatingCharsRelDto toItemFloatingCharsRelDto(ItemFloatingCharsRelEntity itemFloatingCharsRel) {
 
         return new ItemFloatingCharsRelDto()
-                .setFloatingCharCatId(itemFloatingCharsRelEntity.getFloatingCharCatId())
-                .setItemFloatingCharsRelId(itemFloatingCharsRelEntity.getItemFloatingCharsRelId())
-                .setItemId(itemFloatingCharsRelEntity.getItemId())
-                .setFloatingCharId(itemFloatingCharsRelEntity.getFloatingCharId());
+                .setFloatingCharCatId(itemFloatingCharsRel.getFloatingCharCatId())
+                .setItemFloatingCharsRelId(itemFloatingCharsRel.getItemFloatingCharsRelId())
+                .setItemId(itemFloatingCharsRel.getItemId())
+                .setFloatingCharId(itemFloatingCharsRel.getFloatingCharId());
     }
 
     public List<ItemFloatingCharsRelEntity> toItemFloatingCharsRelEntityList(List<ItemFloatingCharsRelDto> itemFloatingCharsRelDtos) {
         return itemFloatingCharsRelDtos.stream().map(this::toItemFloatingCharsRelEntity).collect(Collectors.toList());
     }
 
-    public ItemFloatingCharsRelEntity toItemFloatingCharsRelEntity(ItemFloatingCharsRelDto itemFloatingCharsRelDto) {
+    public ItemFloatingCharsRelEntity toItemFloatingCharsRelEntity(ItemFloatingCharsRelDto itemFloatingCharsRel) {
 
         return new ItemFloatingCharsRelEntity()
-                .setItemFloatingCharsRelId(itemFloatingCharsRelDto.getItemFloatingCharsRelId())
-                .setFloatingCharCatId(itemFloatingCharsRelDto.getFloatingCharCatId())
-                .setItemId(itemFloatingCharsRelDto.getItemId())
-                .setFloatingCharId(itemFloatingCharsRelDto.getFloatingCharId());
+                .setItemFloatingCharsRelId(itemFloatingCharsRel.getItemFloatingCharsRelId())
+                .setFloatingCharCatId(itemFloatingCharsRel.getFloatingCharCatId())
+                .setItemId(itemFloatingCharsRel.getItemId())
+                .setFloatingCharId(itemFloatingCharsRel.getFloatingCharId());
     }
 
     public List<ItemFloatingCharsRelDto> toItemFloatingCharsRelDtoList(Iterable<ItemFloatingCharsRelEntity> floatingCharsIterableEntities) {

@@ -12,7 +12,8 @@ public class ItemDto implements Serializable {
     private int itemTypeCatId;
     private int itemTransactionId;
     private String name;
-    private long price;
+    private Integer year;
+    private double price;
     private long originalPrice;
     private double discount;
     private String description;
@@ -30,6 +31,7 @@ public class ItemDto implements Serializable {
         this.setItemTypeCatId( item.getItemTypeCatId() );
         this.setItemTransactionId( item.getItemTransactionId() );
         this.setName( item.getName() );
+        this.setYear( item.getYear() );
         this.setPrice( item.getPrice() );
         this.setOriginalPrice( item.getOriginalPrice() );
         this.setDiscount( item.getDiscount() );
@@ -93,11 +95,20 @@ public class ItemDto implements Serializable {
         return this;
     }
 
-    public long getPrice() {
+    public Integer getYear() {
+        return year;
+    }
+
+    public ItemDto setYear(Integer year) {
+        this.year = year;
+        return this;
+    }
+
+    public double getPrice() {
         return price;
     }
 
-    public ItemDto setPrice(long price) {
+    public ItemDto setPrice(double price) {
         this.price = price;
         return this;
     }

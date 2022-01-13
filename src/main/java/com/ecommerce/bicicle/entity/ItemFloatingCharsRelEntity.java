@@ -23,12 +23,6 @@ public class ItemFloatingCharsRelEntity {
     public ItemFloatingCharsRelEntity() {
     }
 
-    public ItemFloatingCharsRelEntity(Integer itemId, Integer floatingCharCatId, Integer floatingCharId) {
-        this.itemId = itemId;
-        this.floatingCharCatId = floatingCharCatId;
-        this.floatingCharId = floatingCharId;
-    }
-
     public int getItemFloatingCharsRelId() {
         return itemFloatingCharsRelId;
     }
