@@ -16,22 +16,22 @@ public class ItemFloatingCharsMapper {
         return users.stream().map(this::toItemFloatingCharsDto).collect(Collectors.toList());
     }
 
-    public ItemFloatingCharsDto toItemFloatingCharsDto(ItemFloatingCharsEntity itemFloatingCharsEntity) {
+    public ItemFloatingCharsDto toItemFloatingCharsDto(ItemFloatingCharsEntity itemFloatingChars) {
 
         return new ItemFloatingCharsDto()
-                .setFloatingCharName(itemFloatingCharsEntity.getCharName())
-                .setFloatingCharId(itemFloatingCharsEntity.getFloatingCharId());
+                .setFloatingCharName(itemFloatingChars.getCharName())
+                .setFloatingCharId(itemFloatingChars.getFloatingCharId());
     }
 
     public List<ItemFloatingCharsEntity> toItemFloatingCharsEntityList(List<ItemFloatingCharsDto> itemFloatingCharsDtos) {
         return itemFloatingCharsDtos.stream().map(this::toItemFloatingCharsEntity).collect(Collectors.toList());
     }
 
-    public ItemFloatingCharsEntity toItemFloatingCharsEntity(ItemFloatingCharsDto itemFloatingCharsDto) {
+    public ItemFloatingCharsEntity toItemFloatingCharsEntity(ItemFloatingCharsDto itemFloatingChars) {
 
         return new ItemFloatingCharsEntity()
-                .setCharName(itemFloatingCharsDto.getFloatingCharName())
-                .setFloatingCharId(itemFloatingCharsDto.getFloatingCharId());
+                .setCharName(itemFloatingChars.getFloatingCharName())
+                .setFloatingCharId(itemFloatingChars.getFloatingCharId());
     }
 
     public List<ItemFloatingCharsDto> toItemFloatingCharsDtoList(Iterable<ItemFloatingCharsEntity> floatingCharsIterableEntities) {

@@ -16,7 +16,7 @@ public class UserBalanceHistory {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "transaction_id")
-    private ItemTransaction itemTransaction;
+    private ItemTransactionEntity itemTransaction;
 
     @Column(name = "total_payment")
     private double totalPayment;
@@ -42,11 +42,11 @@ public class UserBalanceHistory {
         return this;
     }
 
-    public ItemTransaction getItemTransaction() {
+    public ItemTransactionEntity getItemTransaction() {
         return itemTransaction;
     }
 
-    public UserBalanceHistory setItemTransaction(ItemTransaction itemTransaction) {
+    public UserBalanceHistory setItemTransaction(ItemTransactionEntity itemTransaction) {
         this.itemTransaction = itemTransaction;
         return this;
     }

@@ -17,26 +17,26 @@ public class ItemFloatingCharsCatMapper {
         return users.stream().map(this::toItemFloatingCharsCatDto).collect(Collectors.toList());
     }
 
-    public ItemFloatingCharsCatDto toItemFloatingCharsCatDto(ItemFloatingCharsCatEntity itemFloatingCharsCatEntity) {
+    public ItemFloatingCharsCatDto toItemFloatingCharsCatDto(ItemFloatingCharsCatEntity itemFloatingCharsCat) {
 
         ItemFloatingCharsDto itemFloatingCharsDto = new ItemFloatingCharsDto();
-        itemFloatingCharsDto.setFloatingCharId(itemFloatingCharsCatEntity.getItemFloatingChar().getFloatingCharId());
-        itemFloatingCharsDto.setFloatingCharName(itemFloatingCharsCatEntity.getItemFloatingChar().getCharName());
+        itemFloatingCharsDto.setFloatingCharId(itemFloatingCharsCat.getItemFloatingChar().getFloatingCharId());
+        itemFloatingCharsDto.setFloatingCharName(itemFloatingCharsCat.getItemFloatingChar().getCharName());
 
         return new ItemFloatingCharsCatDto()
-                .setCharId(itemFloatingCharsCatEntity.getFloatingCharCatId())
-                .setCharName(itemFloatingCharsCatEntity.getFloatingCharName());
+                .setCharId(itemFloatingCharsCat.getFloatingCharCatId())
+                .setCharName(itemFloatingCharsCat.getFloatingCharName());
     }
 
     public List<ItemFloatingCharsCatEntity> toItemFloatingCharsCatEntityList(List<ItemFloatingCharsCatDto> itemFloatingCharsCatDtos) {
         return itemFloatingCharsCatDtos.stream().map(this::toItemFloatingCharsCatEntity).collect(Collectors.toList());
     }
 
-    public ItemFloatingCharsCatEntity toItemFloatingCharsCatEntity(ItemFloatingCharsCatDto itemFloatingCharsCatDto) {
+    public ItemFloatingCharsCatEntity toItemFloatingCharsCatEntity(ItemFloatingCharsCatDto itemFloatingCharsCat) {
 
         return new ItemFloatingCharsCatEntity()
-                .setFloatingCharCatId(itemFloatingCharsCatDto.getCharId())
-                .setFloatingCharName(itemFloatingCharsCatDto.getCharName());
+                .setFloatingCharCatId(itemFloatingCharsCat.getCharId())
+                .setFloatingCharName(itemFloatingCharsCat.getCharName());
     }
 
     public List<ItemFloatingCharsCatDto> toItemFloatingCharsCatDtoList(Iterable<ItemFloatingCharsCatEntity> floatingCharsIterableEntities) {

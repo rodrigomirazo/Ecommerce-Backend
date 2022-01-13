@@ -7,7 +7,7 @@ public class UserAddressDto implements Serializable {
 
     private static final long serialVersionUID = 6061630455851019613L;
     private int id;
-    private UserDto user;
+    private String userId;
     private String name;
     private String lastnames;
     private String street;
@@ -19,6 +19,8 @@ public class UserAddressDto implements Serializable {
     private String suburb;
     private String reference;
     private String phoneNumber;
+    private boolean savedInProfile;
+    private String streetRef;
 
     public UserAddressDto() {
     }
@@ -32,12 +34,12 @@ public class UserAddressDto implements Serializable {
         return this;
     }
 
-    public UserDto getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public UserAddressDto setUser(UserDto user) {
-        this.user = user;
+    public UserAddressDto setUserId(String userId) {
+        this.userId = userId;
         return this;
     }
 
@@ -137,6 +139,24 @@ public class UserAddressDto implements Serializable {
 
     public UserAddressDto setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public boolean getSavedInProfile() {
+        return savedInProfile;
+    }
+
+    public UserAddressDto setSavedInProfile(boolean savedInProfile) {
+        this.savedInProfile = savedInProfile;
+        return this;
+    }
+
+    public String getStreetRef() {
+        return streetRef;
+    }
+
+    public UserAddressDto setStreetRef(String streetRef) {
+        this.streetRef = streetRef;
         return this;
     }
 }

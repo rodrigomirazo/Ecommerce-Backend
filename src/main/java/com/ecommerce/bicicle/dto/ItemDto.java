@@ -13,7 +13,7 @@ public class ItemDto implements Serializable {
     private int itemTransactionId;
     private String name;
     private Integer year;
-    private long price;
+    private double price;
     private long originalPrice;
     private double discount;
     private String description;
@@ -104,11 +104,11 @@ public class ItemDto implements Serializable {
         return this;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public ItemDto setPrice(long price) {
+    public ItemDto setPrice(double price) {
         this.price = price;
         return this;
     }

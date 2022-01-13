@@ -21,46 +21,46 @@ public class UserItemMapper {
         return users.stream().map(this::toItemDto).collect(Collectors.toList());
     }
 
-    public ItemDto toItemDto(ItemEntity itemEntity) {
+    public ItemDto toItemDto(ItemEntity item) {
 
-        UserDto userDto = userMapper.toUserDto(itemEntity.getUser());
+        UserDto userDto = userMapper.toUserDto(item.getUser());
 
         return new ItemDto()
-                .setId(itemEntity.getId())
-                .setStatusId(itemEntity.getStatusId())
-                .setItemColorId(itemEntity.getItemColorId())
-                .setItemTypeCatId(itemEntity.getItemTypeCatId())
-                .setItemTransactionId(itemEntity.getItemTransactionId())
-                .setName(itemEntity.getName())
-                .setPrice(itemEntity.getPrice())
-                .setOriginalPrice(itemEntity.getOriginalPrice())
-                .setDiscount(itemEntity.getDiscount())
-                .setDescription(itemEntity.getDescription())
-                .setFleetCost(itemEntity.getFleetCost())
-                .setSizeId(itemEntity.getSizeId())
-                .setLastLevelCategoryId(itemEntity.getLastLevelCategoryId());
+                .setId(item.getId())
+                .setStatusId(item.getStatusId())
+                .setItemColorId(item.getItemColorId())
+                .setItemTypeCatId(item.getItemTypeCatId())
+                .setItemTransactionId(item.getItemTransactionId())
+                .setName(item.getName())
+                .setPrice(item.getPrice())
+                .setOriginalPrice(item.getOriginalPrice())
+                .setDiscount(item.getDiscount())
+                .setDescription(item.getDescription())
+                .setFleetCost(item.getFleetCost())
+                .setSizeId(item.getSizeId())
+                .setLastLevelCategoryId(item.getLastLevelCategoryId());
     }
 
     public List<ItemEntity> toUserList(List<ItemDto> users) {
         return users.stream().map(this::toItemEntity).collect(Collectors.toList());
     }
 
-    public ItemEntity toItemEntity(ItemDto itemDto) {
+    public ItemEntity toItemEntity(ItemDto item) {
 
         return new ItemEntity()
-                .setId(itemDto.getId())
-                .setStatusId(itemDto.getStatusId())
-                .setItemColorId(itemDto.getItemColorId())
-                .setItemTypeCatId(itemDto.getItemTypeCatId())
-                .setItemTransactionId(itemDto.getItemTransactionId())
-                .setName(itemDto.getName())
-                .setPrice(itemDto.getPrice())
-                .setOriginalPrice(itemDto.getOriginalPrice())
-                .setDiscount(itemDto.getDiscount())
-                .setDescription(itemDto.getDescription())
-                .setFleetCost(itemDto.getFleetCost())
-                .setSizeId(itemDto.getSizeId())
-                .setLastLevelCategoryId(itemDto.getLastLevelCategoryId());
+                .setId(item.getId())
+                .setStatusId(item.getStatusId())
+                .setItemColorId(item.getItemColorId())
+                .setItemTypeCatId(item.getItemTypeCatId())
+                .setItemTransactionId(item.getItemTransactionId())
+                .setName(item.getName())
+                .setPrice(item.getPrice())
+                .setOriginalPrice(item.getOriginalPrice())
+                .setDiscount(item.getDiscount())
+                .setDescription(item.getDescription())
+                .setFleetCost(item.getFleetCost())
+                .setSizeId(item.getSizeId())
+                .setLastLevelCategoryId(item.getLastLevelCategoryId());
     }
 
     public List<ItemEntity> toItemDtoList(Iterable<ItemEntity> userIterableEntities) {

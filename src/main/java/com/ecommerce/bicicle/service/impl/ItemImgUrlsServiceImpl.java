@@ -1,6 +1,6 @@
 package com.ecommerce.bicicle.service.impl;
 
-import com.ecommerce.bicicle.entity.ItemImgUrls;
+import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 import com.ecommerce.bicicle.repository.ItemImgUrlsRepository;
 import com.ecommerce.bicicle.service.ItemImgUrlsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,14 @@ public class ItemImgUrlsServiceImpl implements ItemImgUrlsService {
     ItemImgUrlsRepository itemImgUrlsRepo;
 
     @Override
-    public List<ItemImgUrls> get() {
+    public List<ItemImgUrlsEntity> get() {
         return StreamSupport.stream(
                 itemImgUrlsRepo.findAll().spliterator(), false)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ItemImgUrls save(ItemImgUrls itemImgUrls) {
+    public ItemImgUrlsEntity save(ItemImgUrlsEntity itemImgUrls) {
         return itemImgUrlsRepo.save(itemImgUrls);
     }
 

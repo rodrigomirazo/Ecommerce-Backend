@@ -7,10 +7,7 @@ public class EndpointNames {
     public static final String ITEM_CATEGORY_CONTROLLER = "/itemCat";
     public static final String ITEM_FLOATING_CHARS_CONTROLLER = "/itemFloatingChars";
     public static final String ITEM_FLOATING_CHARS_CAT_CONTROLLER = "/itemFloatingCharsCat";
-
-    public static final String ITEM_COLOR_CAT_CONTROLLER = "/itemColorCat";
     public static final String ITEM_COMMENTS_CONTROLLER = "/itemComments";
-    public static final String ITEM_IMG_URLS_CONTROLLER = "/itemImgUrl";
     public static final String ITEM_CONTROLLER = "/item";
     public static final String ITEM_TRANSACTION_HISTORY_CONTROLLER = "/itemTransactionHistory";
     public static final String ITEM_TRANSACTION_CONTROLLER = "/itemTransaction";
@@ -19,7 +16,8 @@ public class EndpointNames {
     public static final String USER_BALANCE_HISTORY_CONTROLLER = "/userBalanceHistory";
     public static final String USER_RATE_HISTORY_CONTROLLER = "/userRateHistory";
     public static final String USER_CONTROLLER = "/user";
-
+    public static final String USER_PROFILE_CONTROLLER = "/user/profile";
+    public static final String EMAIL_SERVICE_CONTROLLER = "/emailService";
 
     public static final String URI = "/ecommerce/bicicle/api/v1";
 

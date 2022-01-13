@@ -1,5 +1,12 @@
 package com.ecommerce.bicicle.dto;
 
+import javax.imageio.ImageIO;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -10,7 +17,6 @@ public class ItemImgUrlsDto implements Serializable {
     private int itemId;
     private Timestamp createdTime;
     private String imgUrl;
-    private String imgServer;
 
     public ItemImgUrlsDto() {
     }
@@ -51,12 +57,13 @@ public class ItemImgUrlsDto implements Serializable {
         return this;
     }
 
-    public String getImgServer() {
-        return imgServer;
-    }
-
-    public ItemImgUrlsDto setImgServer(String imgServer) {
-        this.imgServer = imgServer;
-        return this;
+    @Override
+    public String toString() {
+        return "ItemImgUrlsDto{" +
+                "id=" + id +
+                ", itemId=" + itemId +
+                ", createdTime=" + createdTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                '}';
     }
 }

@@ -1,14 +1,16 @@
 package com.ecommerce.bicicle.dto;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 public class ItemTransactionHistoryDto implements Serializable {
 
     private static final long serialVersionUID = -1703022289240174602L;
     private int id;
-    private ItemTransactionDto itemTransaction;
+    private Integer itemTransactionId;
     private String action;
     private String description;
+    private Timestamp createdTime;
 
     public ItemTransactionHistoryDto() {
     }
@@ -22,12 +24,12 @@ public class ItemTransactionHistoryDto implements Serializable {
         return this;
     }
 
-    public ItemTransactionDto getItemTransaction() {
-        return itemTransaction;
+    public Integer getItemTransactionId() {
+        return itemTransactionId;
     }
 
-    public ItemTransactionHistoryDto setItemTransaction(ItemTransactionDto itemTransaction) {
-        this.itemTransaction = itemTransaction;
+    public ItemTransactionHistoryDto setItemTransactionId(Integer itemTransactionId) {
+        this.itemTransactionId = itemTransactionId;
         return this;
     }
 
@@ -46,6 +48,15 @@ public class ItemTransactionHistoryDto implements Serializable {
 
     public ItemTransactionHistoryDto setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    public Timestamp getCreatedTime() {
+        return createdTime;
+    }
+
+    public ItemTransactionHistoryDto setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
         return this;
     }
 }

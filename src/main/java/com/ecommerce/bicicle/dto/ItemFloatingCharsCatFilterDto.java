@@ -27,7 +27,7 @@ public class ItemFloatingCharsCatFilterDto {
         return this;
     }
 
-    public boolean isSelected() {
+    public boolean getIsSelected() {
         return isSelected;
     }
 

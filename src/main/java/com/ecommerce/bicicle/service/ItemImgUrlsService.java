@@ -1,13 +1,13 @@
 package com.ecommerce.bicicle.service;
 
-import com.ecommerce.bicicle.entity.ItemImgUrls;
+import com.ecommerce.bicicle.entity.ItemImgUrlsEntity;
 
 import java.util.List;
 
 public interface ItemImgUrlsService {
-    List<ItemImgUrls> get();
+    List<ItemImgUrlsEntity> get();
 
-    ItemImgUrls save(ItemImgUrls itemImgUrls);
+    ItemImgUrlsEntity save(ItemImgUrlsEntity itemImgUrls);
 
     void delete(Integer itemImgUrlsId);
 }

@@ -1,13 +1,15 @@
 package com.ecommerce.bicicle.service;
 
-import com.ecommerce.bicicle.entity.UserAddress;
+import com.ecommerce.bicicle.dto.UserAddressDto;
 
 import java.util.List;
 
 public interface UserAddressService {
-    List<UserAddress> get();
+    List<UserAddressDto> get();
 
-    UserAddress save(UserAddress userAddress);
+    List<UserAddressDto> getByUserName(String userName);
 
-    void delete(Long userAddressId);
+    UserAddressDto save(UserAddressDto userAddress);
+
+    void delete(String userAddressId);
 }

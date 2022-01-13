@@ -5,17 +5,14 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "item_img_urls")
-public class ItemImgUrls {
+public class ItemImgUrlsEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "item_id")
     private int itemId;
-
-    @Column(name = "user_id")
-    private int userId;
 
     @Column(name = "created_time")
     private Timestamp createdTime;
@@ -23,17 +20,14 @@ public class ItemImgUrls {
     @Column(name = "img_url")
     private String imgUrl;
 
-    @Column(name = "img_server")
-    private String imgServer;
-
-    public ItemImgUrls() {
+    public ItemImgUrlsEntity() {
     }
 
     public int getId() {
         return id;
     }
 
-    public ItemImgUrls setId(int id) {
+    public ItemImgUrlsEntity setId(int id) {
         this.id = id;
         return this;
     }
@@ -42,17 +36,8 @@ public class ItemImgUrls {
         return itemId;
     }
 
-    public ItemImgUrls setItemId(int itemId) {
+    public ItemImgUrlsEntity setItemId(int itemId) {
         this.itemId = itemId;
-        return this;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public ItemImgUrls setUserId(int userId) {
-        this.userId = userId;
         return this;
     }
 
@@ -60,7 +45,7 @@ public class ItemImgUrls {
         return createdTime;
     }
 
-    public ItemImgUrls setCreatedTime(Timestamp createdTime) {
+    public ItemImgUrlsEntity setCreatedTime(Timestamp createdTime) {
         this.createdTime = createdTime;
         return this;
     }
@@ -69,17 +54,8 @@ public class ItemImgUrls {
         return imgUrl;
     }
 
-    public ItemImgUrls setImgUrl(String imgUrl) {
+    public ItemImgUrlsEntity setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
-        return this;
-    }
-
-    public String getImgServer() {
-        return imgServer;
-    }
-
-    public ItemImgUrls setImgServer(String imgServer) {
-        this.imgServer = imgServer;
         return this;
     }
 }

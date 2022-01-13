@@ -5,7 +5,7 @@ import java.util.List;
 public class ItemFilterDto {
 
     private String searchBar;
-    private List<Integer> years;
+    private List<ItemFilterYearsDto> years;
     private List<ItemFloatingCharsFilterDto> itemFloatingChars;
     private List<ItemCategoryFilterDto> itemTypes;
 
@@ -21,11 +21,11 @@ public class ItemFilterDto {
         return this;
     }
 
-    public List<Integer> getYears() {
+    public List<ItemFilterYearsDto> getYears() {
         return years;
     }
 
-    public ItemFilterDto setYears(List<Integer> years) {
+    public ItemFilterDto setYears(List<ItemFilterYearsDto> years) {
         this.years = years;
         return this;
     }
