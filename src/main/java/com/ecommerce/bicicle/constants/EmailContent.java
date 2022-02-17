@@ -2,7 +2,7 @@ package com.ecommerce.bicicle.constants;
 
 public class EmailContent {
 
-    public static final String MAIL_FROM =  "rider911@baaw.mx";
+    public static final String MAIL_FROM =  "ventas@baaw.mx";
 
     public static final String MAIL_TYPE_VERIFICATION = "VERIFICATION";
     public static final String MAIL_TYPE_RESET_PASSWORD = "RESET_PASSWORD";

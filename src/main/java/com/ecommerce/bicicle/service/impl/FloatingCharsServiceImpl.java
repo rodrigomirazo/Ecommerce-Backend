@@ -58,7 +58,7 @@ public class FloatingCharsServiceImpl implements FloatingCharsService
         return itemFloatingCharsDto;
     }
 
-    @Cacheable("itemFloatingChars")
+    //@Cacheable("itemFloatingChars")
     public List<ItemFloatingCharsDto> getItemFloatingCharsDtos() {
 
         // Retrieve from DB

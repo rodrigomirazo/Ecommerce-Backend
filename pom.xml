@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ecommerce</groupId>
-	<artifactId>bicicle</artifactId>
+	<artifactId>bicicle-ssl</artifactId>
 	<version>1.0.0</version>
 	<name>Bicicle Item and user Mannagement</name>
 	<description>Bicicle and User description and Characteristics</description>
@@ -48,6 +48,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.15</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
